@@ -95,3 +95,4 @@ To render a PDF version:
 
 ```bash
 quarto render resume.qmd --to pdf
+```
