@@ -12,5 +12,40 @@
     "title": "solplots-website",
     "section": "",
     "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "Peter Maximilian Fortunato",
+    "section": "",
+    "text": "📧 peter@solplots.com\n\n🌐 solplots.com\n\n💼 LinkedIn\n\n🐙 GitHub"
+  },
+  {
+    "objectID": "resume.html#data-scientist-i-strategic-routing-worldpay-inc",
+    "href": "resume.html#data-scientist-i-strategic-routing-worldpay-inc",
+    "title": "Peter Maximilian Fortunato",
+    "section": "Data Scientist I, Strategic Routing — Worldpay, Inc",
+    "text": "Data Scientist I, Strategic Routing — Worldpay, Inc\nRemote | Dec 2023 – Present\n\nImplements network routing product to maximize merchant cost savings on card processing fees\nPerforms ad-hoc analyses simulating potential merchant savings using a “least cost routing” method\nEngineers routing table update processes by integrating various documents and requests\nMonitors product performance to match negotiated transaction volumes from network deals"
+  },
+  {
+    "objectID": "resume.html#data-scientist-transit-rail-planning-vanasse-hangen-brustlin-inc.-vhb",
+    "href": "resume.html#data-scientist-transit-rail-planning-vanasse-hangen-brustlin-inc.-vhb",
+    "title": "Peter Maximilian Fortunato",
+    "section": "Data Scientist, Transit & Rail Planning — Vanasse Hangen Brustlin, Inc. (VHB)",
+    "text": "Data Scientist, Transit & Rail Planning — Vanasse Hangen Brustlin, Inc. (VHB)\nWashington, D.C. | Sept 2022 - Dec 2023\n\nAnalyzed General Transit Feed Specification (GTFS) data in conjunction with Automated Passenger Count data to program R scripts and output load factor and schedule adherence KPI for transit studies\nDeveloped and maintains a suite of transit planning and origin/destination traffic analysis Shiny Apps known as Data Trippers that resulted in assisting clients’ decision making processes"
+  },
+  {
+    "objectID": "resume.html#data-scientist-ohio-kentucky-indiana-regional-council-of-governments-oki",
+    "href": "resume.html#data-scientist-ohio-kentucky-indiana-regional-council-of-governments-oki",
+    "title": "Peter Maximilian Fortunato",
+    "section": "Data Scientist — Ohio Kentucky Indiana Regional Council of Governments (OKI)",
+    "text": "Data Scientist — Ohio Kentucky Indiana Regional Council of Governments (OKI)\nCincinnati, Ohio | May 2021 - Aug 2022\n\nRepurposed open-source R scripts to develop inaugural method evaluating roadway safety performance in the 8-county OKI region which resulted in the Excess Expected Crashes (EEC) KPI\nPresented methodology at area analytics conferences and the useR! Conference 2022 (recognized)\nVisualized of existing conditions and commodity flow using Freight Analysis Framework (FAF)"
+  },
+  {
+    "objectID": "resume.html#exporting-to-pdf",
+    "href": "resume.html#exporting-to-pdf",
+    "title": "Peter Maximilian Fortunato",
+    "section": "📄 Exporting to PDF",
+    "text": "📄 Exporting to PDF\nTo render a PDF version:\n```bash quarto render resume.qmd –to pdf"
   }
 ]

@@ -1,0 +1,312 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Peter Maximilian Fortunato},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Peter Maximilian Fortunato}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, frame hidden, breakable, enhanced, sharp corners, interior hidden]}{\end{tcolorbox}}\fi
+
+\hypertarget{contact}{%
+\section{Contact}\label{contact}}
+
+\begin{itemize}
+\tightlist
+\item
+  📧 peter@solplots.com\\
+\item
+  🌐 \href{https://gira-solo.github.io/solplots-website}{solplots.com}\\
+\item
+  💼 \href{https://www.linkedin.com/in/peter-m-f/}{LinkedIn}\\
+\item
+  🐙 \href{https://github.com/gira-solo}{GitHub}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{summary}{%
+\section{Summary}\label{summary}}
+
+Peter is a data scientist with over three years of professional
+experience and is currently a member of the Strategic Routing team at
+Worldpay (formerly part of FIS). He is an expert in the R and SQL
+programming languages as well as analytical storytelling.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{skills}{%
+\section{Skills}\label{skills}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Languages:} R, SQL, Python
+\item
+  \textbf{Tools:} Databricks, RStudio, Quarto, Git, Snowflake, Jupyter,
+  Streetlight, ArcGIS,\\
+\item
+  \textbf{Libraries:} tidyverse (ggplot2, dplyr, etc.), Shiny, RMarkdown
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{experience}{%
+\section{Experience}\label{experience}}
+
+\hypertarget{data-scientist-i-strategic-routing-worldpay-inc}{%
+\subsection{Data Scientist I, Strategic Routing --- Worldpay,
+Inc}\label{data-scientist-i-strategic-routing-worldpay-inc}}
+
+\emph{Remote \textbar{} Dec 2023 -- Present}
+
+\begin{itemize}
+\tightlist
+\item
+  Implements network routing product to maximize merchant cost savings
+  on card processing fees
+\item
+  Performs ad-hoc analyses simulating potential merchant savings using a
+  ``least cost routing'' method
+\item
+  Engineers routing table update processes by integrating various
+  documents and requests
+\item
+  Monitors product performance to match negotiated transaction volumes
+  from network deals
+\end{itemize}
+
+\hypertarget{data-scientist-transit-rail-planning-vanasse-hangen-brustlin-inc.-vhb}{%
+\subsection{Data Scientist, Transit \& Rail Planning --- Vanasse Hangen
+Brustlin,
+Inc.~(VHB)}\label{data-scientist-transit-rail-planning-vanasse-hangen-brustlin-inc.-vhb}}
+
+\emph{Washington, D.C. \textbar{} Sept 2022 - Dec 2023}
+
+\begin{itemize}
+\tightlist
+\item
+  Analyzed General Transit Feed Specification (GTFS) data in conjunction
+  with Automated Passenger Count data to program R scripts and output
+  load factor and schedule adherence KPI for transit studies
+\item
+  Developed and maintains a suite of transit planning and
+  origin/destination traffic analysis Shiny Apps known as Data Trippers
+  that resulted in assisting clients' decision making processes
+\end{itemize}
+
+\hypertarget{data-scientist-ohio-kentucky-indiana-regional-council-of-governments-oki}{%
+\subsection{Data Scientist --- Ohio Kentucky Indiana Regional Council of
+Governments
+(OKI)}\label{data-scientist-ohio-kentucky-indiana-regional-council-of-governments-oki}}
+
+\emph{Cincinnati, Ohio \textbar{} May 2021 - Aug 2022}
+
+\begin{itemize}
+\tightlist
+\item
+  Repurposed open-source R scripts to develop inaugural method
+  evaluating roadway safety performance in the 8-county OKI region which
+  resulted in the Excess Expected Crashes (EEC) KPI
+\item
+  Presented methodology at area analytics conferences and the useR!
+  Conference 2022 (recognized)
+\item
+  Visualized of existing conditions and commodity flow using Freight
+  Analysis Framework (FAF)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{education}{%
+\section{Education}\label{education}}
+
+\textbf{M.S. in Business Analytics}\\
+Miami University of Ohio, 2021
+
+\textbf{B.A. in International Studies}\\
+Miami University of Ohio, 2020
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{projects}{%
+\section{Projects}\label{projects}}
+
+\begin{itemize}
+\item
+  \textbf{Safety Performance Evaluation of OKI's Regional Highway
+  Network:} As part of my work in developing a process to evaluate
+  roadway safety while working for OKI, I organized my research into a
+  poster presentation and submitted it to the
+  \href{https://user2022.r-project.org/program/posters/}{useR! 2022
+  Conference}. The poster was recognized as one of five ``best of the
+  conference''.
+  \href{../assets/pdfs/Roadway\%20Safety\%20Poster\%20V2.pdf}{View PDF
+  Report}
+\item
+  \textbf{Mediterranean Corridor Volunteer Work:} Supported Commissioner
+  Josep Vicent Boira Maiques of Valencia, Spain to develop
+  visualizations that examined existing rail infrastructures related to
+  type of service and technical characteristics.\\
+  \href{../assets/pdfs/Carta\%20Peter\%20Fortunato\%20v2.\%201.pdf}{Certification
+  Letter (in Spanish)}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{exporting-to-pdf}{%
+\subsection{📄 Exporting to PDF}\label{exporting-to-pdf}}
+
+To render a PDF version:
+
+```bash quarto render resume.qmd --to pdf
+
+
+
+\end{document}
