@@ -80,11 +80,11 @@ Miami University of Ohio, 2020
 # Projects
 
 - **Safety Performance Evaluation of OKI's Regional Highway Network:** As part of my work in developing a process to evaluate roadway safety while working for OKI, I organized my research into a poster presentation and submitted it to the [useR! 2022 Conference](https://user2022.r-project.org/program/posters/). The poster was recognized as one of five "best of the conference".
-  [View PDF Report](../assets/pdfs/Roadway Safety Poster V2.pdf)
+  [View PDF Report](/assets/pdfs/Roadway Safety Poster V2.pdf)
 
 - **Mediterranean Corridor Volunteer Work:** Supported Commissioner Josep Vicent Boira Maiques of Valencia, Spain to develop visualizations 
 that examined existing rail infrastructures related to type of service and technical characteristics.  
-  [Certification Letter (in Spanish)](../assets/pdfs/Carta Peter Fortunato v2. 1.pdf)
+  [Certification Letter (in Spanish)](/assets/pdfs/Carta Peter Fortunato v2. 1.pdf)
 
 ---
 
