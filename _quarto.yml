@@ -3,26 +3,24 @@ project:
   output-dir: docs
   resources:
     - assets/pdfs/*
+    - images/*
 
 
 website:
-  site-url: https://www.solplots.com
   title: "Solplots"
-  navbar:
-    left:
-      - text: "Home"
-        href: index.qmd
-      - text: "About"
-        href: about.qmd
-      - text: "Resume"
-        href: resume.qmd
+  sidebar:
+    style: "floating"       # or "docked" if you want it always visible
+    collapse-level: 1       # allows collapsing nested sections
+    contents:
+      - index.qmd
+      - resume.qmd           # add other pages here if needed
+
+  navbar: false             # disables the top navigation bar
 
 format:
   html:
-    theme: cosmo
-    css: styles.css
-
-    toc: true
+    theme: default
+    toc: false
 
 editor: visual
 

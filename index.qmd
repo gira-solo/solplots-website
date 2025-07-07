@@ -1,11 +1,6 @@
 ---
 title: "solplots-website"
+format: html
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
+![Solplots Home Image](images/home_image.png)
