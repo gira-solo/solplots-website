@@ -46,6 +46,6 @@
     "href": "resume.html#exporting-to-pdf",
     "title": "Peter Maximilian Fortunato",
     "section": "📄 Exporting to PDF",
-    "text": "📄 Exporting to PDF\nTo render a PDF version:\n```bash quarto render resume.qmd –to pdf"
+    "text": "📄 Exporting to PDF\nTo render a PDF version:\nquarto render resume.qmd --to pdf"
   }
 ]
