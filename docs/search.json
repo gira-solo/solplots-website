@@ -40,12 +40,5 @@
     "title": "Peter Maximilian Fortunato",
     "section": "Data Scientist — Ohio Kentucky Indiana Regional Council of Governments (OKI)",
     "text": "Data Scientist — Ohio Kentucky Indiana Regional Council of Governments (OKI)\nCincinnati, Ohio | May 2021 - Aug 2022\n\nRepurposed open-source R scripts to develop inaugural method evaluating roadway safety performance in the 8-county OKI region which resulted in the Excess Expected Crashes (EEC) KPI\nPresented methodology at area analytics conferences and the useR! Conference 2022 (recognized)\nVisualized of existing conditions and commodity flow using Freight Analysis Framework (FAF)"
-  },
-  {
-    "objectID": "resume.html#exporting-to-pdf",
-    "href": "resume.html#exporting-to-pdf",
-    "title": "Peter Maximilian Fortunato",
-    "section": "📄 Exporting to PDF",
-    "text": "📄 Exporting to PDF\nTo render a PDF version:\nquarto render resume.qmd --to pdf"
   }
 ]

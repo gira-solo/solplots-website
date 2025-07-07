@@ -19,80 +19,72 @@ format:
 
 # Contact
 
-- 📧 peter@solplots.com  
-- 🌐 [solplots.com](https://gira-solo.github.io/solplots-website)  
-- 💼 [LinkedIn](https://www.linkedin.com/in/peter-m-f/)  
-- 🐙 [GitHub](https://github.com/gira-solo)
+-   📧 peter\@solplots.com\
+-   🌐 [solplots.com](https://gira-solo.github.io/solplots-website)\
+-   💼 [LinkedIn](https://www.linkedin.com/in/peter-m-f/)\
+-   🐙 [GitHub](https://github.com/gira-solo)
 
----
+------------------------------------------------------------------------
 
 # Summary
 
 Peter is a data scientist with over three years of professional experience and is currently a member of the Strategic Routing team at Worldpay (formerly part of FIS). He is an expert in the R and SQL programming languages as well as analytical storytelling.
 
----
+------------------------------------------------------------------------
 
 # Skills
 
-- **Languages:** R, SQL, Python
-- **Tools:** Databricks, RStudio, Quarto, Git, Snowflake, Jupyter, Streetlight, ArcGIS,  
-- **Libraries:** tidyverse (ggplot2, dplyr, etc.), Shiny, RMarkdown
+-   **Languages:** R, SQL, Python
+-   **Tools:** Databricks, RStudio, Quarto, Git, Snowflake, Jupyter, Streetlight, ArcGIS,\
+-   **Libraries:** tidyverse (ggplot2, dplyr, etc.), Shiny, RMarkdown
 
----
+------------------------------------------------------------------------
 
 # Experience
 
-## Data Scientist I, Strategic Routing — Worldpay, Inc 
-*Remote | Dec 2023 – Present*
+## Data Scientist I, Strategic Routing --- Worldpay, Inc
 
-- Implements network routing product to maximize merchant cost savings on card processing fees
-- Performs ad-hoc analyses simulating potential merchant savings using a “least cost routing” method
-- Engineers routing table update processes by integrating various documents and requests 
-- Monitors product performance to match negotiated transaction volumes from network deals
+*Remote \| Dec 2023 -- Present*
 
-## Data Scientist, Transit & Rail Planning — Vanasse Hangen Brustlin, Inc. (VHB)  
-*Washington, D.C. | Sept 2022 - Dec 2023*
+-   Implements network routing product to maximize merchant cost savings on card processing fees
+-   Performs ad-hoc analyses simulating potential merchant savings using a "least cost routing" method
+-   Engineers routing table update processes by integrating various documents and requests
+-   Monitors product performance to match negotiated transaction volumes from network deals
 
-- Analyzed General Transit Feed Specification (GTFS) data in conjunction with Automated Passenger 
-Count data to program R scripts and output load factor and schedule adherence KPI for transit studies 
-- Developed and maintains a suite of transit planning and origin/destination traffic analysis Shiny Apps 
-known as Data Trippers that resulted in assisting clients’ decision making processes          
+## Data Scientist, Transit & Rail Planning --- Vanasse Hangen Brustlin, Inc. (VHB)
 
-## Data Scientist — Ohio Kentucky Indiana Regional Council of Governments (OKI)
-*Cincinnati, Ohio | May 2021 - Aug 2022*
+*Washington, D.C. \| Sept 2022 - Dec 2023*
 
-- Repurposed open-source R scripts to develop inaugural method evaluating roadway safety 
-performance in the 8-county OKI region which resulted in the Excess Expected Crashes (EEC) KPI 
-- Presented methodology at area analytics conferences and the useR! Conference 2022 (recognized) 
-- Visualized of existing conditions and commodity flow using Freight Analysis Framework (FAF) 
----
+-   Analyzed General Transit Feed Specification (GTFS) data in conjunction with Automated Passenger Count data to program R scripts and output load factor and schedule adherence KPI for transit studies
+-   Developed and maintains a suite of transit planning and origin/destination traffic analysis Shiny Apps known as Data Trippers that resulted in assisting clients' decision making processes
+
+## Data Scientist --- Ohio Kentucky Indiana Regional Council of Governments (OKI)
+
+*Cincinnati, Ohio \| May 2021 - Aug 2022*
+
+-   Repurposed open-source R scripts to develop inaugural method evaluating roadway safety performance in the 8-county OKI region which resulted in the Excess Expected Crashes (EEC) KPI
+
+-   Presented methodology at area analytics conferences and the useR! Conference 2022 (recognized)
+
+-   
+
+    ## Visualized of existing conditions and commodity flow using Freight Analysis Framework (FAF)
 
 # Education
 
-**M.S. in Business Analytics**  
+**M.S. in Business Analytics**\
 Miami University of Ohio, 2021
 
-**B.A. in International Studies**  
+**B.A. in International Studies**\
 Miami University of Ohio, 2020
 
----
+------------------------------------------------------------------------
 
 # Projects
 
-- **Safety Performance Evaluation of OKI's Regional Highway Network:** As part of my work in developing a process to evaluate roadway safety while working for OKI, I organized my research into a poster presentation and submitted it to the [useR! 2022 Conference](https://user2022.r-project.org/program/posters/). The poster was recognized as one of five "best of the conference".
-  [View PDF Report](/assets/pdfs/Roadway Safety Poster V2.pdf)
+-   **Safety Performance Evaluation of OKI's Regional Highway Network:** As part of my work in developing a process to evaluate roadway safety while working for OKI, I organized my research into a poster presentation and submitted it to the [useR! 2022 Conference](https://user2022.r-project.org/program/posters/). The poster was recognized as one of five "best of the conference". [View PDF Report](/assets/pdfs/Roadway%20Safety%20Poster%20V2.pdf)
 
-- **Mediterranean Corridor Volunteer Work:** Supported Commissioner Josep Vicent Boira Maiques of Valencia, Spain to develop visualizations 
-that examined existing rail infrastructures related to type of service and technical characteristics.  
-  [Certification Letter (in Spanish)](/assets/pdfs/carta_peter_fortunato.pdf)
-
----
+-   **Mediterranean Corridor Volunteer Work:** Supported Commissioner Josep Vicent Boira Maiques of Valencia, Spain to develop visualizations that examined existing rail infrastructures related to type of service and technical characteristics.\
+    [Certification Letter (in Spanish)](/assets/pdfs/carta_peter_fortunato.pdf)
 
 
-## 📄 Exporting to PDF
-
-To render a PDF version:
-
-```bash
-quarto render resume.qmd --to pdf
-```
