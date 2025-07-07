@@ -1,5 +1,5 @@
 ---
-title: "solplots-website"
+title: ""
 format: html
 ---
 
