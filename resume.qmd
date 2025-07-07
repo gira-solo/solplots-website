@@ -66,9 +66,7 @@ Peter is a data scientist with over three years of professional experience and i
 
 -   Presented methodology at area analytics conferences and the useR! Conference 2022 (recognized)
 
--   
-
-    ## Visualized of existing conditions and commodity flow using Freight Analysis Framework (FAF)
+-   Visualized of existing conditions and commodity flow using Freight Analysis Framework (FAF)
 
 # Education
 
