@@ -3,4 +3,4 @@ title: ""
 format: html
 ---
 
-![Solplots Home Image](images/home_image.png)
+![](images/home_image.png)
