@@ -1,5 +1,8 @@
 ---
-title: "Peter Maximilian Fortunato"
+title: "Resume"
+author: "Peter Maximilian Fortunato"
+toc: true
+highlight-style: pygments
 format: 
   html:
     toc: false
@@ -20,7 +23,6 @@ format:
 # Contact
 
 -   📧 peter\@solplots.com\
--   🌐 [solplots.com](https://gira-solo.github.io/solplots-website)\
 -   💼 [LinkedIn](https://www.linkedin.com/in/peter-m-f/)\
 -   🐙 [GitHub](https://github.com/gira-solo)
 
@@ -28,14 +30,14 @@ format:
 
 # Summary
 
-Peter is a data scientist with over three years of professional experience and is currently a member of the Strategic Routing team at Worldpay (formerly part of FIS). He is an expert in the R and SQL programming languages as well as analytical storytelling.
+Peter is a data scientist with over four years of professional experience and is currently a member of the Strategic Routing team at Worldpay (formerly part of FIS). He is an expert in the R and SQL programming languages, and is passionate about data storytelling and visualization.
 
 ------------------------------------------------------------------------
 
 # Skills
 
 -   **Languages:** R, SQL, Python
--   **Tools:** Databricks, RStudio, Quarto, Git, Snowflake, Jupyter, Streetlight, ArcGIS,\
+-   **Tools:** Databricks, RStudio, Quarto, Git, Snowflake, Jupyter, Streetlight, ArcGIS
 -   **Libraries:** tidyverse (ggplot2, dplyr, etc.), Shiny, RMarkdown
 
 ------------------------------------------------------------------------

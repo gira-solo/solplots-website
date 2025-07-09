@@ -13,6 +13,7 @@ website:
     collapse-level: 1
     contents:
       - resume.qmd        # add other pages here if needed
+      - demos.qmd
 
 
 format:

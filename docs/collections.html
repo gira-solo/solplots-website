@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Peter Maximilian Fortunato">
 
-<title>Resume</title>
+<title>Collections</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -59,12 +60,42 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
 
-<link rel="stylesheet" href="../assets/css/custom.css">
+    const options = {
+      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: [],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -73,7 +104,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./resume.html">Resume</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Collections</li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -95,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resume.html" class="sidebar-item-text sidebar-link active">
+  <a href="./resume.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resume</span></a>
   </div>
 </li>
@@ -110,26 +141,19 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="resume.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Resume</h1>
+<h1 class="title">Collections</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Peter Maximilian Fortunato </p>
-          </div>
-  </div>
     
   
     
@@ -138,81 +162,19 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="contact" class="level1">
-<h1>Contact</h1>
-<ul>
-<li>📧 peter@solplots.com<br>
-</li>
-<li>💼 <a href="https://www.linkedin.com/in/peter-m-f/">LinkedIn</a><br>
-</li>
-<li>🐙 <a href="https://github.com/gira-solo">GitHub</a></li>
-</ul>
-<hr>
-</section>
-<section id="summary" class="level1">
-<h1>Summary</h1>
-<p>Peter is a data scientist with over four years of professional experience and is currently a member of the Strategic Routing team at Worldpay (formerly part of FIS). He is an expert in the R and SQL programming languages, and is passionate about data storytelling and visualization.</p>
-<hr>
-</section>
-<section id="skills" class="level1">
-<h1>Skills</h1>
-<ul>
-<li><strong>Languages:</strong> R, SQL, Python</li>
-<li><strong>Tools:</strong> Databricks, RStudio, Quarto, Git, Snowflake, Jupyter, Streetlight, ArcGIS</li>
-<li><strong>Libraries:</strong> tidyverse (ggplot2, dplyr, etc.), Shiny, RMarkdown</li>
-</ul>
-<hr>
-</section>
-<section id="experience" class="level1">
-<h1>Experience</h1>
-<section id="data-scientist-i-strategic-routing-worldpay-inc" class="level2">
-<h2 class="anchored" data-anchor-id="data-scientist-i-strategic-routing-worldpay-inc">Data Scientist I, Strategic Routing — Worldpay, Inc</h2>
-<p><em>Remote | Dec 2023 – Present</em></p>
-<ul>
-<li>Implements network routing product to maximize merchant cost savings on card processing fees</li>
-<li>Performs ad-hoc analyses simulating potential merchant savings using a “least cost routing” method</li>
-<li>Engineers routing table update processes by integrating various documents and requests</li>
-<li>Monitors product performance to match negotiated transaction volumes from network deals</li>
-</ul>
-</section>
-<section id="data-scientist-transit-rail-planning-vanasse-hangen-brustlin-inc.-vhb" class="level2">
-<h2 class="anchored" data-anchor-id="data-scientist-transit-rail-planning-vanasse-hangen-brustlin-inc.-vhb">Data Scientist, Transit &amp; Rail Planning — Vanasse Hangen Brustlin, Inc.&nbsp;(VHB)</h2>
-<p><em>Washington, D.C. | Sept 2022 - Dec 2023</em></p>
-<ul>
-<li>Analyzed General Transit Feed Specification (GTFS) data in conjunction with Automated Passenger Count data to program R scripts and output load factor and schedule adherence KPI for transit studies</li>
-<li>Developed and maintains a suite of transit planning and origin/destination traffic analysis Shiny Apps known as Data Trippers that resulted in assisting clients’ decision making processes</li>
-</ul>
-</section>
-<section id="data-scientist-ohio-kentucky-indiana-regional-council-of-governments-oki" class="level2">
-<h2 class="anchored" data-anchor-id="data-scientist-ohio-kentucky-indiana-regional-council-of-governments-oki">Data Scientist — Ohio Kentucky Indiana Regional Council of Governments (OKI)</h2>
-<p><em>Cincinnati, Ohio | May 2021 - Aug 2022</em></p>
-<ul>
-<li><p>Repurposed open-source R scripts to develop inaugural method evaluating roadway safety performance in the 8-county OKI region which resulted in the Excess Expected Crashes (EEC) KPI</p></li>
-<li><p>Presented methodology at area analytics conferences and the useR! Conference 2022 (recognized)</p></li>
-<li><p>Visualized of existing conditions and commodity flow using Freight Analysis Framework (FAF)</p></li>
-</ul>
-</section>
-</section>
-<section id="education" class="level1">
-<h1>Education</h1>
-<p><strong>M.S. in Business Analytics</strong><br>
-Miami University of Ohio, 2021</p>
-<p><strong>B.A. in International Studies</strong><br>
-Miami University of Ohio, 2020</p>
-<hr>
-</section>
-<section id="projects" class="level1">
-<h1>Projects</h1>
-<ul>
-<li><p><strong>Safety Performance Evaluation of OKI’s Regional Highway Network:</strong> As part of my work in developing a process to evaluate roadway safety while working for OKI, I organized my research into a poster presentation and submitted it to the <a href="https://user2022.r-project.org/program/posters/">useR! 2022 Conference</a>. The poster was recognized as one of five “best of the conference”. <a href="./assets/pdfs/Roadway Safety Poster V2.pdf">View PDF Report</a></p></li>
-<li><p><strong>Mediterranean Corridor Volunteer Work:</strong> Supported Commissioner Josep Vicent Boira Maiques of Valencia, Spain to develop visualizations that examined existing rail infrastructures related to type of service and technical characteristics.<br>
-<a href="./assets/pdfs/carta_peter_fortunato.pdf">Certification Letter (in Spanish)</a></p></li>
-</ul>
+<p>A curated feed of data visualizations, code repositories and tools.</p>
 
 
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

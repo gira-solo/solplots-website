@@ -1,0 +1,9 @@
+---
+title: "Demos"
+listing:
+  type: default
+  sort: "date desc"
+  contents: demos/*
+---
+
+A collection of my own data visualizations and interactive projects.
