@@ -13,6 +13,8 @@ execute:
   message: false
 ---
 
+![Bob Ross Color Frequency Analysis](images/bobross_updated.png)
+
 ## Data Source
 
 Every Tuesday, volunteers prepare a [data set](https://github.com/rfordatascience/tidytuesday/blob/main/data/2023/2023-02-21/readme.md) for people to practice data tidying and plotting skills with R. This is how I've interpreted Bob Ross Paintings.

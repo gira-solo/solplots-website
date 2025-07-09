@@ -18,14 +18,14 @@
     "href": "demos/bobross.html",
     "title": "Color Frequency",
     "section": "",
-    "text": "Every Tuesday, volunteers prepare a data set for people to practice data tidying and plotting skills with R. This is how I’ve interpreted Bob Ross Paintings.\nUpon learning that the producers intentionally limited the show’s palette to 18 colors, I wanted to find the answer to this question: how often is each color used?\nIt’s also a great example because this information can’t be immediately gleaned from the data set. The granularity is at the episode level, meaning 403 episodes of the show are contained in 403 observations in the data.\nThe information pertaining to colors used and those colors’ hex code had to be messaged out of the source and be organized into a new data frame from which to build a plot."
+    "text": "Bob Ross Color Frequency Analysis"
   },
   {
     "objectID": "demos/bobross.html#data-source",
     "href": "demos/bobross.html#data-source",
     "title": "Color Frequency",
-    "section": "",
-    "text": "Every Tuesday, volunteers prepare a data set for people to practice data tidying and plotting skills with R. This is how I’ve interpreted Bob Ross Paintings.\nUpon learning that the producers intentionally limited the show’s palette to 18 colors, I wanted to find the answer to this question: how often is each color used?\nIt’s also a great example because this information can’t be immediately gleaned from the data set. The granularity is at the episode level, meaning 403 episodes of the show are contained in 403 observations in the data.\nThe information pertaining to colors used and those colors’ hex code had to be messaged out of the source and be organized into a new data frame from which to build a plot."
+    "section": "Data Source",
+    "text": "Data Source\nEvery Tuesday, volunteers prepare a data set for people to practice data tidying and plotting skills with R. This is how I’ve interpreted Bob Ross Paintings.\nUpon learning that the producers intentionally limited the show’s palette to 18 colors, I wanted to find the answer to this question: how often is each color used?\nIt’s also a great example because this information can’t be immediately gleaned from the data set. The granularity is at the episode level, meaning 403 episodes of the show are contained in 403 observations in the data.\nThe information pertaining to colors used and those colors’ hex code had to be messaged out of the source and be organized into a new data frame from which to build a plot."
   },
   {
     "objectID": "demos/bobross.html#simple-code-reproduction",
