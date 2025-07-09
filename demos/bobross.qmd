@@ -45,10 +45,10 @@ library(tidytuesdayR)
 tt = tidytuesdayR::tt_load("2023-02-21")
 df = tt$bob_ross
 
-font_import()
-loadfonts()
-
-
+suppressMessages({
+  font_import()
+  loadfonts()
+})
 # data analysis -----------------------------------------------------------
 
 # plot_missing(df) # nothing is missing!!
