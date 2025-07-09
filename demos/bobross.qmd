@@ -27,7 +27,7 @@ The information pertaining to colors used and those colors' hex code had to be m
 
 ```{r}
 #| label: setup and load-data
-#| include: false
+#| code-fold: true
 
 # library(tidyverse)
 library(dplyr)
@@ -155,18 +155,7 @@ counts |>
 
 ```
 
-## Technical Notes
 
--   **Data source**: GTFS feed processed using R's `tidyverse` ecosystem
--   **Visualization**: Interactive plots created with `plotly` and `leaflet`
--   **Reproducibility**: All code is version-controlled and data processing is fully documented
-
-## Future Work
-
--   Integrate real-time arrival data
--   Add temporal analysis (rush hour patterns)
--   Explore route optimization opportunities
--   Incorporate demographic data for equity analysis
 
 ------------------------------------------------------------------------
 

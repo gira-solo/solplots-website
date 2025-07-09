@@ -64,10 +64,8 @@ Peter is a data scientist with over four years of professional experience and is
 
 *Cincinnati, Ohio \| May 2021 - Aug 2022*
 
--   Repurposed open-source R scripts to develop inaugural method evaluating roadway safety performance in the 8-county OKI region which resulted in the Excess Expected Crashes (EEC) KPI
-
+-   Re-purposed open-source R scripts to develop inaugural method evaluating roadway safety performance in the 8-county OKI region which resulted in the Excess Expected Crashes (EEC) KPI
 -   Presented methodology at area analytics conferences and the useR! Conference 2022 (recognized)
-
 -   Visualized of existing conditions and commodity flow using Freight Analysis Framework (FAF)
 
 # Education
@@ -80,11 +78,10 @@ Miami University of Ohio, 2020
 
 ------------------------------------------------------------------------
 
-# Projects
+# Presentations
 
 -   **Safety Performance Evaluation of OKI's Regional Highway Network:** As part of my work in developing a process to evaluate roadway safety while working for OKI, I organized my research into a poster presentation and submitted it to the [useR! 2022 Conference](https://user2022.r-project.org/program/posters/). The poster was recognized as one of five "best of the conference". [View PDF Report](/assets/pdfs/Roadway%20Safety%20Poster%20V2.pdf)
 
--   **Mediterranean Corridor Volunteer Work:** Supported Commissioner Josep Vicent Boira Maiques of Valencia, Spain to develop visualizations that examined existing rail infrastructures related to type of service and technical characteristics.\
-    [Certification Letter (in Spanish)](/assets/pdfs/carta_peter_fortunato.pdf)
+
 
 
