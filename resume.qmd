@@ -1,6 +1,5 @@
 ---
 title: "Resume"
-author: "Peter Maximilian Fortunato"
 toc: true
 highlight-style: pygments
 format: 
@@ -20,7 +19,7 @@ format:
     urlcolor: blue
 ---
 
-# Contact
+# Peter Maximilian Fortunato
 
 -   📧 peter\@solplots.com\
 -   💼 [LinkedIn](https://www.linkedin.com/in/peter-m-f/)\
