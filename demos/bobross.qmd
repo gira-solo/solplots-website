@@ -30,6 +30,9 @@ The information pertaining to colors used and those colors' hex code had to be m
 ```{r}
 #| label: setup and load-data
 #| code-fold: true
+#| output: false
+#| message: false
+#| warning: false
 
 # library(tidyverse)
 library(dplyr)
@@ -124,6 +127,9 @@ counts =
   mutate(color_name = str_replace(color_name, "_", " ") |> str_replace("_", " "),
          color_label = if_else(color_name %in% c("Titanium White", "Liquid Clear"), "black", codes)) 
  
+```
+
+```{r}
 counts |> 
   ggplot(aes(x = count, 
              y = reorder(color_name, count),

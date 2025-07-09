@@ -6,4 +6,4 @@ listing:
   contents: demos/*
 ---
 
-A collection of my own data visualizations and interactive projects.
+This is a collection of my plots and their reproducible R scripts.
