@@ -13,9 +13,8 @@ Solplots is my interpretation of the world. Not just through data, but through t
 library(leaflet)
 
 leaflet() %>%
-  addTiles() %>%
-  setView(lng = -98.5, lat = 38.5, zoom = 7) %>%
-  addMarkers(lng = -98.5, lat = 38.5, popup = "Kansas")
+  addProviderTiles(providers$CartoDB.Positron) |> 
+  setView(lng = -98.5, lat = 38.5, zoom = 7)
 ```
 
 I come from Kansas, the Sunflower State, and the last one admitted to the Union before the Civil War. In fact, the inception of its territory all but sealed the fate for the United States to fall into conflict.
