@@ -12,6 +12,7 @@ website:
     style: "floating"  # ✅ Makes the sidebar removable/toggleable
     collapse-level: 1
     contents:
+      - about.qmd
       - demos.qmd
       - resume.qmd
 
