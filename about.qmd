@@ -6,40 +6,16 @@ format: html
 Solplots is my interpretation of the world. Not just through data, but through the stories we tell and the thoughts and beliefs we employ to construct our reality. Plotting and thotting is a mantra, for it embraces the dichotomy of how we as humans utilize the power inside us (our thoughts) and make our mark on the world and others around us (our plots).
 
 ```{r}
+#| echo: false
 #| message: false
 #| warning: false
 
 library(leaflet)
-library(tigris)
-library(sf)
 
-# Get Kansas county boundaries
-kansas_counties <- counties(state = "KS", cb = TRUE)
-
-leaflet(kansas_counties) %>%
-  addProviderTiles(providers$CartoDB.Positron) %>%
-  addPolygons(
-    fillColor = ~colorQuantile("YlOrRd", ALAND)(ALAND),
-    weight = 1,
-    opacity = 1,
-    color = "white",
-    dashArray = "3",
-    fillOpacity = 0.7,
-    highlight = highlightOptions(
-      weight = 2,
-      color = "#666",
-      dashArray = "",
-      fillOpacity = 0.7,
-      bringToFront = TRUE
-    )
-  ) %>%
-  addLegend(
-    "bottomright",
-    pal = colorQuantile("YlOrRd", kansas_counties$ALAND),
-    values = ~ALAND,
-    title = "Land Area",
-    opacity = 1
-  )
+leaflet() %>%
+  addTiles() %>%
+  setView(lng = -98.5, lat = 38.5, zoom = 7) %>%
+  addMarkers(lng = -98.5, lat = 38.5, popup = "Kansas")
 ```
 
 I come from Kansas, the Sunflower State, and the last one admitted to the Union before the Civil War. In fact, the inception of its territory all but sealed the fate for the United States to fall into conflict.

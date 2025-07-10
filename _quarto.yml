@@ -13,7 +13,8 @@ website:
     style: "floating"  # ✅ Makes the sidebar removable/toggleable
     collapse-level: 1
     contents:
-      - index.qmd
+      - text: "Solplots"
+        href: index.qmd
       - about.qmd
       - demos.qmd
       - resume.qmd
