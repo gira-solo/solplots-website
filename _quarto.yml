@@ -4,14 +4,16 @@ project:
   resources:
     - assets/pdfs/*
     - images/*
-
-
+    
+    
 website:
   navbar: false        # ❌ Removes the top navigation bar
+  search: false
   sidebar:
     style: "floating"  # ✅ Makes the sidebar removable/toggleable
     collapse-level: 1
     contents:
+      - index.qmd
       - about.qmd
       - demos.qmd
       - resume.qmd

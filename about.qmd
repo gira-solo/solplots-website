@@ -5,7 +5,42 @@ format: html
 
 Solplots is my interpretation of the world. Not just through data, but through the stories we tell and the thoughts and beliefs we employ to construct our reality. Plotting and thotting is a mantra, for it embraces the dichotomy of how we as humans utilize the power inside us (our thoughts) and make our mark on the world and others around us (our plots).
 
-![](docs/kansas_map.jpg)
+```{r}
+#| message: false
+#| warning: false
+
+library(leaflet)
+library(tigris)
+library(sf)
+
+# Get Kansas county boundaries
+kansas_counties <- counties(state = "KS", cb = TRUE)
+
+leaflet(kansas_counties) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    fillColor = ~colorQuantile("YlOrRd", ALAND)(ALAND),
+    weight = 1,
+    opacity = 1,
+    color = "white",
+    dashArray = "3",
+    fillOpacity = 0.7,
+    highlight = highlightOptions(
+      weight = 2,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.7,
+      bringToFront = TRUE
+    )
+  ) %>%
+  addLegend(
+    "bottomright",
+    pal = colorQuantile("YlOrRd", kansas_counties$ALAND),
+    values = ~ALAND,
+    title = "Land Area",
+    opacity = 1
+  )
+```
 
 I come from Kansas, the Sunflower State, and the last one admitted to the Union before the Civil War. In fact, the inception of its territory all but sealed the fate for the United States to fall into conflict.
 
@@ -15,4 +50,6 @@ This led to thousands of people, both pro-slavery and abolitionists, from across
 
 Moreover, the indigenous peoples of these lands were prohibited from participating in popular sovereign, for their way of life was to be erased from these lands regardless of which way the vote went. At the end of the day, what were we actually voting for if we still had to be subservient to capital and the U.S. government?
 
-The history of my home has great influence on my worldview. The moral of this story is that governments and those in power are **constantly** developing plots and running experiments on the world as a whole, sometimes for general improvement, mostly for the expansion of the power of capital. Therefore, it is imperative that we as humans understand that this power to plot and experiment also belongs to us. And that we may use this power to improve our lives without having to ask permission from someone else.
+The history of my home has great influence on my worldview. The moral of this story is that governments and those in power are **constantly** developing plots and running experiments on the world as a whole, sometimes for general improvement, mostly for the expansion of the power of capital. Even today, with this current administration's [position](https://www.whitehouse.gov/presidential-actions/2025/01/protecting-the-meaning-and-value-of-american-citizenship/) on who gets to be born a citizen in this country, this country is about to see a profound increase in the number of stateless humans within our borders. All because one state decides not to have birthright citizenship while another maintains that right. It's plots and experiments.
+
+Therefore, it is imperative that we as humans understand that this power to plot and experiment also belongs to us. And that we may use this power to improve our lives without having to ask permission from someone else.
