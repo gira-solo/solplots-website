@@ -11,7 +11,7 @@
     "href": "apps/mta_art_explorer.html",
     "title": "MTA Art Explorer",
     "section": "",
-    "text": "MTA Permanent Art Catalog\nExplore the permanent art collection in MTA stations across New York City. This is intended to demonstrate how quickly one can spin up an app that enables quick and easy exploration of a data set from New York State’s Open Data Portal. The code will be published to GitHub shortly.\n\n\nThe data for this app can be found in the MTA’s Open Data Portal."
+    "text": "Explore the permanent art collection in MTA stations across New York City. This is intended to demonstrate how quickly one can spin up an app that enables quick and easy exploration of a data set from New York State’s Open Data Portal. The code will be published to GitHub shortly.\n\n\nThe data for this app can be found in the MTA’s Open Data Portal."
   },
   {
     "objectID": "apps.html",
@@ -51,7 +51,7 @@
   {
     "objectID": "demos.html",
     "href": "demos.html",
-    "title": "Demos",
+    "title": "Thoughts on Plots",
     "section": "",
     "text": "This is a collection of my plots and their reproducible R scripts.\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n  \n\n\n\n\nColor Frequency\n\n\n\n\n\nSubmission to Tidy Tuesday for Week 8, 2023\n\n\n\n\n\n\nJul 9, 2025\n\n\n\n\n\n\nNo matching items"
   },

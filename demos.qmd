@@ -1,5 +1,5 @@
 ---
-title: "Demos"
+title: "Thoughts on Plots"
 listing:
   type: default
   sort: "date desc"
