@@ -56,6 +56,20 @@
     "text": "This is a collection of my plots and their reproducible R scripts.\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n  \n\n\n\n\nColor Frequency\n\n\n\n\n\nSubmission to Tidy Tuesday for Week 8, 2023\n\n\n\n\n\n\nJul 9, 2025\n\n\n\n\n\n\nNo matching items"
   },
   {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "This is a curated collection of resources that have helped me in my career."
+  },
+  {
+    "objectID": "resources.html#books",
+    "href": "resources.html#books",
+    "title": "Resources",
+    "section": "Books",
+    "text": "Books\nR for Data Science (2e)\nHadley Wickham & Garrett Grolemund\nWhenever someone asks me how to get started with learning R programming, I always point them here.\nR Graphics Cookbook, 2nd edition\nWinston Chang\nThis book focuses on R’s plotting capabilities, primarily through the ggplot2 library. I used this resource when I made the intentional decision to sit down and learn how to code plots in R. Sometimes I will still use it as a manual, but it isn’t very comprehensive.\nggplot2: Elegant Graphics for Data Analysis\nHadley Wickham\nThis is the comprehensive resource for learning the grammar of graphics in R using the ggplot2 library."
+  },
+  {
     "objectID": "resume.html",
     "href": "resume.html",
     "title": "Resume",

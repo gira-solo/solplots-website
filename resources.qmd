@@ -1,0 +1,24 @@
+---
+title: "Resources"
+---
+
+This is a curated collection of resources that have helped me in my career.
+
+## Books
+
+**[R for Data Science (2e)](https://r4ds.hadley.nz/)**  
+*Hadley Wickham & Garrett Grolemund*  
+Whenever someone asks me how to get started with learning R programming, I always point them here.
+
+**[R Graphics Cookbook, 2nd edition](https://r-graphics.org/)**  
+*Winston Chang*  
+This book focuses on R's plotting capabilities, primarily through the ggplot2 library. I used this resource when I made the intentional decision to sit down and learn how to code plots in R. Sometimes I will still use it as a manual, but it isn't very comprehensive.
+
+**[ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)**  
+*Hadley Wickham*  
+This is the comprehensive resource for learning the grammar of graphics in R using the ggplot2 library.
+
+
+
+
+
