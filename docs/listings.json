@@ -1,12 +1,17 @@
 [
   {
+    "listing": "/apps.html",
+    "items": [
+      "/apps/mta_art_explorer.html"
+    ]
+  },
+  {
     "listing": "/collections.html",
     "items": []
   },
   {
     "listing": "/demos.html",
     "items": [
-      "/demos/mta_art_explorer.html",
       "/demos/bobross.html"
     ]
   }

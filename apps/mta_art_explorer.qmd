@@ -1,0 +1,15 @@
+---
+title: "MTA Art Explorer"
+format: html
+server: shiny
+---
+
+# MTA Permanent Art Catalog
+
+Explore the permanent art collection in MTA stations across New York City. This is intended to demonstrate how quickly one can spin up an app that enables quick and easy exploration of a data set from New York State's Open Data Portal. The code will be published to GitHub shortly.
+
+<iframe src="https://gira-solo.shinyapps.io/Art_of_the_MTA/" width="100%" height="600px" frameborder="0">
+
+</iframe>
+
+The data for this app can be found in the MTA's [Open Data Portal](https://data.ny.gov/Transportation/MTA-Permanent-Art-Catalog-Beginning-1980/4y8j-9pkd/about_data).

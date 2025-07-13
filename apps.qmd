@@ -1,0 +1,9 @@
+---
+title: "Data Exploration Apps"
+listing:
+  type: default
+  sort: "date desc"
+  contents: apps/*
+---
+
+Browse through the data sets I've interactively visualized with the help of Shiny Apps.

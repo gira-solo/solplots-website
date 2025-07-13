@@ -23,6 +23,7 @@ website:
         href: index.qmd
       - about.qmd
       - demos.qmd
+      - apps.qmd
       - resume.qmd
 
 
