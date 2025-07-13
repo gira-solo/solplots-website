@@ -1,0 +1,232 @@
+---
+title: "MTA Art Explorer"
+format: html
+server: shiny
+---
+
+# MTA Permanent Art Catalog
+
+Explore the permanent art collection in MTA stations across New York City. This is intended to demonstrate how quickly one can spin up an app that enables quick and easy exploration of a data set from New York State's Open Data Portal.
+
+```{r}
+#| context: setup
+library(shiny)
+library(shinythemes)
+library(rvest)
+library(tidyverse)
+library(janitor)
+
+df <- 
+  read_csv("data/MTA_Permanent_Art_Catalog__Beginning_1980_20241005.csv") |> 
+  clean_names() |> 
+  filter(agency %in% c("LIRR", "Metro-North", "NYCT")) |> 
+  separate_rows(line, sep = ",") 
+
+```
+
+```{r}
+#| panel: sidebar
+h3("MTA Permanent Art Catalog")
+
+selectInput(
+  "agency_id",
+  "Select Agency:",
+  choices = unique(df$agency)
+)
+
+selectInput(
+  "line_id",
+  "Select Line:",
+  choices = NULL
+)
+
+selectInput(
+  "station_id",
+  "Select Station:",
+  choices = NULL
+)
+
+selectInput(
+  "artist_id",
+  "Select Artist:",
+  choices = NULL
+)
+
+selectInput(
+  "title_id",
+  "Select Artwork Title:",
+  choices = NULL
+)
+
+uiOutput("line_ui")
+uiOutput("station_ui")
+uiOutput("artist_ui")
+textOutput("artist_bio")
+```
+
+```{r}
+#| panel: fill
+uiOutput("art_title")
+uiOutput("art_material_date")
+uiOutput("art_img")
+textOutput("art_desc")
+```
+
+```{r}
+#| context: server
+
+# Update line choices based on agency selection
+observe({
+  updateSelectInput(
+    session,
+    "line_id",
+    choices = df |> 
+      filter(agency == input$agency_id) |> 
+      pull(line) |> 
+      unique()
+  )
+})
+
+# Update station choices based on agency and line selection
+observe({
+  updateSelectInput(
+    session,
+    "station_id",
+    choices = df |> 
+      filter(agency == input$agency_id,
+             line == input$line_id) |> 
+      pull(station_name) |> 
+      unique()
+  )
+})
+
+# Update artist choices based on agency, line, and station selection
+observe({
+  updateSelectInput(
+    session,
+    "artist_id",
+    choices = df |> 
+      filter(agency == input$agency_id,
+             line == input$line_id,
+             station_name == input$station_id) |> 
+      pull(artist) |> 
+      unique()
+  )
+})
+
+# Update artwork title choices based on all previous selections
+observe({
+  updateSelectInput(
+    session,
+    "title_id",
+    choices = df |> 
+      filter(agency == input$agency_id,
+             line == input$line_id,
+             station_name == input$station_id,
+             artist == input$artist_id) |> 
+      pull(art_title) |> 
+      unique()
+  )
+})
+
+# Render artwork title
+output$art_title <- renderUI({
+  req(input$title_id)
+  title <- 
+    df |> 
+    filter(agency == input$agency_id,
+           line == input$line_id,
+           station_name == input$station_id,
+           artist == input$artist_id,
+           art_title == input$title_id) |> 
+    pull(art_title)
+  
+  tags$h3(title)
+})
+
+# Render artwork material and date
+output$art_material_date <- renderUI({
+  req(input$title_id)
+
+  filt_df <- 
+    df |> 
+    filter(agency == input$agency_id,
+           line == input$line_id,
+           station_name == input$station_id,
+           artist == input$artist_id,
+           art_title == input$title_id)
+  
+  material <- 
+    filt_df |> 
+    pull(art_material)
+  
+  date <- 
+    filt_df |> 
+    pull(art_date)
+  
+  tags$h4(paste(material, date, sep = ", "))
+})
+
+# Render artwork image
+output$art_img <- renderUI({
+  req(input$title_id)
+  
+  selected_url <- 
+    df |> 
+    filter(agency == input$agency_id,
+           line == input$line_id,
+           station_name == input$station_id,
+           artist == input$artist_id,
+           art_title == input$title_id) |> 
+    pull(art_image_link)
+  
+  imgsrc <- 
+    read_html(selected_url) |> 
+    html_node(xpath = '//*/img') |> 
+    html_attr('src')
+  
+  tags$img(src = imgsrc)
+})
+
+# Render artwork description
+output$art_desc <- renderText({
+  req(input$title_id)
+  
+  selected_url <- 
+    df |> 
+    filter(agency == input$agency_id,
+           line == input$line_id,
+           station_name == input$station_id,
+           artist == input$artist_id,
+           art_title == input$title_id) |> 
+    pull(art_image_link)
+  
+  element <- 
+    read_html(selected_url) |> 
+    html_elements("p") |> 
+    html_text2() 
+  
+  paste(element[1], collapse = "\n")
+})
+
+# Render artist biography
+output$artist_bio <- renderText({
+  req(input$title_id)
+  
+  selected_url <- 
+    df |> 
+    filter(agency == input$agency_id,
+           line == input$line_id,
+           station_name == input$station_id,
+           artist == input$artist_id,
+           art_title == input$title_id) |> 
+    pull(art_image_link)
+  
+  element <- 
+    read_html(selected_url) |> 
+    html_elements("p") |> 
+    html_text2() 
+  
+  paste(element[2], collapse = "\n")
+})
+```

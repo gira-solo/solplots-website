@@ -6,6 +6,7 @@
   {
     "listing": "/demos.html",
     "items": [
+      "/demos/mta_art_explorer.html",
       "/demos/bobross.html"
     ]
   }
