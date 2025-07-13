@@ -1,7 +1,7 @@
 ---
 title: "MTA Art Explorer"
 format: html
-server: shiny
+image: "images/mta_app_cover_photo.jpg"
 ---
 
 Explore the permanent art collection in MTA stations across New York City. This is intended to demonstrate how quickly one can spin up an app that enables quick and easy exploration of a data set from New York State's Open Data Portal. The code will be published to GitHub shortly.
