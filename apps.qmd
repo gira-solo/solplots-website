@@ -6,4 +6,4 @@ listing:
   contents: apps/*
 ---
 
-Browse through the data sets I've interactively visualized with the help of Shiny Apps.
+Browse through the data sets I've interactively visualized with the help of Shiny.

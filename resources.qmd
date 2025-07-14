@@ -2,22 +2,45 @@
 title: "Resources"
 ---
 
-This is a curated collection of resources that have helped me in my career.
+This is a curated collection of resources I think are useful.
 
 ## Books
 
-**[R for Data Science (2e)](https://r4ds.hadley.nz/)**  
-*Hadley Wickham & Garrett Grolemund*  
+[**R for Data Science (2e)**](https://r4ds.hadley.nz/)\
+*Hadley Wickham, Mine Cetinkaya-Rundel & Garrett Grolemund*\
 Whenever someone asks me how to get started with learning R programming, I always point them here.
 
-**[R Graphics Cookbook, 2nd edition](https://r-graphics.org/)**  
-*Winston Chang*  
-This book focuses on R's plotting capabilities, primarily through the ggplot2 library. I used this resource when I made the intentional decision to sit down and learn how to code plots in R. Sometimes I will still use it as a manual, but it isn't very comprehensive.
+[**R Graphics Cookbook, 2nd edition**](https://r-graphics.org/)\
+*Winston Chang*\
+This book focuses on R's plotting capabilities, primarily through the ggplot2 library. I used this resource when I made the intentional decision to sit down and learn how to code plots in R. It's a cookbook meant to cover the possible situations you may encounter when plotting data, so it isn't too comprehensive. I didn't have really any programming experience before I started reading this book.
 
-**[ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)**  
-*Hadley Wickham*  
-This is the comprehensive resource for learning the grammar of graphics in R using the ggplot2 library.
+[**ggplot2: Elegant Graphics for Data Analysis**](https://ggplot2-book.org/)\
+*Hadley Wickham*\
+This is the comprehensive resource for ggplot2, explained in through detail by Hadley Wickham, the author of several other key R data science package libraries.
 
+[**Geocomputation with R**](https://r.geocompx.org/)\
+*Robin Lovelace, Jakub Nowosad and Jannes Muenchow*\
+Learn how to turn R into a GIS by using the [simple features (sf)](https://r-spatial.github.io/sf/) package.
+
+--
+
+## Blogs and Projects
+
+[**FlowingData**](https://flowingdata.com/)\
+*Nathan Yau, Ph.D*
+Well-renown statistician and data visualization artist shares his work (also offers membership that includes tutorials and other learning materials).
+
+[**Statistics Globe**](https://statisticsglobe.com/)\
+*Joachim Schork*
+A comprehensive statistics resource for R and Python.
+
+[R Graph Gallery](https://r-graph-gallery.com/)\
+*Yan Holtz*
+The "most extensive compilation of R-generated graphs" found on the internet, it contains over 400 examples of over 50 different plot types primarily focusing on R and ggplot2, with some base R plotting as well.
+
+[**Outsider Data Science**](https://outsiderdata.blog/)\
+*Art Steinmetz*\
+A former Wall Street CEO shares his data stories with R. Lot's of different analyses all with reproducible code.
 
 
 
