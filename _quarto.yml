@@ -21,7 +21,6 @@ website:
     contents:
       - text: "Solplots"
         href: index.qmd
-      - about.qmd
       - demos.qmd
       - apps.qmd
       - resume.qmd
