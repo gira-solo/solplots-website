@@ -60,7 +60,7 @@
     "href": "resources.html",
     "title": "Resources",
     "section": "",
-    "text": "This is a curated collection of resources I think are useful."
+    "text": "These are resources I think are useful."
   },
   {
     "objectID": "resources.html#books",
@@ -74,7 +74,7 @@
     "href": "resources.html#blogs-and-projects",
     "title": "Resources",
     "section": "Blogs and Projects",
-    "text": "Blogs and Projects\nFlowingData\nNathan Yau, Ph.D Well-renown statistician and data visualization artist shares his work (also offers membership that includes tutorials and other learning materials).\nStatistics Globe\nJoachim Schork A comprehensive statistics resource for R and Python.\nR Graph Gallery\nYan Holtz The “most extensive compilation of R-generated graphs” found on the internet, it contains over 400 examples of over 50 different plot types primarily focusing on R and ggplot2, with some base R plotting as well.\nOutsider Data Science\nArt Steinmetz\nA former Wall Street CEO shares his data stories with R. Lot’s of different analyses all with reproducible code."
+    "text": "Blogs and Projects\nFlowingData\nNathan Yau, Ph.D Well-renown statistician and data visualization artist shares his work (also offers membership that includes tutorials and other learning materials).\nStatistics Globe\nJoachim Schork A comprehensive statistics resource for R and Python.\nR Graph Gallery\nYan Holtz The “most extensive compilation of R-generated graphs” found on the internet, it contains over 400 examples of over 50 different plot types primarily focusing on R and ggplot2, with some base R plotting as well.\nJUlia Silge releases YouTube videos along with each blog post, which are very straightforward and pragmatic analyses\nOutsider Data Science\nArt Steinmetz\nA former Wall Street CEO shares his data stories with R. Lot’s of different analyses all with reproducible code."
   },
   {
     "objectID": "resume.html",

@@ -1,8 +1,10 @@
 ---
 title: "Resources"
+toc: true
+highlight-style: pygments
 ---
 
-This is a curated collection of resources I think are useful.
+These are resources I think are useful.
 
 ## Books
 
@@ -34,13 +36,16 @@ Well-renown statistician and data visualization artist shares his work (also off
 *Joachim Schork*
 A comprehensive statistics resource for R and Python.
 
-[R Graph Gallery](https://r-graph-gallery.com/)\
+[**R Graph Gallery**](https://r-graph-gallery.com/)\
 *Yan Holtz*
 The "most extensive compilation of R-generated graphs" found on the internet, it contains over 400 examples of over 50 different plot types primarily focusing on R and ggplot2, with some base R plotting as well.
+
+[**JUlia Silge**](https://juliasilge.com/blog/) releases [YouTube](https://www.youtube.com/channel/UCTTBgWyJl2HrrhQOOc710kA) videos along with each blog post, which are very straightforward and pragmatic analyses
 
 [**Outsider Data Science**](https://outsiderdata.blog/)\
 *Art Steinmetz*\
 A former Wall Street CEO shares his data stories with R. Lot's of different analyses all with reproducible code.
+
 
 
 
