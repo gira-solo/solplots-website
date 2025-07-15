@@ -24,8 +24,6 @@ This is the comprehensive resource for ggplot2, explained in through detail by H
 *Robin Lovelace, Jakub Nowosad and Jannes Muenchow*\
 Learn how to turn R into a GIS by using the [simple features (sf)](https://r-spatial.github.io/sf/) package.
 
---
-
 ## Blogs and Projects
 
 [**FlowingData**](https://flowingdata.com/)\
