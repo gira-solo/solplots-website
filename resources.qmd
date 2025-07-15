@@ -29,15 +29,15 @@ Learn how to turn R into a GIS by using the [simple features (sf)](https://r-spa
 ## Blogs and Projects
 
 [**FlowingData**](https://flowingdata.com/)\
-*Nathan Yau, Ph.D*
+*Nathan Yau, Ph.D*\
 Well-renown statistician and data visualization artist shares his work (also offers membership that includes tutorials and other learning materials).
 
 [**Statistics Globe**](https://statisticsglobe.com/)\
-*Joachim Schork*
+*Joachim Schork*\
 A comprehensive statistics resource for R and Python.
 
 [**R Graph Gallery**](https://r-graph-gallery.com/)\
-*Yan Holtz*
+*Yan Holtz*\
 The "most extensive compilation of R-generated graphs" found on the internet, it contains over 400 examples of over 50 different plot types primarily focusing on R and ggplot2, with some base R plotting as well.
 
 [**JUlia Silge**](https://juliasilge.com/blog/) releases [YouTube](https://www.youtube.com/channel/UCTTBgWyJl2HrrhQOOc710kA) videos along with each blog post, which are very straightforward and pragmatic analyses
