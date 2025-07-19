@@ -2,7 +2,7 @@
 title: "California forest fires acres battled by agency"
 date: "2025-07-19"
 description: "An exercise in effective use of color and axis labels"
-categories: [census, wealth]
+categories: [forest fires]
 image: "images/fighting_acres_2025.png"
 format: 
   html:
