@@ -13,8 +13,6 @@ execute:
   message: false
 ---
 
-The U.S. Census is arguable the most famous data set that exists regarding the "state" of the United States.
-
 ## Packages
 
 -   **tidyverse** (ggplot2, dplyr) for plotting and wrangling data

@@ -12,6 +12,7 @@
   {
     "listing": "/demos.html",
     "items": [
+      "/demos/CalFires.html",
       "/demos/CensusDc.html",
       "/demos/NorthAtlanticAnomaly.html",
       "/demos/bobross.html"
