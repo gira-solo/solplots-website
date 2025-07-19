@@ -12,6 +12,8 @@
   {
     "listing": "/demos.html",
     "items": [
+      "/demos/CensusDc.html",
+      "/demos/NorthAtlanticAnomaly.html",
       "/demos/bobross.html"
     ]
   }
