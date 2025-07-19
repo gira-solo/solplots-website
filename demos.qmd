@@ -1,7 +1,7 @@
 ---
 title: "Thoughts on Plots"
 listing:
-  type: default
+  type: table
   sort: "date desc"
   contents: demos/*
 ---
