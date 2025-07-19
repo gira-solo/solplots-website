@@ -1,9 +1,9 @@
 ---
 title: "Thoughts on Plots"
 listing:
-  type: table
+  type: default
   sort: "date desc"
-  contents: demos/*
+  contents: demos/*.qmd
 ---
 
 This is a collection of my plots and their reproducible R scripts.
