@@ -29,7 +29,8 @@ website:
 
 format:
   html:
-    theme: default
+    light:
+      css: styles.scss
     toc: false
     include-in-header: favicon.html
      
