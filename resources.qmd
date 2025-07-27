@@ -30,6 +30,8 @@ Learn how to turn R into a GIS by using the [simple features (sf)](https://r-spa
 *Nathan Yau, Ph.D*\
 Well-renown statistician and data visualization artist shares his work (also offers membership that includes tutorials and other learning materials).
 
+[**Nicola Rennie**](https://nrennie.rbind.io/), a data visualization specialist.
+
 [**Statistics Globe**](https://statisticsglobe.com/)\
 *Joachim Schork*\
 A comprehensive statistics resource for R and Python.
