@@ -140,7 +140,7 @@ fin |>
            y = 1.05,
            label = expression(underline( bold("2023:"))),
            family = "Garamond",
-           size = 4.4) +
+           size = 4) +
   guides(fill = guide_legend(nrow = 2)) +
   theme_minimal() +
   theme(legend.position = "top",
@@ -156,16 +156,18 @@ fin |>
         panel.grid = element_blank(),
         plot.title = element_text(face = "bold",
                                   family = "Garamond",
-                                  size = 18),
+                                  size = 21),
         plot.title.position = "plot",
         legend.margin = margin(0, 0, 0, 0), # turned off for alignment
         legend.justification.top = "left",
         legend.location = "plot",
         plot.subtitle = element_text( family = "Garamond",
-                                     size = 17,
+                                     size = 19,
                                      color = "grey30"),
         plot.background = element_rect(fill = "grey95"),
         plot.caption = element_text(face = "bold",
                                     family = "Garamond",
                                     size = 12)) 
 ```
+
+I made the decision to color each of the 2023 value labels the same color as their associated area color to make it easier to read. I also did not get the legend ordering to match
