@@ -19,10 +19,9 @@ My interpretation of forest fire data courtesy of [CalFire](https://www.fire.ca.
 
 For two reasons (the fact that our data lives in a PDF file plus a few other sources, and the fact that I'm using a pre-defined color palette) we need three packages in addition to the tidyverse in order to produce the plot.
 
-- [palettetown](https://github.com/timcdlucas/palettetown?tab=readme-ov-file): a package full of color palettes derived from Pokemon and inspired by [pokepalettes](https://pokepalettes.com/#charizard); each Pokemon is represented in the package, but my favorite is Charizard and happens to go along with the theme of the data.
-- [pdftools](https://github.com/ropensci/pdftools): this data is stored in a pdf file, so this is an opportunity to show how to use R to replicate the process of extracting the data from the file and into a data frame from which to be plotted.
-- [janitor](https://github.com/sfirke/janitor): a very helpful package for restructuring dirty data frames, such as those extracted from pdf files.
-
+-   [palettetown](https://github.com/timcdlucas/palettetown?tab=readme-ov-file): a package full of color palettes derived from Pokemon and inspired by [pokepalettes](https://pokepalettes.com/#charizard); each Pokemon is represented in the package, but my favorite is Charizard and happens to go along with the theme of the data.
+-   [pdftools](https://github.com/ropensci/pdftools): this data is stored in a pdf file, so this is an opportunity to show how to use R to replicate the process of extracting the data from the file and into a data frame from which to be plotted.
+-   [janitor](https://github.com/sfirke/janitor): a very helpful package for restructuring dirty data frames, such as those extracted from pdf files.
 
 ```{r}
 library(tidyverse)
@@ -41,7 +40,6 @@ tib = pdf_data(pdf)[[1]]
 
 tib
 ```
-
 
 ```{r}
 
@@ -130,11 +128,9 @@ fires <-
         "Federa" = "Federal"))
 ```
 
-
 # Color scheme
 
 Pulling our color scheme from the `palettetown` package that produces hex codes corresponding with first-generation Pokemon. We'll select Charizard.
-
 
 ```{r}
 char <- palettetown::ichooseyou("charizard")
@@ -201,7 +197,3 @@ p <-
 p
 
 ```
-
-
-
-
