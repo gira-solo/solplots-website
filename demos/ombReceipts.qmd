@@ -1,5 +1,6 @@
 ---
 title: "Sources of U.S. Federal Revenue Over The Years Part 1"
+toc: true
 date: "2025-08-02"
 description: "Figuring out how to reproduce a plot found out in the wild"
 categories: [fiscal policy]
@@ -32,8 +33,6 @@ There are a few aspects of this plot that I really like, and I can learn from th
 -   Call-out of 2023 values (2024 has been published as well so theoretically this plot could use an update)
 
 -   Color scheme
-
-*Note: this blog post is a work in progress.*
 
 # Data Source
 

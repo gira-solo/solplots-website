@@ -1,5 +1,6 @@
 ---
 title: "Median Income and Race in the District of Columbia"
+toc: true
 date: "2025-07-19"
 description: "Mapping U.S. Census Data with R"
 categories: [census, wealth]
@@ -177,6 +178,5 @@ Now that you've successfully plotted Census data on map, you can save the image 
 #        height = 4.3,
 #        unit = "in")
 ```
-
 
 If you found this tutorial helpful, try this out on your own.

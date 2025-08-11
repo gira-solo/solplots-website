@@ -1,5 +1,6 @@
 ---
 title: "Color Frequency"
+toc: true
 date: "2025-07-09"
 description: "Submission to Tidy Tuesday for Week 8, 2023"
 categories: [R, tidyverse, art, paint]

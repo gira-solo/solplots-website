@@ -1,9 +1,0 @@
----
-title: "Collections"
-listing: 
-  type: default
-  sort: "date desc"
-  contents: collections/*
----
-
-A curated feed of data visualizations, code repositories and tools.

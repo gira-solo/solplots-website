@@ -80,7 +80,3 @@ Miami University of Ohio, 2020
 # Presentations
 
 -   **Safety Performance Evaluation of OKI's Regional Highway Network:** As part of my work in developing a process to evaluate roadway safety while working for OKI, I organized my research into a poster presentation and submitted it to the [useR! 2022 Conference](https://user2022.r-project.org/program/posters/). The poster was recognized as one of five "best of the conference". [View PDF Report](/assets/pdfs/Roadway%20Safety%20Poster%20V2.pdf)
-
-
-
-

@@ -24,6 +24,7 @@ website:
       - demos.qmd
       - apps.qmd
       - resources.qmd
+      - resume.qmd
 
 
 format:

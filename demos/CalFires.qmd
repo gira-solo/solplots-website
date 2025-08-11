@@ -1,5 +1,6 @@
 ---
 title: "California forest fires acres battled by agency"
+toc: true
 date: "2025-07-19"
 description: "An exercise in effective use of color and axis labels"
 categories: [forest fires]
