@@ -29,6 +29,7 @@ How we are going to achieve the animation is that we will essentially publish ro
 The following is all of the code from Part 1 up until the portion that actually creates the plot with a *slight* alteration at the end: we mutate an additional column that shows each group's proportion for every year.
 
 ```{r}
+#| message: false
 library(tidyverse)
 library(janitor)
 library(extrafont)
