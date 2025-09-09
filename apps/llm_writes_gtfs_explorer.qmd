@@ -1,0 +1,20 @@
+---
+title: "If you prompt an LLM to Shine on the GTFS..."
+format: html
+image: "images/gtfs_app_cover_photo.jpg"
+---
+
+I'm testing out how LLM chats can improve my workflow.
+
+The other day (from several weeks ago) I went over to Claude and asked them to write a Shiny App that allows the user to upload a GTFS zip file and explore the transit system described within the upload. This is the result. I haven't edited it really, just wanted to see what kind of output we get here. I think it's pretty neat.
+
+I moved to Washington, D.C. over three years ago to accept a inaugural position of Transit & Rail Data Scientist at an engineering and public transportation consultancy firm. The General Transit Feed Specification (GTFS) featured prominently in my day-to-day work; it is a standardized mapping (through data) of the operations of a transit agency. You can find further documentation of the GTFS [here](https://developers.google.com/transit/gtfs/reference/).
+
+This app offers the user the chance to upload a GTFS zip file. They used to be easier to obtain and download from reputable sources, but now you must create accounts with these websites and thus jump through some hoops. I found this [link](https://busmaps.com/en/usa/WMATA/wmata-rail) that allows us to download the Metrorail GTFS fof the Washington Metropolitan Area Transit Authority (WMATA). Make sure you click on the link that says "Latest GTFS Feed - Corrected & Enriched".
+
+Once you've downloaded the zip file, proceed with uploaded that zip file into this app, and give it a shot at trying to understand what goes on inside the GTFS :)
+
+<iframe src="https://gira-solo.shinyapps.io/LLM_FirstDraft_GTFS_Explorer/" width="100%" height="1000px" frameborder="0">
+
+</iframe>
+
