@@ -20,7 +20,7 @@ Please refer to [Part 1](https://solplots.com/demos/ombReceipts.html) for contex
 
 ![](images/animate_over_years.gif)
 
-The R package the enables us to create animations and store them in .gif files is the [**camcorder**](https://github.com/thebioengineer/camcorder) package.
+The R package that enables us to create animations and store them as .gif files is the [**camcorder**](https://github.com/thebioengineer/camcorder) package.
 
 How we are going to achieve the animation is that we will essentially publish roughly 80 plot images (one for each year between 1941 and 2023) and then stitch them together (in order) to form a gif. The package assists us in stitching images together.
 
@@ -181,12 +181,12 @@ We see all the data up until 1974, with x-axis showing the remaining years. And 
 Generating plot images for each year and stitching them together in order will produce a moving image that shows the area geometry moving to the right for each year. How can we loop through our written function `animate_plot()` to produce a plot for each year? We'll use the `map()` function from the [**purrr**](https://purrr.tidyverse.org/) and utilize its functional programming toolkit.
 
 ```{r}
-map(1973:1974, ~ animate_plot(fin, .))
+map(1973:1975, ~ animate_plot(fin, .))
 ```
 
-Essentially (in our case), we want to loop the function `animate_plot()` over a vector of years in sequential order. I showed how to use `map()` in the code chunk above just for 1973 and 1974 (`1973:1974` produces a vector of every number between 1973 and 1974). Therefore, to produce every plot for our time frame we can write `map(1942:2022, ~ animate_plot(fin, .))`. I'm not going to run this code on this page and have 81 plot images outputted here.
+Essentially (in our case), we want to loop the function `animate_plot()` over a vector of years in sequential order. I showed how to use `map()` in the code chunk above just for 1973, 1974 and 1975 (`1973:1975` produces a vector of every number between 1973 and 1975). Therefore, to produce every plot for our time frame we can write `map(1942:2022, ~ animate_plot(fin, .))`. I'm not going to run this code on this page and have 81 plot images outputted here.
 
-# Annimation
+# Animation
 
 To utilize the capabilities of the camcorder package, we would run the following code:
 
@@ -213,5 +213,7 @@ To utilize the capabilities of the camcorder package, we would run the following
 ```
 
 The first function, `gg_record()` initiates a session in which R knows to immediately save as an image every plot that is generated. Once the recording session begins, we can loop over our plot generating function to produce each of the plots we need an in the order we need them. Once each plot is generated and saved to disk, the function `gg_playback()` takes each image produced and generates a .gif file. You can adjust how long the gif stays on the first and last image as well as how long to stay on each image in between.
+
+I'm not running this code for the post because but just un-comment the cell.
 
 Please refer to the package [repo](https://github.com/thebioengineer/camcorder) for more information about the package.

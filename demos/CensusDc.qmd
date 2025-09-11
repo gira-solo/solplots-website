@@ -14,11 +14,13 @@ execute:
   message: false
 ---
 
+Suppose you need to "pull" U.S. Census data and "run" some summary statistics. Consider this approach.
+
 ## Packages
 
 -   **tidyverse** (ggplot2, dplyr) for plotting and wrangling data
 -   **sf** (simple features) - I'll only be using one function `geom_sf()` to plot the map with ggplot2, but this package is part of the [geocomputation](https://r.geocompx.org/) ecosystem of R.
--   **tidycensus** - an R package by [Kyle Walker](https://walker-data.com/tidycensus/) that allows users to interface with a select number of the US Census Bureau's data APIs and return tidyverse-ready data frames, optionally with simple feature geometry included
+-   **tidycensus** - an R package by [Kyle Walker](https://walker-data.com/tidycensus/) that allows users to interface with a select number of the US Census Bureau's data APIs and return tidyverse-ready data frames, optionally with simple feature geometry included.
 
 ```{r}
 #| label: loading package libraries

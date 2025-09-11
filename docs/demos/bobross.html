@@ -198,9 +198,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-source" class="level2">
 <h2 class="anchored" data-anchor-id="data-source">Data Source</h2>
 <p>Every Tuesday, volunteers prepare a <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2023/2023-02-21/readme.md">data set</a> for people to practice data tidying and plotting skills with R. This is how I’ve interpreted Bob Ross Paintings.</p>
-<p>Upon learning that the producers intentionally limited the show’s palette to 18 colors, I wanted to find the answer to this question: how often is each color used?</p>
-<p>It’s also a great example because this information can’t be immediately gleaned from the data set. The granularity is at the episode level, meaning 403 episodes of the show are contained in 403 observations in the data.</p>
-<p>The information pertaining to colors used and those colors’ hex code had to be messaged out of the source and be organized into a new data frame from which to build a plot.</p>
+<p>Upon learning that the producers intentionally limited the show’s palette to 18 colors, I wanted to find the answer to this question: how often is each color used? As in, what is the sum appearances across all 403 episodes of these 18 colors?</p>
+<p>It’s also a great example because this information can’t be immediately gleaned from the data set. The granularity is at the episode level, meaning 403 episodes of the show are contained in 403 observations in the data. Our target granularity is the color level, meaning we first need to create a data frame of 18 observations before we can build the plot.</p>
+<p>The information pertaining to colors used and those colors’ hex code has to be messaged out of the source and be organized into a new data frame from which to build a plot.</p>
 </section>
 <section id="simple-code-reproduction" class="level2">
 <h2 class="anchored" data-anchor-id="simple-code-reproduction">Simple code reproduction</h2>
@@ -292,7 +292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>         <span class="at">color_label =</span> <span class="fu">if_else</span>(color_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Titanium White"</span>, <span class="st">"Liquid Clear"</span>), <span class="st">"black"</span>, codes)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Once we have a data frame titled “counts”, we can then use ggplot to visualize the data.</p>
+<p>Once we have a data frame titled <code>counts</code>, we can then use ggplot to visualize the data.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -333,7 +333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>This is just one way to plot this data. I also liked this <a href="https://github.com/apsteinmetz/tidytuesday/blob/master/Rplot.jpeg">interpretation</a> by Art Steinmetz.</p>
 <hr>
-<p><em>Generated with R R version 4.3.2 (2023-10-31 ucrt) on 2025-09-08</em></p>
+<p><em>Generated with R R version 4.3.2 (2023-10-31 ucrt) on 2025-09-10</em></p>
 
 
 <!-- -->
@@ -645,11 +645,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>Every Tuesday, volunteers prepare a <span class="co">[</span><span class="ot">data set</span><span class="co">](https://github.com/rfordatascience/tidytuesday/blob/main/data/2023/2023-02-21/readme.md)</span> for people to practice data tidying and plotting skills with R. This is how I've interpreted Bob Ross Paintings.</span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>Upon learning that the producers intentionally limited the show's palette to 18 colors, I wanted to find the answer to this question: how often is each color used?</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>Upon learning that the producers intentionally limited the show's palette to 18 colors, I wanted to find the answer to this question: how often is each color used? As in, what is the sum appearances across all 403 episodes of these 18 colors?</span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>It's also a great example because this information can't be immediately gleaned from the data set. The granularity is at the episode level, meaning 403 episodes of the show are contained in 403 observations in the data.</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>It's also a great example because this information can't be immediately gleaned from the data set. The granularity is at the episode level, meaning 403 episodes of the show are contained in 403 observations in the data. Our target granularity is the color level, meaning we first need to create a data frame of 18 observations before we can build the plot.</span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>The information pertaining to colors used and those colors' hex code had to be messaged out of the source and be organized into a new data frame from which to build a plot.</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>The information pertaining to colors used and those colors' hex code has to be messaged out of the source and be organized into a new data frame from which to build a plot.</span>
 <span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## Simple code reproduction</span></span>
 <span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
@@ -746,7 +746,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>Once we have a data frame titled "counts", we can then use ggplot to visualize the data.</span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>Once we have a data frame titled <span class="in">`counts`</span>, we can then use ggplot to visualize the data.</span>
 <span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>

@@ -18,11 +18,11 @@ execute:
 
 Every Tuesday, volunteers prepare a [data set](https://github.com/rfordatascience/tidytuesday/blob/main/data/2023/2023-02-21/readme.md) for people to practice data tidying and plotting skills with R. This is how I've interpreted Bob Ross Paintings.
 
-Upon learning that the producers intentionally limited the show's palette to 18 colors, I wanted to find the answer to this question: how often is each color used?
+Upon learning that the producers intentionally limited the show's palette to 18 colors, I wanted to find the answer to this question: how often is each color used? As in, what is the sum appearances across all 403 episodes of these 18 colors?
 
-It's also a great example because this information can't be immediately gleaned from the data set. The granularity is at the episode level, meaning 403 episodes of the show are contained in 403 observations in the data.
+It's also a great example because this information can't be immediately gleaned from the data set. The granularity is at the episode level, meaning 403 episodes of the show are contained in 403 observations in the data. Our target granularity is the color level, meaning we first need to create a data frame of 18 observations before we can build the plot.
 
-The information pertaining to colors used and those colors' hex code had to be messaged out of the source and be organized into a new data frame from which to build a plot.
+The information pertaining to colors used and those colors' hex code has to be messaged out of the source and be organized into a new data frame from which to build a plot.
 
 ## Simple code reproduction
 
@@ -119,7 +119,7 @@ counts =
  
 ```
 
-Once we have a data frame titled "counts", we can then use ggplot to visualize the data.
+Once we have a data frame titled `counts`, we can then use ggplot to visualize the data.
 
 ```{r}
 #| fig-width: 8
