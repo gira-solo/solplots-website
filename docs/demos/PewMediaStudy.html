@@ -550,7 +550,7 @@ $ high_school_or_less &lt;dbl&gt; 14, 19, 14, 19, 18, 21, 20, 20, 23, 22, 25, 29
 <span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
 <span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">nrow</span>(df) <span class="sc">+</span> <span class="fl">4.6</span>,</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">nrow</span>(df) <span class="sc">+</span> <span class="fl">1.77</span>,</span>
 <span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">62</span>,</span>
 <span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"62% of people who</span><span class="sc">\n</span><span class="st">regularly get news</span><span class="sc">\n</span><span class="st">from The Atlantic are</span><span class="sc">\n</span><span class="st">college graduates."</span>,</span>
 <span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineheight =</span> .<span class="dv">8</span>,</span>
@@ -568,15 +568,16 @@ $ high_school_or_less &lt;dbl&gt; 14, 19, 14, 19, 18, 21, 20, 20, 23, 22, 25, 29
 <span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
-<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>                             <span class="at">family =</span> <span class="st">"Arial"</span>),</span>
-<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, </span>
-<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">size =</span> <span class="dv">11</span>, </span>
-<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">color =</span> <span class="st">"grey60"</span>, </span>
-<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">face =</span> <span class="st">"italic"</span>, </span>
-<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="st">"Cambria"</span>),</span>
-<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"grey60"</span>,)</span>
-<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>                                <span class="at">family =</span> <span class="st">"Arial"</span>,</span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>                                <span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.5</span>)),</span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, </span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">size =</span> <span class="dv">11</span>, </span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">color =</span> <span class="st">"grey60"</span>, </span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">face =</span> <span class="st">"italic"</span>, </span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="st">"Cambria"</span>),</span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"grey60"</span>,)</span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="PewMediaStudy_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
@@ -1125,7 +1126,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-257"><a href="#cb23-257" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb23-258"><a href="#cb23-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
 <span id="cb23-259"><a href="#cb23-259" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
-<span id="cb23-260"><a href="#cb23-260" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">nrow</span>(df) <span class="sc">+</span> <span class="fl">4.6</span>,</span>
+<span id="cb23-260"><a href="#cb23-260" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">nrow</span>(df) <span class="sc">+</span> <span class="fl">1.77</span>,</span>
 <span id="cb23-261"><a href="#cb23-261" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">62</span>,</span>
 <span id="cb23-262"><a href="#cb23-262" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"62% of people who</span><span class="sc">\n</span><span class="st">regularly get news</span><span class="sc">\n</span><span class="st">from The Atlantic are</span><span class="sc">\n</span><span class="st">college graduates."</span>,</span>
 <span id="cb23-263"><a href="#cb23-263" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineheight =</span> .<span class="dv">8</span>,</span>
@@ -1143,19 +1144,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-275"><a href="#cb23-275" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb23-276"><a href="#cb23-276" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb23-277"><a href="#cb23-277" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
-<span id="cb23-278"><a href="#cb23-278" aria-hidden="true" tabindex="-1"></a>                             <span class="at">family =</span> <span class="st">"Arial"</span>),</span>
-<span id="cb23-279"><a href="#cb23-279" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb23-280"><a href="#cb23-280" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, </span>
-<span id="cb23-281"><a href="#cb23-281" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">size =</span> <span class="dv">11</span>, </span>
-<span id="cb23-282"><a href="#cb23-282" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">color =</span> <span class="st">"grey60"</span>, </span>
-<span id="cb23-283"><a href="#cb23-283" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">face =</span> <span class="st">"italic"</span>, </span>
-<span id="cb23-284"><a href="#cb23-284" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="st">"Cambria"</span>),</span>
-<span id="cb23-285"><a href="#cb23-285" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"grey60"</span>,)</span>
-<span id="cb23-286"><a href="#cb23-286" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb23-287"><a href="#cb23-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-288"><a href="#cb23-288" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-289"><a href="#cb23-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-290"><a href="#cb23-290" aria-hidden="true" tabindex="-1"></a>I'm happy as to how this turned out. The next step is to find the raw survey data Pew collected and use that as the starting point rather than the PDF they provided 👀</span>
+<span id="cb23-278"><a href="#cb23-278" aria-hidden="true" tabindex="-1"></a>                                <span class="at">family =</span> <span class="st">"Arial"</span>,</span>
+<span id="cb23-279"><a href="#cb23-279" aria-hidden="true" tabindex="-1"></a>                                <span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.5</span>)),</span>
+<span id="cb23-280"><a href="#cb23-280" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb23-281"><a href="#cb23-281" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, </span>
+<span id="cb23-282"><a href="#cb23-282" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">size =</span> <span class="dv">11</span>, </span>
+<span id="cb23-283"><a href="#cb23-283" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">color =</span> <span class="st">"grey60"</span>, </span>
+<span id="cb23-284"><a href="#cb23-284" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">face =</span> <span class="st">"italic"</span>, </span>
+<span id="cb23-285"><a href="#cb23-285" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="st">"Cambria"</span>),</span>
+<span id="cb23-286"><a href="#cb23-286" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"grey60"</span>,)</span>
+<span id="cb23-287"><a href="#cb23-287" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-288"><a href="#cb23-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-289"><a href="#cb23-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-290"><a href="#cb23-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-291"><a href="#cb23-291" aria-hidden="true" tabindex="-1"></a>I'm happy as to how this turned out. The next step is to find the raw survey data Pew collected and use that as the starting point rather than the PDF they provided 👀</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

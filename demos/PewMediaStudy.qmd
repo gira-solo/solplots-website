@@ -250,7 +250,7 @@ df |>
   ) +
   annotate(
     "text",
-    y = nrow(df) + 4.6,
+    y = nrow(df) + 1.77,
     x = 62,
     label = "62% of people who\nregularly get news\nfrom The Atlantic are\ncollege graduates.",
     lineheight = .8,
@@ -268,7 +268,8 @@ df |>
     axis.title = element_blank(),
     axis.text.x = element_blank(),
     axis.text = element_markdown(color = "black",
-                             family = "Arial"),
+                                family = "Arial",
+                                size = rel(1.5)),
     plot.title = element_markdown(hjust = 0, face = "bold"),
     plot.subtitle = element_markdown(hjust = 0, 
                                  size = 11, 
