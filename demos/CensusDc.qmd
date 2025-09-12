@@ -41,6 +41,7 @@ To begin pulling data from the U.S. Census into R, you must submit your email to
 #| echo: false
 
 my_key <- "187f5aac4952d3a712229e1f84b52a31d52ee628"
+extrafont::loadfonts()
 ```
 
 Take your key and instantiate it in your R session like so:
@@ -72,7 +73,7 @@ dc <-
     # this could be whole plotting and thotting topic on its own...
     state = "DC",
     # DC counts as a state here
-    year = 2024,
+    year = 2023,
     # I first created this plot when 2022 had the most recent data
     geometry = TRUE
     # we want to return an sf object (similar to tidy table/tibble that 
@@ -131,8 +132,8 @@ map <-
   geom_sf() + 
   # apply sf geom
   labs(title = "Race and Income in DC",
-       subtitle = "2022 Inflation-adjusted USD\nMedian Household Income",
-       caption = "Source: 2018-2022 5-year\nAmerican Community Servey") +
+       subtitle = "2023 Inflation-adjusted USD\nMedian Household Income",
+       caption = "Source: 2019-2023 5-year\nAmerican Community Servey") +
   # set title, subtitle and caption (using new line character "\n")
   scale_fill_viridis_c(labels = scales::dollar,
                        option = "inferno",

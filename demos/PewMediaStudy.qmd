@@ -1,10 +1,10 @@
 ---
-title: "Reproducing Pew Research's plot from their August 18, 2025 article 'How the audiences of 30 major news sources differ in their levels of education'"
+title: "Reproducing Pew Research's 'How the audiences of 30 major news sources differ in their levels of education'"
 toc: true
-date: "2025-09-11"
+date: "2025-09-12"
 description: "Let's ask ClaudeAI to help us with identifying data stored in a string"
-categories: [forest fires]
-image: "images/pew_reproduction.png"
+categories: [media,education,survey,meritocracy]
+image: "images/pew_original.png"
 format: 
   html:
     code-fold: true
@@ -15,6 +15,8 @@ execute:
 ---
 
 Pew's research into the level of higher education among the different audiences of 30 major media outlets includes an interesting bar plot that I would like to reproduce.
+
+The article I'm referencing can be found [here](https://www.pewresearch.org/short-reads/2025/08/18/how-the-audiences-of-30-major-news-sources-differ-in-their-levels-of-education/).
 
 It is a vertical bar plot with 30 discrete media outlets on the y-axis ordered by their proportion of audience that has obtained a bachelor's degree or even more education.
 
