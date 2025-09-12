@@ -31,7 +31,8 @@ Much like the [CalFire](https://solplots.com/demos/CalFires.html) situation wher
 We want tidyverse and extrafont (as per usual) and [ggtext](https://github.com/wilkelab/ggtext) (a helper package on top of ggplot2).
 
 ```{r}
-#| echo: FALSE
+#| echo: false
+#| message: false
 library(tidyverse)
 library(extrafont)
 library(ggtext)
