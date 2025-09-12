@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-09-11">
+<meta name="description" content="Let’s ask ClaudeAI to help us with identifying data stored in a string">
+
+<title>Reproducing Pew Research’s plot from their August 18, 2025 article ‘How the audiences of 30 major news sources differ in their levels of education’</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Reproducing Pew Research’s plot from their August 18, 2025 article ‘How the audiences of 30 major news sources differ in their levels of education’</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solplots</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../demos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Thoughts on Plots</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../apps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plot with Me</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resume.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resume</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#package-libraries" id="toc-package-libraries" class="nav-link active" data-scroll-target="#package-libraries">Package Libraries</a></li>
+  <li><a href="#assist-from-claudeai" id="toc-assist-from-claudeai" class="nav-link" data-scroll-target="#assist-from-claudeai">Assist from ClaudeAI</a>
+  <ul class="collapse">
+  <li><a href="#prompt-1-code" id="toc-prompt-1-code" class="nav-link" data-scroll-target="#prompt-1-code">Prompt 1 Code</a></li>
+  <li><a href="#prompt-2-code" id="toc-prompt-2-code" class="nav-link" data-scroll-target="#prompt-2-code">Prompt 2 Code</a></li>
+  </ul></li>
+  <li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting">Plotting</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Reproducing Pew Research’s plot from their August 18, 2025 article ‘How the audiences of 30 major news sources differ in their levels of education’</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">forest fires</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Let’s ask ClaudeAI to help us with identifying data stored in a string
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 11, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Pew’s research into the level of higher education among the different audiences of 30 major media outlets includes an interesting bar plot that I would like to reproduce.</p>
+<p>It is a vertical bar plot with 30 discrete media outlets on the y-axis ordered by their proportion of audience that has obtained a bachelor’s degree or even more education.</p>
+<p>This is an interesting plot to reproduce because it expresses themes of meritocracy and how there can be hierarchies within many areas of life, such as media consumption, extracted and laid out for us to see where we <em>may</em> fall. It is definitely an interesting choice for the researchers at Pew not to ask the survey participants if they also get their news from TikTok (either from these very media outlets’ own accounts or from independent journalists reporting stories on the app).</p>
+<p>This plot feels very similar to the kinds of plots Pew usually produces, so I hope you find my post here informative for how we can take the data they provide us and turn it into this plot.</p>
+<section id="package-libraries" class="level1">
+<h1>Package Libraries</h1>
+<p>Much like the <a href="https://solplots.com/demos/CalFires.html">CalFire</a> situation where their data is stored in a PDF file, Pew let’s you also view a <a href="https://www.pewresearch.org/wp-content/uploads/sites/20/2025/08/SR_25.08.18_media-brands-edu_detailed-table.pdf">PDF</a> file that organizes the data in a tidy format for plotting. This is nice for us because aside from bring this data in, we won’t have to change anything beyond how it looks already.</p>
+<p>We want tidyverse and extrafont (as per usual) and <a href="https://github.com/wilkelab/ggtext">ggtext</a> (a helper package on top of ggplot2).</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "AGA Arabesque"                   "AGA Arabesque Desktop"          
+  [3] "Agency FB"                       "Akhbar MT"                      
+  [5] "Algerian"                        "Ami R"                          
+  [7] "Arial Black"                     "Arial"                          
+  [9] "Arial Narrow"                    "Arial Rounded MT Bold"          
+ [11] "Bahnschrift"                     "Baskerville Old Face"           
+ [13] "Bauhaus 93"                      "Bell MT"                        
+ [15] "Berlin Sans FB"                  "Berlin Sans FB Demi"            
+ [17] "Bernard MT Condensed"            "Blackadder ITC"                 
+ [19] "Bodoni MT"                       "Bodoni MT Black"                
+ [21] "Bodoni MT Condensed"             "Bodoni MT Poster Compressed"    
+ [23] "Bold Italic Art"                 "Book Antiqua"                   
+ [25] "Bookman Old Style"               "Bookshelf Symbol 7"             
+ [27] "Bradley Hand ITC"                "Britannic Bold"                 
+ [29] "Broadway"                        "Brush Script MT"                
+ [31] "Calibri"                         "Calibri Light"                  
+ [33] "Californian FB"                  "Calisto MT"                     
+ [35] "Cambria"                         "Candara"                        
+ [37] "Candara Light"                   "Castellar"                      
+ [39] "Centaur"                         "Century"                        
+ [41] "Century Gothic"                  "Century Schoolbook"             
+ [43] "Chiller"                         "Colonna MT"                     
+ [45] "Comic Sans MS"                   "Consolas"                       
+ [47] "Constantia"                      "Cooper Black"                   
+ [49] "Copperplate Gothic Bold"         "Copperplate Gothic Light"       
+ [51] "Corbel"                          "Corbel Light"                   
+ [53] "Courier New"                     "Curlz MT"                       
+ [55] "DecoType Naskh"                  "DecoType Naskh Extensions"      
+ [57] "DecoType Naskh Special"          "DecoType Naskh Swashes"         
+ [59] "DecoType Naskh Variants"         "DecoType Thuluth"               
+ [61] "Diwani Bent"                     "Diwani Letter"                  
+ [63] "Diwani Outline Shaded"           "Diwani Simple Outline"          
+ [65] "Diwani Simple Outline 2"         "Diwani Simple Striped"          
+ [67] "Dubai"                           "Dubai Light"                    
+ [69] "Dubai Medium"                    "Ebrima"                         
+ [71] "Edwardian Script ITC"            "Elephant"                       
+ [73] "Engravers MT"                    "Eras Bold ITC"                  
+ [75] "Eras Demi ITC"                   "Eras Light ITC"                 
+ [77] "Eras Medium ITC"                 "Farsi Simple Bold"              
+ [79] "Farsi Simple Outline"            "Felix Titling"                  
+ [81] "Footlight MT Light"              "Forte"                          
+ [83] "Franklin Gothic Book"            "Franklin Gothic Demi"           
+ [85] "Franklin Gothic Demi Cond"       "Franklin Gothic Heavy"          
+ [87] "Franklin Gothic Medium"          "Franklin Gothic Medium Cond"    
+ [89] "Freestyle Script"                "French Script MT"               
+ [91] "FZShuTi"                         "FZYaoTi"                        
+ [93] "Gabriola"                        "Gadugi"                         
+ [95] "Garamond"                        "Georgia"                        
+ [97] "Gigi"                            "Gill Sans Ultra Bold"           
+ [99] "Gill Sans Ultra Bold Condensed"  "Gill Sans MT"                   
+[101] "Gill Sans MT Condensed"          "Gill Sans MT Ext Condensed Bold"
+[103] "Gloucester MT Extra Condensed"   "Goudy Old Style"                
+[105] "Goudy Stout"                     "HYGraphic-Medium"               
+[107] "HYGungSo-Bold"                   "HYGothic-Extra"                 
+[109] "HYGothic-Medium"                 "HYHeadLine-Medium"              
+[111] "HYMyeongJo-Extra"                "HYSinMyeongJo-Medium"           
+[113] "HYPMokGak-Bold"                  "HYPost-Light"                   
+[115] "HYPost-Medium"                   "HYShortSamul-Medium"            
+[117] "Haettenschweiler"                "Harlow Solid Italic"            
+[119] "Harrington"                      "Headline R"                     
+[121] "High Tower Text"                 "HoloLens MDL2 Assets"           
+[123] "Impact"                          "Imprint MT Shadow"              
+[125] "Informal Roman"                  "Ink Free"                       
+[127] "Italic Outline Art"              "Javanese Text"                  
+[129] "Jokerman"                        "Juice ITC"                      
+[131] "ITC Korinna"                     "Kristen ITC"                    
+[133] "Kufi Extended Outline"           "Kufi Outline Shaded"            
+[135] "Kunstler Script"                 "Wide Latin"                     
+[137] "Led Italic Font"                 "Leelawadee UI"                  
+[139] "Leelawadee UI Semilight"         "LiSu"                           
+[141] "Lucida Bright"                   "Lucida Calligraphy"             
+[143] "Lucida Console"                  "Lucida Fax"                     
+[145] "Lucida Handwriting"              "Lucida Sans"                    
+[147] "Lucida Sans Typewriter"          "Lucida Sans Unicode"            
+[149] "Magic R"                         "Magneto"                        
+[151] "Maiandra GD"                     "Malgun Gothic"                  
+[153] "Malgun Gothic Semilight"         "Marlett"                        
+[155] "Matura MT Script Capitals"       "Microsoft Himalaya"             
+[157] "Microsoft Yi Baiti"              "Microsoft New Tai Lue"          
+[159] "Microsoft PhagsPa"               "Microsoft Sans Serif"           
+[161] "Microsoft Tai Le"                "Mistral"                        
+[163] "Modern No. 20"                   "Mongolian Baiti"                
+[165] "Monotype Corsiva"                "Monotype Koufi"                 
+[167] "Morning Rainbow"                 "MS Outlook"                     
+[169] "MS Reference Sans Serif"         "MS Reference Specialty"         
+[171] "MT Extra"                        "Mudir MT"                       
+[173] "MV Boli"                         "Myanmar Text"                   
+[175] "New Gulim"                       "Niagara Engraved"               
+[177] "Niagara Solid"                   "Nirmala UI"                     
+[179] "Nirmala UI Semilight"            "OCR A Extended"                 
+[181] "Old Antic Bold"                  "Old Antic Decorative"           
+[183] "Old Antic Outline"               "Old Antic Outline Shaded"       
+[185] "Old English Text MT"             "Onyx"                           
+[187] "Palace Script MT"                "Palatino Linotype"              
+[189] "Papyrus"                         "Parchment"                      
+[191] "Perpetua"                        "Perpetua Titling MT"            
+[193] "Playbill"                        "Poor Richard"                   
+[195] "Pristina"                        "PT Bold Arch"                   
+[197] "PT Bold Broken"                  "PT Bold Dusky"                  
+[199] "PT Bold Heading"                 "PT Bold Mirror"                 
+[201] "PT Bold Stars"                   "PT Separated Baloon"            
+[203] "PT Simple Bold Ruled"            "Pyunji R"                       
+[205] "Rage Italic"                     "Ravie"                          
+[207] "Rockwell"                        "Rockwell Condensed"             
+[209] "Rockwell Extra Bold"             "Sans Serif Collection"          
+[211] "Script MT Bold"                  "Segoe Fluent Icons"             
+[213] "Segoe MDL2 Assets"               "Segoe Print"                    
+[215] "Segoe Script"                    "Segoe UI"                       
+[217] "Segoe UI Light"                  "Segoe UI Semibold"              
+[219] "Segoe UI Semilight"              "Segoe UI Black"                 
+[221] "Segoe UI Historic"               "Segoe UI Symbol"                
+[223] "Segoe UI Variable"               "Showcard Gothic"                
+[225] "Simple Bold Jut Out"             "Simple Indust Outline"          
+[227] "Simple Indust Shaded"            "Simple Outline Pat"             
+[229] "SimSun-ExtB"                     "Sitka Text"                     
+[231] "Snap ITC"                        "STCaiyun"                       
+[233] "Stencil"                         "STFangsong"                     
+[235] "STHupo"                          "STKaiti"                        
+[237] "STLiti"                          "STSong"                         
+[239] "STXihei"                         "STXingkai"                      
+[241] "STXinwei"                        "STZhongsong"                    
+[243] "Sylfaen"                         "Symbol"                         
+[245] "Tahoma"                          "Tempus Sans ITC"                
+[247] "Times New Roman"                 "Trebuchet MS"                   
+[249] "Tw Cen MT"                       "Tw Cen MT Condensed"            
+[251] "Tw Cen MT Condensed Extra Bold"  "Verdana"                        
+[253] "Viner Hand ITC"                  "Vivaldi"                        
+[255] "Vladimir Script"                 "Webdings"                       
+[257] "Wingdings"                       "Wingdings 2"                    
+[259] "Wingdings 3"                     "Yet R"                          
+[261] "YouYuan"                        </code></pre>
+</div>
+</div>
+</section>
+<section id="assist-from-claudeai" class="level1">
+<h1>Assist from ClaudeAI</h1>
+<p>I decided to enlist the help from Claude to take the string of text in the pdf to become a tidy data frame (aka “tibble”) that can be used directly to plot.</p>
+<p>Prompt 1 essentially takes the string I copied that includes all the relevant data and use its knowledge of R code to create a script that manually creates a tibble. Prompt 2 takes the same string but uses the stringr library within tidyverse to build out a process that parses the string itself and creates the same data frame result.</p>
+<p>The string I used is thus:</p>
+<p>“Education levels of U.S. audiences for 30 major news sources Among U.S. adults who regularly get news from ___, % with each level of education College+ Some college High school or less The Atlantic 62% 23% 14% Axios 59 21 19 NPR 58 27 14 The New York Times 56 24 19 The Guardian 53 28 18 The Wall Street Journal 53 26 21 Politico 52 27 20 The Associated Press 52 28 20 BBC News 49 27 23 The Washington Post 47 30 22 HuffPost 47 28 25 The Hill 45 25 29 Forbes 42 30 28 PBS 41 29 30 CNN 38 28 33 New York Post 38 33 29 The Daily Wire 37 37 26 MSNBC 37 30 33 USA Today 34 30 36 Breitbart 34 32 34 Newsweek 32 32 35 NBC News 32 29 39 ABC News 31 30 39 CBS News 30 30 40 Tucker Carlson Network 28 33 40 Newsmax 28 35 37 Fox News 27 30 42 The Joe Rogan Experience 27 35 38 Telemundo 16 26 56 Univision 15 26 57”</p>
+<section id="prompt-1-code" class="level3">
+<h3 class="anchored" data-anchor-id="prompt-1-code">Prompt 1 Code</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># method 1 from Claude ----</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># LLM to parse the text and use its knowledge of R code to output the following:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create tibble from the news sources education data</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>news_education <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>news_source, <span class="sc">~</span>college_plus, <span class="sc">~</span>some_college, <span class="sc">~</span>high_school_or_less,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Atlantic"</span>, <span class="dv">62</span>, <span class="dv">23</span>, <span class="dv">14</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Axios"</span>, <span class="dv">59</span>, <span class="dv">21</span>, <span class="dv">19</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NPR"</span>, <span class="dv">58</span>, <span class="dv">27</span>, <span class="dv">14</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The New York Times"</span>, <span class="dv">56</span>, <span class="dv">24</span>, <span class="dv">19</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Guardian"</span>, <span class="dv">53</span>, <span class="dv">28</span>, <span class="dv">18</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Wall Street Journal"</span>, <span class="dv">53</span>, <span class="dv">26</span>, <span class="dv">21</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Politico"</span>, <span class="dv">52</span>, <span class="dv">27</span>, <span class="dv">20</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Associated Press"</span>, <span class="dv">52</span>, <span class="dv">28</span>, <span class="dv">20</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BBC News"</span>, <span class="dv">49</span>, <span class="dv">27</span>, <span class="dv">23</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Washington Post"</span>, <span class="dv">47</span>, <span class="dv">30</span>, <span class="dv">22</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"HuffPost"</span>, <span class="dv">47</span>, <span class="dv">28</span>, <span class="dv">25</span>,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Hill"</span>, <span class="dv">45</span>, <span class="dv">25</span>, <span class="dv">29</span>,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Forbes"</span>, <span class="dv">42</span>, <span class="dv">30</span>, <span class="dv">28</span>,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"PBS"</span>, <span class="dv">41</span>, <span class="dv">29</span>, <span class="dv">30</span>,</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CNN"</span>, <span class="dv">38</span>, <span class="dv">28</span>, <span class="dv">33</span>,</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"New York Post"</span>, <span class="dv">38</span>, <span class="dv">33</span>, <span class="dv">29</span>,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Daily Wire"</span>, <span class="dv">37</span>, <span class="dv">37</span>, <span class="dv">26</span>,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MSNBC"</span>, <span class="dv">37</span>, <span class="dv">30</span>, <span class="dv">33</span>,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"USA Today"</span>, <span class="dv">34</span>, <span class="dv">30</span>, <span class="dv">36</span>,</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Breitbart"</span>, <span class="dv">34</span>, <span class="dv">32</span>, <span class="dv">34</span>,</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Newsweek"</span>, <span class="dv">32</span>, <span class="dv">32</span>, <span class="dv">35</span>,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NBC News"</span>, <span class="dv">32</span>, <span class="dv">29</span>, <span class="dv">39</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ABC News"</span>, <span class="dv">31</span>, <span class="dv">30</span>, <span class="dv">39</span>,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CBS News"</span>, <span class="dv">30</span>, <span class="dv">30</span>, <span class="dv">40</span>,</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Tucker Carlson Network"</span>, <span class="dv">28</span>, <span class="dv">33</span>, <span class="dv">40</span>,</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Newsmax"</span>, <span class="dv">28</span>, <span class="dv">35</span>, <span class="dv">37</span>,</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Fox News"</span>, <span class="dv">27</span>, <span class="dv">30</span>, <span class="dv">42</span>,</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Joe Rogan Experience"</span>, <span class="dv">27</span>, <span class="dv">35</span>, <span class="dv">38</span>,</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Telemundo"</span>, <span class="dv">16</span>, <span class="dv">26</span>, <span class="dv">56</span>,</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Univision"</span>, <span class="dv">15</span>, <span class="dv">26</span>, <span class="dv">57</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the tibble</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(news_education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 4
+   news_source             college_plus some_college high_school_or_less
+   &lt;chr&gt;                          &lt;dbl&gt;        &lt;dbl&gt;               &lt;dbl&gt;
+ 1 The Atlantic                      62           23                  14
+ 2 Axios                             59           21                  19
+ 3 NPR                               58           27                  14
+ 4 The New York Times                56           24                  19
+ 5 The Guardian                      53           28                  18
+ 6 The Wall Street Journal           53           26                  21
+ 7 Politico                          52           27                  20
+ 8 The Associated Press              52           28                  20
+ 9 BBC News                          49           27                  23
+10 The Washington Post               47           30                  22
+# ℹ 20 more rows</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: View structure and summary</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(news_education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 30
+Columns: 4
+$ news_source         &lt;chr&gt; "The Atlantic", "Axios", "NPR", "The New York Time…
+$ college_plus        &lt;dbl&gt; 62, 59, 58, 56, 53, 53, 52, 52, 49, 47, 47, 45, 42…
+$ some_college        &lt;dbl&gt; 23, 21, 27, 24, 28, 26, 27, 28, 27, 30, 28, 25, 30…
+$ high_school_or_less &lt;dbl&gt; 14, 19, 14, 19, 18, 21, 20, 20, 23, 22, 25, 29, 28…</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(news_education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> news_source         college_plus    some_college   high_school_or_less
+ Length:30          Min.   :15.00   Min.   :21.00   Min.   :14.00      
+ Class :character   1st Qu.:31.25   1st Qu.:27.00   1st Qu.:21.25      
+ Mode  :character   Median :38.00   Median :29.00   Median :29.50      
+                    Mean   :40.00   Mean   :28.97   Mean   :30.53      
+                    3rd Qu.:51.25   3rd Qu.:30.00   3rd Qu.:37.75      
+                    Max.   :62.00   Max.   :37.00   Max.   :57.00      </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: Sort by college+ percentage (descending)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>news_education_sorted <span class="ot">&lt;-</span> news_education <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(college_plus))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Sorted by College+ percentage:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Sorted by College+ percentage:"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(news_education_sorted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 4
+   news_source             college_plus some_college high_school_or_less
+   &lt;chr&gt;                          &lt;dbl&gt;        &lt;dbl&gt;               &lt;dbl&gt;
+ 1 The Atlantic                      62           23                  14
+ 2 Axios                             59           21                  19
+ 3 NPR                               58           27                  14
+ 4 The New York Times                56           24                  19
+ 5 The Guardian                      53           28                  18
+ 6 The Wall Street Journal           53           26                  21
+ 7 Politico                          52           27                  20
+ 8 The Associated Press              52           28                  20
+ 9 BBC News                          49           27                  23
+10 The Washington Post               47           30                  22
+# ℹ 20 more rows</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This R code uses dplyr and tibble to create a clean dataset from your PDF text. Here's what the code does:</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates the tibble: Uses tribble() (transpose tibble) to easily input the data in a readable row-by-row format</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Column names: Uses snake_case naming convention for the education levels</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Data validation: Includes glimpse() and summary() to check the structure</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Bonus sorting: Shows how to sort by college education percentage</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># The tibble will have 30 rows (one for each news source) and 4 columns:</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># news_source: Character column with the news outlet names</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># college_plus: Numeric column with percentage having college+ education</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># some_college: Numeric column with percentage having some college</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># high_school_or_less: Numeric column with percentage having high school or less</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co"># You can run additional dplyr operations on this tibble like filtering, grouping, or creating new calculated columns as needed for your analysis.RetryClaude can make mistakes. Please double-check responses. Sonnet 4</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>This output simply reads the string and uses the <code>tibble()</code> function to manually declare a data frame from scratch.</p>
+</section>
+<section id="prompt-2-code" class="level3">
+<h3 class="anchored" data-anchor-id="prompt-2-code">Prompt 2 Code</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># method 2 ----</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Take the same text but use its knowledge of R to write a script that parses the string </span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># and creates the same tibble result as the 1st method</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw text from PDF</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>raw_text <span class="ot">&lt;-</span> <span class="st">"Education levels of U.S. audiences for 30 major news sources Among U.S. adults who regularly get news from ___, % with each level of education College+ Some college High school or less The Atlantic 62% 23% 14% Axios 59 21 19 NPR 58 27 14 The New York Times 56 24 19 The Guardian 53 28 18 The Wall Street Journal 53 26 21 Politico 52 27 20 The Associated Press 52 28 20 BBC News 49 27 23 The Washington Post 47 30 22 HuffPost 47 28 25 The Hill 45 25 29 Forbes 42 30 28 PBS 41 29 30 CNN 38 28 33 New York Post 38 33 29 The Daily Wire 37 37 26 MSNBC 37 30 33 USA Today 34 30 36 Breitbart 34 32 34 Newsweek 32 32 35 NBC News 32 29 39 ABC News 31 30 39 CBS News 30 30 40 Tucker Carlson Network 28 33 40 Newsmax 28 35 37 Fox News 27 30 42 The Joe Rogan Experience 27 35 38 Telemundo 16 26 56 Univision 15 26 57"</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse the text to create tibble</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>news_education <span class="ot">&lt;-</span> raw_text <span class="sc">%&gt;%</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Split into lines and convert to tibble</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">"(?=The Atlantic|Axios|NPR|The New York Times|The Guardian|The Wall Street Journal|Politico|The Associated Press|BBC News|The Washington Post|HuffPost|The Hill|Forbes|PBS|CNN|New York Post|The Daily Wire|MSNBC|USA Today|Breitbart|Newsweek|NBC News|ABC News|CBS News|Tucker Carlson Network|Newsmax|Fox News|The Joe Rogan Experience|Telemundo|Univision)"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Keep only the lines with actual data (remove header)</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  .[<span class="fu">str_detect</span>(., <span class="st">"The Atlantic|Axios|NPR|The New York Times|The Guardian|The Wall Street Journal|Politico|The Associated Press|BBC News|The Washington Post|HuffPost|The Hill|Forbes|PBS|CNN|New York Post|The Daily Wire|MSNBC|USA Today|Breitbart|Newsweek|NBC News|ABC News|CBS News|Tucker Carlson Network|Newsmax|Fox News|The Joe Rogan Experience|Telemundo|Univision"</span>)] <span class="sc">%&gt;%</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert to tibble</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">raw_line =</span> .) <span class="sc">%&gt;%</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract news source names and percentages using regex</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract news source (everything before the first number)</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">news_source =</span> <span class="fu">str_extract</span>(raw_line, <span class="st">"^[A-Za-z</span><span class="sc">\\</span><span class="st">s]+(?=</span><span class="sc">\\</span><span class="st">s+</span><span class="sc">\\</span><span class="st">d)"</span>),</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Clean up news source names</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">news_source =</span> <span class="fu">str_trim</span>(news_source),</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract all percentages (with or without % sign)</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentages =</span> <span class="fu">str_extract_all</span>(raw_line, <span class="st">"</span><span class="sc">\\</span><span class="st">d+%?"</span>)</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unnest the percentages and convert to numeric</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(percentages) <span class="sc">%&gt;%</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove % sign and convert to numeric</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentages =</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(percentages, <span class="st">"%"</span>))</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Group by news source and create columns for each education level</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(news_source) <span class="sc">%&gt;%</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">education_level =</span> <span class="fu">case_when</span>(</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>      <span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"college_plus"</span>,</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>      <span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"some_college"</span>, </span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>      <span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"high_school_or_less"</span>,</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pivot to wide format</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> education_level,</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> percentages</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Clean up and select final columns</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(news_source, college_plus, some_college, high_school_or_less) <span class="sc">%&gt;%</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the result</span></span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(news_education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 4
+   news_source             college_plus some_college high_school_or_less
+   &lt;chr&gt;                          &lt;dbl&gt;        &lt;dbl&gt;               &lt;dbl&gt;
+ 1 The Atlantic                      62           23                  14
+ 2 Axios                             59           21                  19
+ 3 NPR                               58           27                  14
+ 4 The New York Times                56           24                  19
+ 5 The Guardian                      53           28                  18
+ 6 The Wall Street Journal           53           26                  21
+ 7 Politico                          52           27                  20
+ 8 The Associated Press              52           28                  20
+ 9 BBC News                          49           27                  23
+10 The Washington Post               47           30                  22
+# ℹ 20 more rows</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the structure</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(news_education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 30
+Columns: 4
+$ news_source         &lt;chr&gt; "The Atlantic", "Axios", "NPR", "The New York Time…
+$ college_plus        &lt;dbl&gt; 62, 59, 58, 56, 53, 53, 52, 52, 49, 47, 47, 45, 42…
+$ some_college        &lt;dbl&gt; 23, 21, 27, 24, 28, 26, 27, 28, 27, 30, 28, 25, 30…
+$ high_school_or_less &lt;dbl&gt; 14, 19, 14, 19, 18, 21, 20, 20, 23, 22, 25, 29, 28…</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that percentages add up to ~100% for each source</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>news_education <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> college_plus <span class="sc">+</span> some_college <span class="sc">+</span> high_school_or_less) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(news_source, total) <span class="sc">%&gt;%</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 2
+   news_source             total
+   &lt;chr&gt;                   &lt;dbl&gt;
+ 1 The Atlantic               99
+ 2 Axios                      99
+ 3 NPR                        99
+ 4 The New York Times         99
+ 5 The Guardian               99
+ 6 The Wall Street Journal   100
+ 7 Politico                   99
+ 8 The Associated Press      100
+ 9 BBC News                   99
+10 The Washington Post        99
+# ℹ 20 more rows</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by college+ percentage (descending)</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>news_education_sorted <span class="ot">&lt;-</span> news_education <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(college_plus))</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Sorted by College+ percentage:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Sorted by College+ percentage:"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(news_education_sorted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 4
+   news_source             college_plus some_college high_school_or_less
+   &lt;chr&gt;                          &lt;dbl&gt;        &lt;dbl&gt;               &lt;dbl&gt;
+ 1 The Atlantic                      62           23                  14
+ 2 Axios                             59           21                  19
+ 3 NPR                               58           27                  14
+ 4 The New York Times                56           24                  19
+ 5 The Guardian                      53           28                  18
+ 6 The Wall Street Journal           53           26                  21
+ 7 Politico                          52           27                  20
+ 8 The Associated Press              52           28                  20
+ 9 BBC News                          49           27                  23
+10 The Washington Post               47           30                  22
+# ℹ 20 more rows</code></pre>
+</div>
+</div>
+<p>This code goes a little deeper in terms of outlining a whole processing starting with a string and ending up with the same data frame we wrote in Prompt 1. The actual regex (regular expression) code is actually very light; it’s the processing that follows that requires a bit of grouping, aggregating and pivoting.</p>
+</section>
+</section>
+<section id="plotting" class="level1">
+<h1>Plotting</h1>
+<p>I did ask Claude for some help here and there to get things as close as possible to what Pew published. But I did make some creative decisions and not extend myself too much just to get the justifications and spacing exactly right.</p>
+<p>I’m not so sure if the names of the colors Pew used are actually vintage merlot and lady flower, but what do you guys think?</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> news_education_sorted</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>vintage_merlot <span class="ot">&lt;-</span> <span class="st">"#733e48"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>lady_flower <span class="ot">&lt;-</span> <span class="st">"#cfa5ac"</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> college_plus,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">reorder</span>(news_source, college_plus))) <span class="sc">+</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> vintage_merlot) <span class="sc">+</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">36</span>, <span class="at">y =</span> news_source),</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> lady_flower) <span class="sc">+</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> college_plus),</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>college_plus <span class="sc">&gt;</span> <span class="dv">34</span>,<span class="sc">-</span>.<span class="dv">21</span>, <span class="fl">1.3</span>),</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>college_plus <span class="sc">&gt;</span> <span class="dv">34</span>, <span class="st">"black"</span>, <span class="st">"white"</span>)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">nrow</span>(df) <span class="sc">+</span> <span class="fl">2.77</span>,</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">36</span>,</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"36% of U.S. adults are</span><span class="sc">\n</span><span class="st">college graduates."</span>,</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineheight =</span> .<span class="dv">8</span>,</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="dv">1</span>,</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">nrow</span>(df) <span class="sc">+</span> <span class="fl">4.6</span>,</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">62</span>,</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"62% of people who</span><span class="sc">\n</span><span class="st">regularly get news</span><span class="sc">\n</span><span class="st">from The Atlantic are</span><span class="sc">\n</span><span class="st">college graduates."</span>,</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineheight =</span> .<span class="dv">8</span>,</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="dv">1</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Across U.S. audiences of 30 major news sources, the&lt;br&gt;share with a college degree varies widely"</span>,</span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Among U.S. adults who regularly get news from __,% who have a &lt;br&gt;bachelor's degree or more education"</span>,</span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Pew Research Center survey of 9,482 U.S. adults conducted March 10-16, 2025;&lt;br&gt;the U.S. adult figure is from Pew Research Center analysis of data from the 2024 Current&lt;br&gt;Population Survey, Annual Social and Economic Supplement (IPUMS)."</span>) <span class="sc">+</span></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.18</span>))) <span class="sc">+</span></span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>))) <span class="sc">+</span></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>                             <span class="at">family =</span> <span class="st">"Arial"</span>),</span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, </span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">size =</span> <span class="dv">11</span>, </span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">color =</span> <span class="st">"grey60"</span>, </span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">face =</span> <span class="st">"italic"</span>, </span>
+<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="st">"Cambria"</span>),</span>
+<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"grey60"</span>,)</span>
+<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="PewMediaStudy_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>I’m happy as to how this turned out. The next step is to find the raw survey data Pew collected and use that as the starting point rather than the PDF they provided 👀</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb24" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Reproducing Pew Research's plot from their August 18, 2025 article 'How the audiences of 30 major news sources differ in their levels of education'"</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-09-11"</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Let's ask ClaudeAI to help us with identifying data stored in a string"</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [forest fires]</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "images/pew_reproduction.png"</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>Pew's research into the level of higher education among the different audiences of 30 major media outlets includes an interesting bar plot that I would like to reproduce.</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>It is a vertical bar plot with 30 discrete media outlets on the y-axis ordered by their proportion of audience that has obtained a bachelor's degree or even more education.</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>This is an interesting plot to reproduce because it expresses themes of meritocracy and how there can be hierarchies within many areas of life, such as media consumption, extracted and laid out for us to see where we *may* fall. It is definitely an interesting choice for the researchers at Pew not to ask the survey participants if they also get their news from TikTok (either from these very media outlets' own accounts or from independent journalists reporting stories on the app).</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>This plot feels very similar to the kinds of plots Pew usually produces, so I hope you find my post here informative for how we can take the data they provide us and turn it into this plot.</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="fu"># Package Libraries</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>Much like the <span class="co">[</span><span class="ot">CalFire</span><span class="co">](https://solplots.com/demos/CalFires.html)</span> situation where their data is stored in a PDF file, Pew let's you also view a <span class="co">[</span><span class="ot">PDF</span><span class="co">](https://www.pewresearch.org/wp-content/uploads/sites/20/2025/08/SR_25.08.18_media-brands-edu_detailed-table.pdf)</span> file that organizes the data in a tidy format for plotting. This is nice for us because aside from bring this data in, we won't have to change anything beyond how it looks already.</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>We want tidyverse and extrafont (as per usual) and <span class="co">[</span><span class="ot">ggtext</span><span class="co">](https://github.com/wilkelab/ggtext)</span> (a helper package on top of ggplot2).</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: FALSE</span></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extrafont)</span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a><span class="fu">fonts</span>()</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a><span class="fu"># Assist from ClaudeAI</span></span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>I decided to enlist the help from Claude to take the string of text in the pdf to become a tidy data frame (aka "tibble") that can be used directly to plot.</span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>Prompt 1 essentially takes the string I copied that includes all the relevant data and use its knowledge of R code to create a script that manually creates a tibble. Prompt 2 takes the same string but uses the stringr library within tidyverse to build out a process that parses the string itself and creates the same data frame result.</span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a>The string I used is thus:</span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a>"Education levels of U.S. audiences for 30 major news sources Among U.S. adults who regularly get news from <span class="sc">\_\_\_</span>, % with each level of education College+ Some college High school or less The Atlantic 62% 23% 14% Axios 59 21 19 NPR 58 27 14 The New York Times 56 24 19 The Guardian 53 28 18 The Wall Street Journal 53 26 21 Politico 52 27 20 The Associated Press 52 28 20 BBC News 49 27 23 The Washington Post 47 30 22 HuffPost 47 28 25 The Hill 45 25 29 Forbes 42 30 28 PBS 41 29 30 CNN 38 28 33 New York Post 38 33 29 The Daily Wire 37 37 26 MSNBC 37 30 33 USA Today 34 30 36 Breitbart 34 32 34 Newsweek 32 32 35 NBC News 32 29 39 ABC News 31 30 39 CBS News 30 30 40 Tucker Carlson Network 28 33 40 Newsmax 28 35 37 Fox News 27 30 42 The Joe Rogan Experience 27 35 38 Telemundo 16 26 56 Univision 15 26 57"</span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prompt 1 Code</span></span>
+<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a><span class="co"># method 1 from Claude ----</span></span>
+<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a><span class="co"># LLM to parse the text and use its knowledge of R code to output the following:</span></span>
+<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Create tibble from the news sources education data</span></span>
+<span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a>news_education <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>news_source, <span class="sc">~</span>college_plus, <span class="sc">~</span>some_college, <span class="sc">~</span>high_school_or_less,</span>
+<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Atlantic"</span>, <span class="dv">62</span>, <span class="dv">23</span>, <span class="dv">14</span>,</span>
+<span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Axios"</span>, <span class="dv">59</span>, <span class="dv">21</span>, <span class="dv">19</span>,</span>
+<span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NPR"</span>, <span class="dv">58</span>, <span class="dv">27</span>, <span class="dv">14</span>,</span>
+<span id="cb24-70"><a href="#cb24-70" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The New York Times"</span>, <span class="dv">56</span>, <span class="dv">24</span>, <span class="dv">19</span>,</span>
+<span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Guardian"</span>, <span class="dv">53</span>, <span class="dv">28</span>, <span class="dv">18</span>,</span>
+<span id="cb24-72"><a href="#cb24-72" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Wall Street Journal"</span>, <span class="dv">53</span>, <span class="dv">26</span>, <span class="dv">21</span>,</span>
+<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Politico"</span>, <span class="dv">52</span>, <span class="dv">27</span>, <span class="dv">20</span>,</span>
+<span id="cb24-74"><a href="#cb24-74" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Associated Press"</span>, <span class="dv">52</span>, <span class="dv">28</span>, <span class="dv">20</span>,</span>
+<span id="cb24-75"><a href="#cb24-75" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BBC News"</span>, <span class="dv">49</span>, <span class="dv">27</span>, <span class="dv">23</span>,</span>
+<span id="cb24-76"><a href="#cb24-76" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Washington Post"</span>, <span class="dv">47</span>, <span class="dv">30</span>, <span class="dv">22</span>,</span>
+<span id="cb24-77"><a href="#cb24-77" aria-hidden="true" tabindex="-1"></a>  <span class="st">"HuffPost"</span>, <span class="dv">47</span>, <span class="dv">28</span>, <span class="dv">25</span>,</span>
+<span id="cb24-78"><a href="#cb24-78" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Hill"</span>, <span class="dv">45</span>, <span class="dv">25</span>, <span class="dv">29</span>,</span>
+<span id="cb24-79"><a href="#cb24-79" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Forbes"</span>, <span class="dv">42</span>, <span class="dv">30</span>, <span class="dv">28</span>,</span>
+<span id="cb24-80"><a href="#cb24-80" aria-hidden="true" tabindex="-1"></a>  <span class="st">"PBS"</span>, <span class="dv">41</span>, <span class="dv">29</span>, <span class="dv">30</span>,</span>
+<span id="cb24-81"><a href="#cb24-81" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CNN"</span>, <span class="dv">38</span>, <span class="dv">28</span>, <span class="dv">33</span>,</span>
+<span id="cb24-82"><a href="#cb24-82" aria-hidden="true" tabindex="-1"></a>  <span class="st">"New York Post"</span>, <span class="dv">38</span>, <span class="dv">33</span>, <span class="dv">29</span>,</span>
+<span id="cb24-83"><a href="#cb24-83" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Daily Wire"</span>, <span class="dv">37</span>, <span class="dv">37</span>, <span class="dv">26</span>,</span>
+<span id="cb24-84"><a href="#cb24-84" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MSNBC"</span>, <span class="dv">37</span>, <span class="dv">30</span>, <span class="dv">33</span>,</span>
+<span id="cb24-85"><a href="#cb24-85" aria-hidden="true" tabindex="-1"></a>  <span class="st">"USA Today"</span>, <span class="dv">34</span>, <span class="dv">30</span>, <span class="dv">36</span>,</span>
+<span id="cb24-86"><a href="#cb24-86" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Breitbart"</span>, <span class="dv">34</span>, <span class="dv">32</span>, <span class="dv">34</span>,</span>
+<span id="cb24-87"><a href="#cb24-87" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Newsweek"</span>, <span class="dv">32</span>, <span class="dv">32</span>, <span class="dv">35</span>,</span>
+<span id="cb24-88"><a href="#cb24-88" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NBC News"</span>, <span class="dv">32</span>, <span class="dv">29</span>, <span class="dv">39</span>,</span>
+<span id="cb24-89"><a href="#cb24-89" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ABC News"</span>, <span class="dv">31</span>, <span class="dv">30</span>, <span class="dv">39</span>,</span>
+<span id="cb24-90"><a href="#cb24-90" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CBS News"</span>, <span class="dv">30</span>, <span class="dv">30</span>, <span class="dv">40</span>,</span>
+<span id="cb24-91"><a href="#cb24-91" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Tucker Carlson Network"</span>, <span class="dv">28</span>, <span class="dv">33</span>, <span class="dv">40</span>,</span>
+<span id="cb24-92"><a href="#cb24-92" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Newsmax"</span>, <span class="dv">28</span>, <span class="dv">35</span>, <span class="dv">37</span>,</span>
+<span id="cb24-93"><a href="#cb24-93" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Fox News"</span>, <span class="dv">27</span>, <span class="dv">30</span>, <span class="dv">42</span>,</span>
+<span id="cb24-94"><a href="#cb24-94" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The Joe Rogan Experience"</span>, <span class="dv">27</span>, <span class="dv">35</span>, <span class="dv">38</span>,</span>
+<span id="cb24-95"><a href="#cb24-95" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Telemundo"</span>, <span class="dv">16</span>, <span class="dv">26</span>, <span class="dv">56</span>,</span>
+<span id="cb24-96"><a href="#cb24-96" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Univision"</span>, <span class="dv">15</span>, <span class="dv">26</span>, <span class="dv">57</span></span>
+<span id="cb24-97"><a href="#cb24-97" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-98"><a href="#cb24-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-99"><a href="#cb24-99" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the tibble</span></span>
+<span id="cb24-100"><a href="#cb24-100" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(news_education)</span>
+<span id="cb24-101"><a href="#cb24-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-102"><a href="#cb24-102" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: View structure and summary</span></span>
+<span id="cb24-103"><a href="#cb24-103" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(news_education)</span>
+<span id="cb24-104"><a href="#cb24-104" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(news_education)</span>
+<span id="cb24-105"><a href="#cb24-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-106"><a href="#cb24-106" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: Sort by college+ percentage (descending)</span></span>
+<span id="cb24-107"><a href="#cb24-107" aria-hidden="true" tabindex="-1"></a>news_education_sorted <span class="ot">&lt;-</span> news_education <span class="sc">%&gt;%</span></span>
+<span id="cb24-108"><a href="#cb24-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(college_plus))</span>
+<span id="cb24-109"><a href="#cb24-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-110"><a href="#cb24-110" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Sorted by College+ percentage:"</span>)</span>
+<span id="cb24-111"><a href="#cb24-111" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(news_education_sorted)</span>
+<span id="cb24-112"><a href="#cb24-112" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb24-113"><a href="#cb24-113" aria-hidden="true" tabindex="-1"></a><span class="co"># This R code uses dplyr and tibble to create a clean dataset from your PDF text. Here's what the code does:</span></span>
+<span id="cb24-114"><a href="#cb24-114" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb24-115"><a href="#cb24-115" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates the tibble: Uses tribble() (transpose tibble) to easily input the data in a readable row-by-row format</span></span>
+<span id="cb24-116"><a href="#cb24-116" aria-hidden="true" tabindex="-1"></a><span class="co"># Column names: Uses snake_case naming convention for the education levels</span></span>
+<span id="cb24-117"><a href="#cb24-117" aria-hidden="true" tabindex="-1"></a><span class="co"># Data validation: Includes glimpse() and summary() to check the structure</span></span>
+<span id="cb24-118"><a href="#cb24-118" aria-hidden="true" tabindex="-1"></a><span class="co"># Bonus sorting: Shows how to sort by college education percentage</span></span>
+<span id="cb24-119"><a href="#cb24-119" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb24-120"><a href="#cb24-120" aria-hidden="true" tabindex="-1"></a><span class="co"># The tibble will have 30 rows (one for each news source) and 4 columns:</span></span>
+<span id="cb24-121"><a href="#cb24-121" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb24-122"><a href="#cb24-122" aria-hidden="true" tabindex="-1"></a><span class="co"># news_source: Character column with the news outlet names</span></span>
+<span id="cb24-123"><a href="#cb24-123" aria-hidden="true" tabindex="-1"></a><span class="co"># college_plus: Numeric column with percentage having college+ education</span></span>
+<span id="cb24-124"><a href="#cb24-124" aria-hidden="true" tabindex="-1"></a><span class="co"># some_college: Numeric column with percentage having some college</span></span>
+<span id="cb24-125"><a href="#cb24-125" aria-hidden="true" tabindex="-1"></a><span class="co"># high_school_or_less: Numeric column with percentage having high school or less</span></span>
+<span id="cb24-126"><a href="#cb24-126" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb24-127"><a href="#cb24-127" aria-hidden="true" tabindex="-1"></a><span class="co"># You can run additional dplyr operations on this tibble like filtering, grouping, or creating new calculated columns as needed for your analysis.RetryClaude can make mistakes. Please double-check responses. Sonnet 4</span></span>
+<span id="cb24-128"><a href="#cb24-128" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb24-129"><a href="#cb24-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-130"><a href="#cb24-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-131"><a href="#cb24-131" aria-hidden="true" tabindex="-1"></a>This output simply reads the string and uses the <span class="in">`tibble()`</span> function to manually declare a data frame from scratch.</span>
+<span id="cb24-132"><a href="#cb24-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-133"><a href="#cb24-133" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prompt 2 Code</span></span>
+<span id="cb24-134"><a href="#cb24-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-137"><a href="#cb24-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-138"><a href="#cb24-138" aria-hidden="true" tabindex="-1"></a><span class="co"># method 2 ----</span></span>
+<span id="cb24-139"><a href="#cb24-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-140"><a href="#cb24-140" aria-hidden="true" tabindex="-1"></a><span class="co"># Take the same text but use its knowledge of R to write a script that parses the string </span></span>
+<span id="cb24-141"><a href="#cb24-141" aria-hidden="true" tabindex="-1"></a><span class="co"># and creates the same tibble result as the 1st method</span></span>
+<span id="cb24-142"><a href="#cb24-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-143"><a href="#cb24-143" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-144"><a href="#cb24-144" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb24-145"><a href="#cb24-145" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb24-146"><a href="#cb24-146" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb24-147"><a href="#cb24-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-148"><a href="#cb24-148" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw text from PDF</span></span>
+<span id="cb24-149"><a href="#cb24-149" aria-hidden="true" tabindex="-1"></a>raw_text <span class="ot">&lt;-</span> <span class="st">"Education levels of U.S. audiences for 30 major news sources Among U.S. adults who regularly get news from ___, % with each level of education College+ Some college High school or less The Atlantic 62% 23% 14% Axios 59 21 19 NPR 58 27 14 The New York Times 56 24 19 The Guardian 53 28 18 The Wall Street Journal 53 26 21 Politico 52 27 20 The Associated Press 52 28 20 BBC News 49 27 23 The Washington Post 47 30 22 HuffPost 47 28 25 The Hill 45 25 29 Forbes 42 30 28 PBS 41 29 30 CNN 38 28 33 New York Post 38 33 29 The Daily Wire 37 37 26 MSNBC 37 30 33 USA Today 34 30 36 Breitbart 34 32 34 Newsweek 32 32 35 NBC News 32 29 39 ABC News 31 30 39 CBS News 30 30 40 Tucker Carlson Network 28 33 40 Newsmax 28 35 37 Fox News 27 30 42 The Joe Rogan Experience 27 35 38 Telemundo 16 26 56 Univision 15 26 57"</span></span>
+<span id="cb24-150"><a href="#cb24-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-151"><a href="#cb24-151" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse the text to create tibble</span></span>
+<span id="cb24-152"><a href="#cb24-152" aria-hidden="true" tabindex="-1"></a>news_education <span class="ot">&lt;-</span> raw_text <span class="sc">%&gt;%</span></span>
+<span id="cb24-153"><a href="#cb24-153" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Split into lines and convert to tibble</span></span>
+<span id="cb24-154"><a href="#cb24-154" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">"(?=The Atlantic|Axios|NPR|The New York Times|The Guardian|The Wall Street Journal|Politico|The Associated Press|BBC News|The Washington Post|HuffPost|The Hill|Forbes|PBS|CNN|New York Post|The Daily Wire|MSNBC|USA Today|Breitbart|Newsweek|NBC News|ABC News|CBS News|Tucker Carlson Network|Newsmax|Fox News|The Joe Rogan Experience|Telemundo|Univision)"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-155"><a href="#cb24-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb24-156"><a href="#cb24-156" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Keep only the lines with actual data (remove header)</span></span>
+<span id="cb24-157"><a href="#cb24-157" aria-hidden="true" tabindex="-1"></a>  .[<span class="fu">str_detect</span>(., <span class="st">"The Atlantic|Axios|NPR|The New York Times|The Guardian|The Wall Street Journal|Politico|The Associated Press|BBC News|The Washington Post|HuffPost|The Hill|Forbes|PBS|CNN|New York Post|The Daily Wire|MSNBC|USA Today|Breitbart|Newsweek|NBC News|ABC News|CBS News|Tucker Carlson Network|Newsmax|Fox News|The Joe Rogan Experience|Telemundo|Univision"</span>)] <span class="sc">%&gt;%</span></span>
+<span id="cb24-158"><a href="#cb24-158" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Convert to tibble</span></span>
+<span id="cb24-159"><a href="#cb24-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">raw_line =</span> .) <span class="sc">%&gt;%</span></span>
+<span id="cb24-160"><a href="#cb24-160" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract news source names and percentages using regex</span></span>
+<span id="cb24-161"><a href="#cb24-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb24-162"><a href="#cb24-162" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract news source (everything before the first number)</span></span>
+<span id="cb24-163"><a href="#cb24-163" aria-hidden="true" tabindex="-1"></a>    <span class="at">news_source =</span> <span class="fu">str_extract</span>(raw_line, <span class="st">"^[A-Za-z</span><span class="sc">\\</span><span class="st">s]+(?=</span><span class="sc">\\</span><span class="st">s+</span><span class="sc">\\</span><span class="st">d)"</span>),</span>
+<span id="cb24-164"><a href="#cb24-164" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Clean up news source names</span></span>
+<span id="cb24-165"><a href="#cb24-165" aria-hidden="true" tabindex="-1"></a>    <span class="at">news_source =</span> <span class="fu">str_trim</span>(news_source),</span>
+<span id="cb24-166"><a href="#cb24-166" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract all percentages (with or without % sign)</span></span>
+<span id="cb24-167"><a href="#cb24-167" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentages =</span> <span class="fu">str_extract_all</span>(raw_line, <span class="st">"</span><span class="sc">\\</span><span class="st">d+%?"</span>)</span>
+<span id="cb24-168"><a href="#cb24-168" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb24-169"><a href="#cb24-169" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unnest the percentages and convert to numeric</span></span>
+<span id="cb24-170"><a href="#cb24-170" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(percentages) <span class="sc">%&gt;%</span></span>
+<span id="cb24-171"><a href="#cb24-171" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove % sign and convert to numeric</span></span>
+<span id="cb24-172"><a href="#cb24-172" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb24-173"><a href="#cb24-173" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentages =</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(percentages, <span class="st">"%"</span>))</span>
+<span id="cb24-174"><a href="#cb24-174" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb24-175"><a href="#cb24-175" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Group by news source and create columns for each education level</span></span>
+<span id="cb24-176"><a href="#cb24-176" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(news_source) <span class="sc">%&gt;%</span></span>
+<span id="cb24-177"><a href="#cb24-177" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb24-178"><a href="#cb24-178" aria-hidden="true" tabindex="-1"></a>    <span class="at">education_level =</span> <span class="fu">case_when</span>(</span>
+<span id="cb24-179"><a href="#cb24-179" aria-hidden="true" tabindex="-1"></a>      <span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"college_plus"</span>,</span>
+<span id="cb24-180"><a href="#cb24-180" aria-hidden="true" tabindex="-1"></a>      <span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"some_college"</span>, </span>
+<span id="cb24-181"><a href="#cb24-181" aria-hidden="true" tabindex="-1"></a>      <span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"high_school_or_less"</span>,</span>
+<span id="cb24-182"><a href="#cb24-182" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb24-183"><a href="#cb24-183" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb24-184"><a href="#cb24-184" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb24-185"><a href="#cb24-185" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pivot to wide format</span></span>
+<span id="cb24-186"><a href="#cb24-186" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb24-187"><a href="#cb24-187" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> education_level,</span>
+<span id="cb24-188"><a href="#cb24-188" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> percentages</span>
+<span id="cb24-189"><a href="#cb24-189" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb24-190"><a href="#cb24-190" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Clean up and select final columns</span></span>
+<span id="cb24-191"><a href="#cb24-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(news_source, college_plus, some_college, high_school_or_less) <span class="sc">%&gt;%</span></span>
+<span id="cb24-192"><a href="#cb24-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb24-193"><a href="#cb24-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-194"><a href="#cb24-194" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the result</span></span>
+<span id="cb24-195"><a href="#cb24-195" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(news_education)</span>
+<span id="cb24-196"><a href="#cb24-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-197"><a href="#cb24-197" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the structure</span></span>
+<span id="cb24-198"><a href="#cb24-198" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(news_education)</span>
+<span id="cb24-199"><a href="#cb24-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-200"><a href="#cb24-200" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that percentages add up to ~100% for each source</span></span>
+<span id="cb24-201"><a href="#cb24-201" aria-hidden="true" tabindex="-1"></a>news_education <span class="sc">%&gt;%</span></span>
+<span id="cb24-202"><a href="#cb24-202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> college_plus <span class="sc">+</span> some_college <span class="sc">+</span> high_school_or_less) <span class="sc">%&gt;%</span></span>
+<span id="cb24-203"><a href="#cb24-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(news_source, total) <span class="sc">%&gt;%</span></span>
+<span id="cb24-204"><a href="#cb24-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span>
+<span id="cb24-205"><a href="#cb24-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-206"><a href="#cb24-206" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by college+ percentage (descending)</span></span>
+<span id="cb24-207"><a href="#cb24-207" aria-hidden="true" tabindex="-1"></a>news_education_sorted <span class="ot">&lt;-</span> news_education <span class="sc">%&gt;%</span></span>
+<span id="cb24-208"><a href="#cb24-208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(college_plus))</span>
+<span id="cb24-209"><a href="#cb24-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-210"><a href="#cb24-210" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Sorted by College+ percentage:"</span>)</span>
+<span id="cb24-211"><a href="#cb24-211" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(news_education_sorted)</span>
+<span id="cb24-212"><a href="#cb24-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-213"><a href="#cb24-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-214"><a href="#cb24-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-215"><a href="#cb24-215" aria-hidden="true" tabindex="-1"></a>This code goes a little deeper in terms of outlining a whole processing starting with a string and ending up with the same data frame we wrote in Prompt 1. The actual regex (regular expression) code is actually very light; it's the processing that follows that requires a bit of grouping, aggregating and pivoting.</span>
+<span id="cb24-216"><a href="#cb24-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-217"><a href="#cb24-217" aria-hidden="true" tabindex="-1"></a><span class="fu"># Plotting</span></span>
+<span id="cb24-218"><a href="#cb24-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-219"><a href="#cb24-219" aria-hidden="true" tabindex="-1"></a>I did ask Claude for some help here and there to get things as close as possible to what Pew published. But I did make some creative decisions and not extend myself too much just to get the justifications and spacing exactly right.</span>
+<span id="cb24-220"><a href="#cb24-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-221"><a href="#cb24-221" aria-hidden="true" tabindex="-1"></a>I'm not so sure if the names of the colors Pew used are actually vintage merlot and lady flower, but what do you guys think?</span>
+<span id="cb24-222"><a href="#cb24-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-225"><a href="#cb24-225" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-226"><a href="#cb24-226" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> news_education_sorted</span>
+<span id="cb24-227"><a href="#cb24-227" aria-hidden="true" tabindex="-1"></a>vintage_merlot <span class="ot">&lt;-</span> <span class="st">"#733e48"</span></span>
+<span id="cb24-228"><a href="#cb24-228" aria-hidden="true" tabindex="-1"></a>lady_flower <span class="ot">&lt;-</span> <span class="st">"#cfa5ac"</span></span>
+<span id="cb24-229"><a href="#cb24-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-230"><a href="#cb24-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-231"><a href="#cb24-231" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb24-232"><a href="#cb24-232" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> college_plus,</span>
+<span id="cb24-233"><a href="#cb24-233" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">reorder</span>(news_source, college_plus))) <span class="sc">+</span></span>
+<span id="cb24-234"><a href="#cb24-234" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> vintage_merlot) <span class="sc">+</span></span>
+<span id="cb24-235"><a href="#cb24-235" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">36</span>, <span class="at">y =</span> news_source),</span>
+<span id="cb24-236"><a href="#cb24-236" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb24-237"><a href="#cb24-237" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> lady_flower) <span class="sc">+</span></span>
+<span id="cb24-238"><a href="#cb24-238" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb24-239"><a href="#cb24-239" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> college_plus),</span>
+<span id="cb24-240"><a href="#cb24-240" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>college_plus <span class="sc">&gt;</span> <span class="dv">34</span>,<span class="sc">-</span>.<span class="dv">21</span>, <span class="fl">1.3</span>),</span>
+<span id="cb24-241"><a href="#cb24-241" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>college_plus <span class="sc">&gt;</span> <span class="dv">34</span>, <span class="st">"black"</span>, <span class="st">"white"</span>)</span>
+<span id="cb24-242"><a href="#cb24-242" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-243"><a href="#cb24-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb24-244"><a href="#cb24-244" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
+<span id="cb24-245"><a href="#cb24-245" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">nrow</span>(df) <span class="sc">+</span> <span class="fl">2.77</span>,</span>
+<span id="cb24-246"><a href="#cb24-246" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">36</span>,</span>
+<span id="cb24-247"><a href="#cb24-247" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"36% of U.S. adults are</span><span class="sc">\n</span><span class="st">college graduates."</span>,</span>
+<span id="cb24-248"><a href="#cb24-248" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineheight =</span> .<span class="dv">8</span>,</span>
+<span id="cb24-249"><a href="#cb24-249" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb24-250"><a href="#cb24-250" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="dv">1</span>,</span>
+<span id="cb24-251"><a href="#cb24-251" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-252"><a href="#cb24-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb24-253"><a href="#cb24-253" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
+<span id="cb24-254"><a href="#cb24-254" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">nrow</span>(df) <span class="sc">+</span> <span class="fl">4.6</span>,</span>
+<span id="cb24-255"><a href="#cb24-255" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">62</span>,</span>
+<span id="cb24-256"><a href="#cb24-256" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"62% of people who</span><span class="sc">\n</span><span class="st">regularly get news</span><span class="sc">\n</span><span class="st">from The Atlantic are</span><span class="sc">\n</span><span class="st">college graduates."</span>,</span>
+<span id="cb24-257"><a href="#cb24-257" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineheight =</span> .<span class="dv">8</span>,</span>
+<span id="cb24-258"><a href="#cb24-258" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb24-259"><a href="#cb24-259" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="dv">1</span></span>
+<span id="cb24-260"><a href="#cb24-260" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-261"><a href="#cb24-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Across U.S. audiences of 30 major news sources, the&lt;br&gt;share with a college degree varies widely"</span>,</span>
+<span id="cb24-262"><a href="#cb24-262" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Among U.S. adults who regularly get news from __,% who have a &lt;br&gt;bachelor's degree or more education"</span>,</span>
+<span id="cb24-263"><a href="#cb24-263" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Pew Research Center survey of 9,482 U.S. adults conducted March 10-16, 2025;&lt;br&gt;the U.S. adult figure is from Pew Research Center analysis of data from the 2024 Current&lt;br&gt;Population Survey, Annual Social and Economic Supplement (IPUMS)."</span>) <span class="sc">+</span></span>
+<span id="cb24-264"><a href="#cb24-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.18</span>))) <span class="sc">+</span></span>
+<span id="cb24-265"><a href="#cb24-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>))) <span class="sc">+</span></span>
+<span id="cb24-266"><a href="#cb24-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb24-267"><a href="#cb24-267" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb24-268"><a href="#cb24-268" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb24-269"><a href="#cb24-269" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb24-270"><a href="#cb24-270" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb24-271"><a href="#cb24-271" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb24-272"><a href="#cb24-272" aria-hidden="true" tabindex="-1"></a>                             <span class="at">family =</span> <span class="st">"Arial"</span>),</span>
+<span id="cb24-273"><a href="#cb24-273" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb24-274"><a href="#cb24-274" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, </span>
+<span id="cb24-275"><a href="#cb24-275" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">size =</span> <span class="dv">11</span>, </span>
+<span id="cb24-276"><a href="#cb24-276" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">color =</span> <span class="st">"grey60"</span>, </span>
+<span id="cb24-277"><a href="#cb24-277" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">face =</span> <span class="st">"italic"</span>, </span>
+<span id="cb24-278"><a href="#cb24-278" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="st">"Cambria"</span>),</span>
+<span id="cb24-279"><a href="#cb24-279" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"grey60"</span>,)</span>
+<span id="cb24-280"><a href="#cb24-280" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-281"><a href="#cb24-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-282"><a href="#cb24-282" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-283"><a href="#cb24-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-284"><a href="#cb24-284" aria-hidden="true" tabindex="-1"></a>I'm happy as to how this turned out. The next step is to find the raw survey data Pew collected and use that as the starting point rather than the PDF they provided 👀</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

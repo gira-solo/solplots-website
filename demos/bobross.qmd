@@ -141,7 +141,7 @@ counts |>
   theme_minimal() +
   labs(title = "<b>Color Frequency, Bob Ross' <i>The Joy of Painting</i></b>",
        subtitle = "Across 403 episodes (paintings), how often is each color used?",
-       caption = "Tidy Tuesday 21 February 2023<br><b>@solplots</b>") +
+       caption = "Tidy Tuesday 21 February 2023<br><b>solplots.com</b>") +
   theme(text = element_text(family = "ITC Korinna",
                             size = 16,
                             color = "black",
