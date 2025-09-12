@@ -218,6 +218,9 @@ I did ask Claude for some help here and there to get things as close as possible
 I'm not so sure if the names of the colors Pew used are actually vintage merlot and lady flower, but what do you guys think?
 
 ```{r}
+#| fig-width: 4
+#| fig-height: 7
+
 df <- news_education_sorted
 vintage_merlot <- "#733e48"
 lady_flower <- "#cfa5ac"

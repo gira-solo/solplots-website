@@ -578,7 +578,7 @@ $ high_school_or_less &lt;dbl&gt; 14, 19, 14, 19, 18, 21, 20, 20, 23, 22, 25, 29
 <span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="PewMediaStudy_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="PewMediaStudy_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="384"></p>
 </div>
 </div>
 <p>I’m happy as to how this turned out. The next step is to find the raw survey data Pew collected and use that as the starting point rather than the PDF they provided 👀</p>
@@ -1092,65 +1092,68 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-223"><a href="#cb23-223" aria-hidden="true" tabindex="-1"></a>I'm not so sure if the names of the colors Pew used are actually vintage merlot and lady flower, but what do you guys think?</span>
 <span id="cb23-224"><a href="#cb23-224" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-227"><a href="#cb23-227" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb23-228"><a href="#cb23-228" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> news_education_sorted</span>
-<span id="cb23-229"><a href="#cb23-229" aria-hidden="true" tabindex="-1"></a>vintage_merlot <span class="ot">&lt;-</span> <span class="st">"#733e48"</span></span>
-<span id="cb23-230"><a href="#cb23-230" aria-hidden="true" tabindex="-1"></a>lady_flower <span class="ot">&lt;-</span> <span class="st">"#cfa5ac"</span></span>
-<span id="cb23-231"><a href="#cb23-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-232"><a href="#cb23-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-233"><a href="#cb23-233" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb23-234"><a href="#cb23-234" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> college_plus,</span>
-<span id="cb23-235"><a href="#cb23-235" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">reorder</span>(news_source, college_plus))) <span class="sc">+</span></span>
-<span id="cb23-236"><a href="#cb23-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> vintage_merlot) <span class="sc">+</span></span>
-<span id="cb23-237"><a href="#cb23-237" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">36</span>, <span class="at">y =</span> news_source),</span>
-<span id="cb23-238"><a href="#cb23-238" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb23-239"><a href="#cb23-239" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> lady_flower) <span class="sc">+</span></span>
-<span id="cb23-240"><a href="#cb23-240" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb23-241"><a href="#cb23-241" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> college_plus),</span>
-<span id="cb23-242"><a href="#cb23-242" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>college_plus <span class="sc">&gt;</span> <span class="dv">34</span>,<span class="sc">-</span>.<span class="dv">21</span>, <span class="fl">1.3</span>),</span>
-<span id="cb23-243"><a href="#cb23-243" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>college_plus <span class="sc">&gt;</span> <span class="dv">34</span>, <span class="st">"black"</span>, <span class="st">"white"</span>)</span>
-<span id="cb23-244"><a href="#cb23-244" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-245"><a href="#cb23-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
-<span id="cb23-246"><a href="#cb23-246" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
-<span id="cb23-247"><a href="#cb23-247" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">nrow</span>(df) <span class="sc">+</span> <span class="fl">2.77</span>,</span>
-<span id="cb23-248"><a href="#cb23-248" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">36</span>,</span>
-<span id="cb23-249"><a href="#cb23-249" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"36% of U.S. adults are</span><span class="sc">\n</span><span class="st">college graduates."</span>,</span>
-<span id="cb23-250"><a href="#cb23-250" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineheight =</span> .<span class="dv">8</span>,</span>
-<span id="cb23-251"><a href="#cb23-251" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>,</span>
-<span id="cb23-252"><a href="#cb23-252" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="dv">1</span>,</span>
-<span id="cb23-253"><a href="#cb23-253" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-254"><a href="#cb23-254" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
-<span id="cb23-255"><a href="#cb23-255" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
-<span id="cb23-256"><a href="#cb23-256" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">nrow</span>(df) <span class="sc">+</span> <span class="fl">4.6</span>,</span>
-<span id="cb23-257"><a href="#cb23-257" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">62</span>,</span>
-<span id="cb23-258"><a href="#cb23-258" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"62% of people who</span><span class="sc">\n</span><span class="st">regularly get news</span><span class="sc">\n</span><span class="st">from The Atlantic are</span><span class="sc">\n</span><span class="st">college graduates."</span>,</span>
-<span id="cb23-259"><a href="#cb23-259" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineheight =</span> .<span class="dv">8</span>,</span>
-<span id="cb23-260"><a href="#cb23-260" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>,</span>
-<span id="cb23-261"><a href="#cb23-261" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="dv">1</span></span>
-<span id="cb23-262"><a href="#cb23-262" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb23-263"><a href="#cb23-263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Across U.S. audiences of 30 major news sources, the&lt;br&gt;share with a college degree varies widely"</span>,</span>
-<span id="cb23-264"><a href="#cb23-264" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Among U.S. adults who regularly get news from __,% who have a &lt;br&gt;bachelor's degree or more education"</span>,</span>
-<span id="cb23-265"><a href="#cb23-265" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Pew Research Center survey of 9,482 U.S. adults conducted March 10-16, 2025;&lt;br&gt;the U.S. adult figure is from Pew Research Center analysis of data from the 2024 Current&lt;br&gt;Population Survey, Annual Social and Economic Supplement (IPUMS)."</span>) <span class="sc">+</span></span>
-<span id="cb23-266"><a href="#cb23-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.18</span>))) <span class="sc">+</span></span>
-<span id="cb23-267"><a href="#cb23-267" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>))) <span class="sc">+</span></span>
-<span id="cb23-268"><a href="#cb23-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb23-269"><a href="#cb23-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb23-270"><a href="#cb23-270" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb23-271"><a href="#cb23-271" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb23-272"><a href="#cb23-272" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb23-273"><a href="#cb23-273" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
-<span id="cb23-274"><a href="#cb23-274" aria-hidden="true" tabindex="-1"></a>                             <span class="at">family =</span> <span class="st">"Arial"</span>),</span>
-<span id="cb23-275"><a href="#cb23-275" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb23-276"><a href="#cb23-276" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, </span>
-<span id="cb23-277"><a href="#cb23-277" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">size =</span> <span class="dv">11</span>, </span>
-<span id="cb23-278"><a href="#cb23-278" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">color =</span> <span class="st">"grey60"</span>, </span>
-<span id="cb23-279"><a href="#cb23-279" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">face =</span> <span class="st">"italic"</span>, </span>
-<span id="cb23-280"><a href="#cb23-280" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="st">"Cambria"</span>),</span>
-<span id="cb23-281"><a href="#cb23-281" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"grey60"</span>,)</span>
-<span id="cb23-282"><a href="#cb23-282" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb23-283"><a href="#cb23-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-284"><a href="#cb23-284" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb23-285"><a href="#cb23-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-286"><a href="#cb23-286" aria-hidden="true" tabindex="-1"></a>I'm happy as to how this turned out. The next step is to find the raw survey data Pew collected and use that as the starting point rather than the PDF they provided 👀</span>
+<span id="cb23-228"><a href="#cb23-228" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 4</span></span>
+<span id="cb23-229"><a href="#cb23-229" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 7</span></span>
+<span id="cb23-230"><a href="#cb23-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-231"><a href="#cb23-231" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> news_education_sorted</span>
+<span id="cb23-232"><a href="#cb23-232" aria-hidden="true" tabindex="-1"></a>vintage_merlot <span class="ot">&lt;-</span> <span class="st">"#733e48"</span></span>
+<span id="cb23-233"><a href="#cb23-233" aria-hidden="true" tabindex="-1"></a>lady_flower <span class="ot">&lt;-</span> <span class="st">"#cfa5ac"</span></span>
+<span id="cb23-234"><a href="#cb23-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-235"><a href="#cb23-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-236"><a href="#cb23-236" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb23-237"><a href="#cb23-237" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> college_plus,</span>
+<span id="cb23-238"><a href="#cb23-238" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">reorder</span>(news_source, college_plus))) <span class="sc">+</span></span>
+<span id="cb23-239"><a href="#cb23-239" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> vintage_merlot) <span class="sc">+</span></span>
+<span id="cb23-240"><a href="#cb23-240" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">36</span>, <span class="at">y =</span> news_source),</span>
+<span id="cb23-241"><a href="#cb23-241" aria-hidden="true" tabindex="-1"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb23-242"><a href="#cb23-242" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> lady_flower) <span class="sc">+</span></span>
+<span id="cb23-243"><a href="#cb23-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb23-244"><a href="#cb23-244" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> college_plus),</span>
+<span id="cb23-245"><a href="#cb23-245" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>college_plus <span class="sc">&gt;</span> <span class="dv">34</span>,<span class="sc">-</span>.<span class="dv">21</span>, <span class="fl">1.3</span>),</span>
+<span id="cb23-246"><a href="#cb23-246" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>college_plus <span class="sc">&gt;</span> <span class="dv">34</span>, <span class="st">"black"</span>, <span class="st">"white"</span>)</span>
+<span id="cb23-247"><a href="#cb23-247" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-248"><a href="#cb23-248" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb23-249"><a href="#cb23-249" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
+<span id="cb23-250"><a href="#cb23-250" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">nrow</span>(df) <span class="sc">+</span> <span class="fl">2.77</span>,</span>
+<span id="cb23-251"><a href="#cb23-251" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">36</span>,</span>
+<span id="cb23-252"><a href="#cb23-252" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"36% of U.S. adults are</span><span class="sc">\n</span><span class="st">college graduates."</span>,</span>
+<span id="cb23-253"><a href="#cb23-253" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineheight =</span> .<span class="dv">8</span>,</span>
+<span id="cb23-254"><a href="#cb23-254" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb23-255"><a href="#cb23-255" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="dv">1</span>,</span>
+<span id="cb23-256"><a href="#cb23-256" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-257"><a href="#cb23-257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb23-258"><a href="#cb23-258" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
+<span id="cb23-259"><a href="#cb23-259" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">nrow</span>(df) <span class="sc">+</span> <span class="fl">4.6</span>,</span>
+<span id="cb23-260"><a href="#cb23-260" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">62</span>,</span>
+<span id="cb23-261"><a href="#cb23-261" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"62% of people who</span><span class="sc">\n</span><span class="st">regularly get news</span><span class="sc">\n</span><span class="st">from The Atlantic are</span><span class="sc">\n</span><span class="st">college graduates."</span>,</span>
+<span id="cb23-262"><a href="#cb23-262" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineheight =</span> .<span class="dv">8</span>,</span>
+<span id="cb23-263"><a href="#cb23-263" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb23-264"><a href="#cb23-264" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="dv">1</span></span>
+<span id="cb23-265"><a href="#cb23-265" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-266"><a href="#cb23-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Across U.S. audiences of 30 major news sources, the&lt;br&gt;share with a college degree varies widely"</span>,</span>
+<span id="cb23-267"><a href="#cb23-267" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Among U.S. adults who regularly get news from __,% who have a &lt;br&gt;bachelor's degree or more education"</span>,</span>
+<span id="cb23-268"><a href="#cb23-268" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Pew Research Center survey of 9,482 U.S. adults conducted March 10-16, 2025;&lt;br&gt;the U.S. adult figure is from Pew Research Center analysis of data from the 2024 Current&lt;br&gt;Population Survey, Annual Social and Economic Supplement (IPUMS)."</span>) <span class="sc">+</span></span>
+<span id="cb23-269"><a href="#cb23-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.18</span>))) <span class="sc">+</span></span>
+<span id="cb23-270"><a href="#cb23-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>))) <span class="sc">+</span></span>
+<span id="cb23-271"><a href="#cb23-271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb23-272"><a href="#cb23-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb23-273"><a href="#cb23-273" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb23-274"><a href="#cb23-274" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb23-275"><a href="#cb23-275" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb23-276"><a href="#cb23-276" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"black"</span>,</span>
+<span id="cb23-277"><a href="#cb23-277" aria-hidden="true" tabindex="-1"></a>                             <span class="at">family =</span> <span class="st">"Arial"</span>),</span>
+<span id="cb23-278"><a href="#cb23-278" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb23-279"><a href="#cb23-279" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="dv">0</span>, </span>
+<span id="cb23-280"><a href="#cb23-280" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">size =</span> <span class="dv">11</span>, </span>
+<span id="cb23-281"><a href="#cb23-281" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">color =</span> <span class="st">"grey60"</span>, </span>
+<span id="cb23-282"><a href="#cb23-282" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">face =</span> <span class="st">"italic"</span>, </span>
+<span id="cb23-283"><a href="#cb23-283" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">family =</span> <span class="st">"Cambria"</span>),</span>
+<span id="cb23-284"><a href="#cb23-284" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">"grey60"</span>,)</span>
+<span id="cb23-285"><a href="#cb23-285" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-286"><a href="#cb23-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-287"><a href="#cb23-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-288"><a href="#cb23-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-289"><a href="#cb23-289" aria-hidden="true" tabindex="-1"></a>I'm happy as to how this turned out. The next step is to find the raw survey data Pew collected and use that as the starting point rather than the PDF they provided 👀</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
