@@ -241,23 +241,23 @@ df |>
   ) +
   annotate(
     "text",
-    y = nrow(df) + 1.77,
+    y = nrow(df) + 2,
     x = 36,
     label = "36% of U.S. adults are\ncollege graduates.",
     lineheight = .8,
     hjust = 1,
     vjust = 1,
-    size = 4
+    size = 5
   ) +
   annotate(
     "text",
-    y = nrow(df) + 1.77,
+    y = nrow(df) + 3,
     x = 62,
     label = "62% of people who\nregularly get news\nfrom The Atlantic are\ncollege graduates.",
     lineheight = .8,
     hjust = 1,
     vjust = 1,
-    size = 4
+    size = 5
   ) +
   labs(title = "Across U.S. audiences of 30 major news sources, the<br>share with a college degree varies widely",
        subtitle = "Among U.S. adults who regularly get news from __,% who have a <br>bachelor's degree or more education",
@@ -271,14 +271,17 @@ df |>
     axis.text.x = element_blank(),
     axis.text = element_markdown(color = "black",
                                 family = "Arial",
-                                size = rel(1.5)),
-    plot.title = element_markdown(hjust = 0, face = "bold"),
+                                size = 16),
+    plot.title = element_markdown(hjust = 0, 
+                                  face = "bold",
+                                  size = 22),
     plot.subtitle = element_markdown(hjust = 0, 
-                                 size = 11, 
-                                 color = "grey60", 
+                                 size = 16, 
+                                 color = "grey45", 
                                  face = "italic", 
                                  family = "Cambria"),
-    plot.caption = element_markdown(color = "grey60",)
+    plot.caption = element_markdown(color = "grey45",
+                                    size = 13)
   )
 
 ```
