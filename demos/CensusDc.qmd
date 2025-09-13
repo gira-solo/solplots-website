@@ -162,8 +162,10 @@ map <-
         # adjust spacing a tiny bit
         plot.title = element_text(face = "bold"),
         # put the title to bold
-        text = element_text(family = "Garamond")
+        text = element_text(family = "Garamond"),
         # change font to Garamond
+        plot.caption = element_text(hjust = 1)
+        # left adjusted caption
   )
 
 map
