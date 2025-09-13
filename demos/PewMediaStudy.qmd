@@ -218,7 +218,7 @@ I did ask Claude for some help here and there to get things as close as possible
 I'm not so sure if the names of the colors Pew used are actually vintage merlot and lady flower, but what do you guys think?
 
 ```{r}
-#| fig-width: 7
+#| fig-width: 12.5
 #| fig-height: 12.5
 
 df <- news_education_sorted
@@ -247,6 +247,7 @@ df |>
     lineheight = .8,
     hjust = 1,
     vjust = 1,
+    size = 4
   ) +
   annotate(
     "text",
@@ -255,7 +256,8 @@ df |>
     label = "62% of people who\nregularly get news\nfrom The Atlantic are\ncollege graduates.",
     lineheight = .8,
     hjust = 1,
-    vjust = 1
+    vjust = 1,
+    size = 4
   ) +
   labs(title = "Across U.S. audiences of 30 major news sources, the<br>share with a college degree varies widely",
        subtitle = "Among U.S. adults who regularly get news from __,% who have a <br>bachelor's degree or more education",

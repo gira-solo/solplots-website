@@ -20,7 +20,8 @@ website:
     collapse-level: 1
     contents:
       - text: "Solplots"
-        href: index.qmd
+        href: 
+      - index.qmd
       - demos.qmd
       - apps.qmd
       - resources.qmd
