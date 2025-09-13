@@ -14,11 +14,13 @@ execute:
   message: false
 ---
 
+![](images/pew_original.png)
+
 Pew's research into the level of higher education among the different audiences of 30 major media outlets includes an interesting bar plot that I would like to reproduce.
 
 The article I'm referencing can be found [here](https://www.pewresearch.org/short-reads/2025/08/18/how-the-audiences-of-30-major-news-sources-differ-in-their-levels-of-education/).
 
-It is a vertical bar plot with 30 discrete media outlets on the y-axis ordered by their proportion of audience that has obtained a bachelor's degree or even more education.
+It is a horizontal bar plot with 30 discrete media outlets on the y-axis ordered by their proportion of audience that has obtained a bachelor's degree or even more education.
 
 This is an interesting plot to reproduce because it expresses themes of meritocracy and how there can be hierarchies within many areas of life, such as media consumption, extracted and laid out for us to see where we *may* fall. It is definitely an interesting choice for the researchers at Pew not to ask the survey participants if they also get their news from TikTok (either from these very media outlets' own accounts or from independent journalists reporting stories on the app).
 
