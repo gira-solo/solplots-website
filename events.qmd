@@ -1,0 +1,9 @@
+---
+title: "Plotting & Thotting"
+listing:
+  type: default
+  sort: "date desc"
+  contents: events/*
+---
+
+Landing page for all upcoming Solplots events, including "Plotting & Thotting" series as well as other engagements and sessions.

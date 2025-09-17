@@ -17,5 +17,11 @@
       "/demos/NorthAtlanticAnomaly.html",
       "/demos/bobross.html"
     ]
+  },
+  {
+    "listing": "/events.html",
+    "items": [
+      "/events/coin_des_plots.html"
+    ]
   }
 ]
