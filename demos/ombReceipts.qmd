@@ -137,9 +137,10 @@ fin |>
   annotate("text",
            x = 2026.5,
            y = 1.05,
-           label = expression(underline( bold("2023:"))),
+           label = "2023:",
            family = "Garamond",
            size = 4) +
+  coord_cartesian(clip = "off") |> 
   guides(fill = guide_legend(nrow = 2)) +
   theme_minimal() +
   theme(legend.position = "top",
