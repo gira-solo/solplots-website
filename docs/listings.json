@@ -9,13 +9,13 @@
   {
     "listing": "/demos.html",
     "items": [
+      "/demos/BigMacIndex.html",
       "/demos/PewMediaStudy.html",
       "/demos/ombReceipts_Animate.html",
       "/demos/ombReceipts.html",
       "/demos/CalFires.html",
       "/demos/CensusDc.html",
-      "/demos/bobross.html",
-      "/demos/BigMacIndex.html"
+      "/demos/bobross.html"
     ]
   },
   {

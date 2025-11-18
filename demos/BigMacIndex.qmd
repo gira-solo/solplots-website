@@ -1,11 +1,11 @@
 ---
 title: "25 Years of the Big Mac Index"
 toc: true
-date: "2025-01-15"
+date: "2025-11-18"
 description: "Visualizing global currency valuation through the lens of a hamburger"
 categories: [R, tidyverse, economics, ggplot2, data visualization]
-image: "bic_mac_2025.png"
-format: 
+image: "images/bic_mac_2025.png"
+format:
   html:
     code-fold: true
     code-tools: true
