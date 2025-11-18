@@ -58,6 +58,9 @@ We need:
 
 library(tidyverse)
 library(jsonlite)
+library(dplyr)
+library(stringr)
+library(tidyr)
 ```
 
 ### Reading in temperature data
@@ -68,9 +71,12 @@ We can use the `jsonlite::fromJSON()` function to read in the JSON file.
 
 ```{r}
 
-link <- "https://climatereanalyzer.org/clim/sst_daily/json/oisst2.1_natlan1_sst_day.json"
-raw <- jsonlite::fromJSON(link)
+# link <- "https://climatereanalyzer.org/clim/sst_daily/json/oisst2.1_natlan1_sst_day.json"
+# raw <- jsonlite::fromJSON(link)
 
+# Author note November 18, 2025: function doesn't wanna work so I've save it as an RDS file and am reading in from disk rather than the internet; the link should still work
+
+raw <- readRDS("data/raw.RDS")
 raw
 ```
 
@@ -81,7 +87,8 @@ R reads in this data as a data frame, with the `name` column referring to year a
 ```{r}
 
 raw <- 
-  fromJSON(link) |> 
+  # fromJSON(link) |> 
+  raw
   as_tibble() |> 
   unnest(data) 
 
