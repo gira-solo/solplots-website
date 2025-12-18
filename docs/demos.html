@@ -20,46 +20,14 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -83,10 +51,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -153,7 +152,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Thoughts on Plots</h1>
-<p class="subtitle lead">Real examples of data analytics and visualization expertise</p>
 </div>
 
 
@@ -168,91 +166,193 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="page-header">
-<p>Explore interactive visualizations, analytical approaches, and techniques that demonstrate my capabilities in transforming data into insights.</p>
-</div>
-<section id="visualizations" class="level2">
-<h2 class="anchored" data-anchor-id="visualizations">Featured Visualizations</h2>
-<div class="demo-grid">
-<section id="advanced-ggplot2-techniques" class="level3">
-<h3 class="anchored" data-anchor-id="advanced-ggplot2-techniques">Advanced ggplot2 Techniques</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your existing R visualization code here</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example plot - replace with your actual demos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Key Features:</strong> - Custom themes and styling - Complex data transformations - Interactive elements with plotly</p>
-<hr>
-</section>
-<section id="time-series-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="time-series-analysis">Time Series Analysis</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your time series visualization code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Demonstrates:</strong> - Trend analysis - Seasonal decomposition - Forecasting methods</p>
-<hr>
-</section>
-<section id="interactive-dashboards" class="level3">
-<h3 class="anchored" data-anchor-id="interactive-dashboards">Interactive Dashboards</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your interactive visualization code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Technologies:</strong> - R Shiny - Plotly - Custom HTML widgets</p>
-</section>
-</div>
-</section>
-<section id="case-studies" class="level2">
-<h2 class="anchored" data-anchor-id="case-studies">Case Studies</h2>
-<section id="project-market-analysis-dashboard" class="level3 case-study">
-<h3 class="anchored" data-anchor-id="project-market-analysis-dashboard">Project: Market Analysis Dashboard</h3>
-<p><strong>Challenge:</strong> Client needed to understand customer behavior patterns across multiple channels.</p>
-<p><strong>Solution:</strong> Built comprehensive analytical framework with interactive visualizations.</p>
-<p><strong>Results:</strong> - 40% improvement in insight discovery time - Identification of 3 new market segments - Improved decision-making process</p>
-<p><a href="#">View Full Case Study →</a></p>
-</section>
-<section id="project-predictive-modeling-pipeline" class="level3 case-study">
-<h3 class="anchored" data-anchor-id="project-predictive-modeling-pipeline">Project: Predictive Modeling Pipeline</h3>
-<p><strong>Challenge:</strong> Automate forecasting process for inventory management.</p>
-<p><strong>Approach:</strong> Developed custom R package with modeling and visualization components.</p>
-<p><strong>Outcome:</strong> - 25% reduction in forecast error - Streamlined workflow - Reproducible reporting system</p>
-<p><a href="#">View Technical Details →</a></p>
-</section>
-<hr>
-</section>
-<section id="additional-examples" class="level2">
-<h2 class="anchored" data-anchor-id="additional-examples">Additional Examples</h2>
-<p>Browse more demonstrations organized by technique and application:</p>
-<div class="example-links">
-<ul>
-<li><a href="#">Statistical Modeling Examples →</a></li>
-<li><a href="#">Data Cleaning &amp; Transformation →</a></li>
-<li><a href="#">Geospatial Visualizations →</a></li>
-<li><a href="#">Network Analysis →</a></li>
-<li><a href="#">Text Analytics →</a></li>
-</ul>
-</div>
-<hr>
-<p><a href="./index.html">← Back to Home</a> | <a href="./apps.html">View Apps →</a></p>
+<p>This is a collection of my plots and their reproducible R scripts.</p>
 
 
-</section>
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="R,tidyverse,economics,ggplot2,data visualization" data-listing-date-sort="1763442000000" data-listing-file-modified-sort="1763471454483" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15">
+<div class="thumbnail">
+<p><a href="./demos/BigMacIndex.html"> <img src="./demos/images/bic_mac_2025.png" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./demos/BigMacIndex.html">
+<h3 class="no-anchor listing-title">
+25 Years of the Big Mac Index
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Visualizing global currency valuation through the lens of a hamburger</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./demos/BigMacIndex.html">
+<div class="listing-date">
+Nov 18, 2025
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="media,education,survey,meritocracy" data-listing-date-sort="1757649600000" data-listing-file-modified-sort="1758134664410" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13">
+<div class="thumbnail">
+<p><a href="./demos/PewMediaStudy.html"> <img src="./demos/images/pew_original.png" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./demos/PewMediaStudy.html">
+<h3 class="no-anchor listing-title">
+Reproducing Pew Research’s ‘How the audiences of 30 major news sources differ in their levels of education’
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Let’s ask ClaudeAI to help us with identifying data stored in a string</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./demos/PewMediaStudy.html">
+<div class="listing-date">
+Sep 12, 2025
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="fiscal policy" data-listing-date-sort="1754884800000" data-listing-file-modified-sort="1757558102630" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
+<div class="thumbnail">
+<p><a href="./demos/ombReceipts_Animate.html"> <img src="./demos/images/animate_over_years.gif" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./demos/ombReceipts_Animate.html">
+<h3 class="no-anchor listing-title">
+Sources of U.S. Federal Revenue Over The Years Part 2
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>A practice in plot animation</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./demos/ombReceipts_Animate.html">
+<div class="listing-date">
+Aug 11, 2025
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="fiscal policy" data-listing-date-sort="1754107200000" data-listing-file-modified-sort="1763471160856" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
+<div class="thumbnail">
+<p><a href="./demos/ombReceipts.html"> <img src="./demos/images/2fpix3lvs1ld1-01.png" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./demos/ombReceipts.html">
+<h3 class="no-anchor listing-title">
+Sources of U.S. Federal Revenue Over The Years Part 1
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Figuring out how to reproduce a plot found out in the wild</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./demos/ombReceipts.html">
+<div class="listing-date">
+Aug 2, 2025
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="forest fires" data-listing-date-sort="1752897600000" data-listing-file-modified-sort="1754330203611" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10">
+<div class="thumbnail">
+<p><a href="./demos/CalFires.html"> <img src="./demos/images/fighting_acres_2025.png" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./demos/CalFires.html">
+<h3 class="no-anchor listing-title">
+California forest fires acres battled by agency
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>An exercise in effective use of color and axis labels</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./demos/CalFires.html">
+<div class="listing-date">
+Jul 19, 2025
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="census,wealth" data-listing-date-sort="1752897600000" data-listing-file-modified-sort="1758038135598" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="thumbnail">
+<p><a href="./demos/CensusDc.html"> <img src="./demos/images/median_income_by_race_dc_census_tracts.png" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./demos/CensusDc.html">
+<h3 class="no-anchor listing-title">
+Median Income and Race in the District of Columbia
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Mapping U.S. Census Data with R</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./demos/CensusDc.html">
+<div class="listing-date">
+Jul 19, 2025
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-categories="R,tidyverse,art,paint" data-listing-date-sort="1752033600000" data-listing-file-modified-sort="1757612960330" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
+<div class="thumbnail">
+<p><a href="./demos/bobross.html"> <img src="./demos/images/bobross_updated.png" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./demos/bobross.html">
+<h3 class="no-anchor listing-title">
+Color Frequency
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Submission to Tidy Tuesday for Week 8, 2023</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./demos/bobross.html">
+<div class="listing-date">
+Jul 9, 2025
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
