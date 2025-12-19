@@ -20,339 +20,87 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <link href="./favicon.ico" rel="icon">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
-  }
-}</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Create navbar HTML
+  const navbarHTML = `
+    <nav id="sticky-navbar" class="navbar-hidden">
+      <div class="navbar-container">
+        <a href="index.html" class="navbar-logo">
+          <img src="images/logo.png" alt="Solplots Logo">
+        </a>
+        <ul class="navbar-menu">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="demos.html">Demos</a></li>
+          <li><a href="apps.html">Apps</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="resume.html">Resume</a></li>
+        </ul>
+      </div>
+    </nav>
+  `;
+  
+  // Insert navbar at the top of body
+  document.body.insertAdjacentHTML('afterbegin', navbarHTML);
+  
+  // Show/hide navbar on scroll
+  let lastScroll = 0;
+  const navbar = document.getElementById('sticky-navbar');
+  
+  window.addEventListener('scroll', function() {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 100) {
+      // At top of page - hide navbar
+      navbar.classList.add('navbar-hidden');
+    } else if (currentScroll > lastScroll && currentScroll > 100) {
+      // Scrolling down - hide navbar
+      navbar.classList.add('navbar-hidden');
+    } else {
+      // Scrolling up - show navbar
+      navbar.classList.remove('navbar-hidden');
+    }
+    
+    lastScroll = currentScroll;
+  });
+});
+</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<link rel="stylesheet" href="styles.scss">
+<link rel="stylesheet" href="custom-landing.css">
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body>
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./demos.html">Thoughts on Plots</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-    </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Solplots</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./demos.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Thoughts on Plots</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./apps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Plot with Me</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Resources</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./resume.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Resume</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
-<!-- margin-sidebar -->
-    
-<!-- main -->
-<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<header id="title-block-header">
 <h1 class="title">Thoughts on Plots</h1>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
 
 </header>
 
 <p>This is a collection of my plots and their reproducible R scripts.</p>
 
 
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="R,tidyverse,economics,ggplot2,data visualization" data-listing-date-sort="1763442000000" data-listing-file-modified-sort="1763471454483" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15">
-<div class="thumbnail">
-<p><a href="./demos/BigMacIndex.html"> <img src="./demos/images/bic_mac_2025.png" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./demos/BigMacIndex.html">
-<h3 class="no-anchor listing-title">
-25 Years of the Big Mac Index
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-<p>Visualizing global currency valuation through the lens of a hamburger</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./demos/BigMacIndex.html">
-<div class="listing-date">
-Nov 18, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="media,education,survey,meritocracy" data-listing-date-sort="1757649600000" data-listing-file-modified-sort="1758134664410" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13">
-<div class="thumbnail">
-<p><a href="./demos/PewMediaStudy.html"> <img src="./demos/images/pew_original.png" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./demos/PewMediaStudy.html">
-<h3 class="no-anchor listing-title">
-Reproducing Pew Research’s ‘How the audiences of 30 major news sources differ in their levels of education’
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-<p>Let’s ask ClaudeAI to help us with identifying data stored in a string</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./demos/PewMediaStudy.html">
-<div class="listing-date">
-Sep 12, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="fiscal policy" data-listing-date-sort="1754884800000" data-listing-file-modified-sort="1757558102630" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
-<div class="thumbnail">
-<p><a href="./demos/ombReceipts_Animate.html"> <img src="./demos/images/animate_over_years.gif" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./demos/ombReceipts_Animate.html">
-<h3 class="no-anchor listing-title">
-Sources of U.S. Federal Revenue Over The Years Part 2
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-<p>A practice in plot animation</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./demos/ombReceipts_Animate.html">
-<div class="listing-date">
-Aug 11, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="fiscal policy" data-listing-date-sort="1754107200000" data-listing-file-modified-sort="1763471160856" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
-<div class="thumbnail">
-<p><a href="./demos/ombReceipts.html"> <img src="./demos/images/2fpix3lvs1ld1-01.png" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./demos/ombReceipts.html">
-<h3 class="no-anchor listing-title">
-Sources of U.S. Federal Revenue Over The Years Part 1
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-<p>Figuring out how to reproduce a plot found out in the wild</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./demos/ombReceipts.html">
-<div class="listing-date">
-Aug 2, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="forest fires" data-listing-date-sort="1752897600000" data-listing-file-modified-sort="1754330203611" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10">
-<div class="thumbnail">
-<p><a href="./demos/CalFires.html"> <img src="./demos/images/fighting_acres_2025.png" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./demos/CalFires.html">
-<h3 class="no-anchor listing-title">
-California forest fires acres battled by agency
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-<p>An exercise in effective use of color and axis labels</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./demos/CalFires.html">
-<div class="listing-date">
-Jul 19, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="census,wealth" data-listing-date-sort="1752897600000" data-listing-file-modified-sort="1758038135598" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
-<div class="thumbnail">
-<p><a href="./demos/CensusDc.html"> <img src="./demos/images/median_income_by_race_dc_census_tracts.png" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./demos/CensusDc.html">
-<h3 class="no-anchor listing-title">
-Median Income and Race in the District of Columbia
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-<p>Mapping U.S. Census Data with R</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./demos/CensusDc.html">
-<div class="listing-date">
-Jul 19, 2025
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="R,tidyverse,art,paint" data-listing-date-sort="1752033600000" data-listing-file-modified-sort="1757612960330" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
-<div class="thumbnail">
-<p><a href="./demos/bobross.html"> <img src="./demos/images/bobross_updated.png" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./demos/bobross.html">
-<h3 class="no-anchor listing-title">
-Color Frequency
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-<p>Submission to Tidy Tuesday for Week 8, 2023</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./demos/bobross.html">
-<div class="listing-date">
-Jul 9, 2025
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -373,6 +121,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+  tabsets.forEach(function(tabset) {
+    const tabby = new Tabby('#' + tabset.id);
+  });
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -444,7 +196,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       },
       interactive: true,
       interactiveBorder: 10,
-      theme: 'quarto',
+      theme: 'light-border',
       placement: 'bottom-start'
     };
     window.tippy(el, config); 
@@ -586,7 +338,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-</div> <!-- /content -->
 
 
 

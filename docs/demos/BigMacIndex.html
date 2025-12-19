@@ -22,6 +22,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
@@ -59,179 +60,115 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <link href="../favicon.ico" rel="icon">
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
-  }
-}</script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Create navbar HTML
+  const navbarHTML = `
+    <nav id="sticky-navbar" class="navbar-hidden">
+      <div class="navbar-container">
+        <a href="index.html" class="navbar-logo">
+          <img src="images/logo.png" alt="Solplots Logo">
+        </a>
+        <ul class="navbar-menu">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="demos.html">Demos</a></li>
+          <li><a href="apps.html">Apps</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="resume.html">Resume</a></li>
+        </ul>
+      </div>
+    </nav>
+  `;
+  
+  // Insert navbar at the top of body
+  document.body.insertAdjacentHTML('afterbegin', navbarHTML);
+  
+  // Show/hide navbar on scroll
+  let lastScroll = 0;
+  const navbar = document.getElementById('sticky-navbar');
+  
+  window.addEventListener('scroll', function() {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 100) {
+      // At top of page - hide navbar
+      navbar.classList.add('navbar-hidden');
+    } else if (currentScroll > lastScroll && currentScroll > 100) {
+      // Scrolling down - hide navbar
+      navbar.classList.add('navbar-hidden');
+    } else {
+      // Scrolling up - show navbar
+      navbar.classList.remove('navbar-hidden');
+    }
+    
+    lastScroll = currentScroll;
+  });
+});
+</script>
 
 
+<link rel="stylesheet" href="../styles.scss">
+<link rel="stylesheet" href="../custom-landing.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body>
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">25 Years of the Big Mac Index</li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-    </div>
-  </nav>
+
+<header id="title-block-header">
+<h1 class="title">25 Years of the Big Mac Index</h1>
+
+<p class="date">2025-11-18</p>
 </header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Solplots</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../demos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Thoughts on Plots</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../apps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Plot with Me</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Resources</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../resume.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Resume</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+<nav id="TOC" role="doc-toc">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-big-mac-index-economics-made-delicious" id="toc-the-big-mac-index-economics-made-delicious" class="nav-link active" data-scroll-target="#the-big-mac-index-economics-made-delicious">The Big Mac Index: Economics Made Delicious</a>
-  <ul class="collapse">
-  <li><a href="#why-a-big-mac" id="toc-why-a-big-mac" class="nav-link" data-scroll-target="#why-a-big-mac">Why a Big Mac?</a></li>
+  <li><a href="#the-big-mac-index-economics-made-delicious" id="toc-the-big-mac-index-economics-made-delicious">The Big Mac Index: Economics Made Delicious</a>
+  <ul>
+  <li><a href="#why-a-big-mac" id="toc-why-a-big-mac">Why a Big Mac?</a></li>
   </ul></li>
-  <li><a href="#data-source" id="toc-data-source" class="nav-link" data-scroll-target="#data-source">Data Source</a></li>
-  <li><a href="#original-approach-unedited-code-with-commentary" id="toc-original-approach-unedited-code-with-commentary" class="nav-link" data-scroll-target="#original-approach-unedited-code-with-commentary">Original Approach: Unedited Code with Commentary</a></li>
-  <li><a href="#alternative-approach-claudes-take" id="toc-alternative-approach-claudes-take" class="nav-link" data-scroll-target="#alternative-approach-claudes-take">Alternative Approach: Claude’s Take</a></li>
-  <li><a href="#synthesis-different-problem-solving-styles" id="toc-synthesis-different-problem-solving-styles" class="nav-link" data-scroll-target="#synthesis-different-problem-solving-styles">Synthesis: Different Problem-Solving Styles</a></li>
-  <li><a href="#design-insights" id="toc-design-insights" class="nav-link" data-scroll-target="#design-insights">Design Insights</a></li>
-  <li><a href="#saving-the-plot" id="toc-saving-the-plot" class="nav-link" data-scroll-target="#saving-the-plot">Saving the Plot</a></li>
-  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
-  <li><a href="#on-using-llms-for-data-analysis-blogging" id="toc-on-using-llms-for-data-analysis-blogging" class="nav-link" data-scroll-target="#on-using-llms-for-data-analysis-blogging">On Using LLMs for Data Analysis Blogging</a>
-  <ul class="collapse">
-  <li><a href="#what-worked-well-in-this-collaboration" id="toc-what-worked-well-in-this-collaboration" class="nav-link" data-scroll-target="#what-worked-well-in-this-collaboration">What worked well in this collaboration:</a></li>
-  <li><a href="#limitations-and-cautions" id="toc-limitations-and-cautions" class="nav-link" data-scroll-target="#limitations-and-cautions">Limitations and cautions:</a></li>
-  <li><a href="#recommended-workflow" id="toc-recommended-workflow" class="nav-link" data-scroll-target="#recommended-workflow">Recommended workflow:</a></li>
-  <li><a href="#the-real-value" id="toc-the-real-value" class="nav-link" data-scroll-target="#the-real-value">The real value:</a></li>
+  <li><a href="#data-source" id="toc-data-source">Data Source</a></li>
+  <li><a href="#original-approach-unedited-code-with-commentary" id="toc-original-approach-unedited-code-with-commentary">Original Approach: Unedited Code with Commentary</a></li>
+  <li><a href="#alternative-approach-claudes-take" id="toc-alternative-approach-claudes-take">Alternative Approach: Claude’s Take</a></li>
+  <li><a href="#synthesis-different-problem-solving-styles" id="toc-synthesis-different-problem-solving-styles">Synthesis: Different Problem-Solving Styles</a></li>
+  <li><a href="#design-insights" id="toc-design-insights">Design Insights</a></li>
+  <li><a href="#saving-the-plot" id="toc-saving-the-plot">Saving the Plot</a></li>
+  <li><a href="#sources" id="toc-sources">Sources</a></li>
+  <li><a href="#on-using-llms-for-data-analysis-blogging" id="toc-on-using-llms-for-data-analysis-blogging">On Using LLMs for Data Analysis Blogging</a>
+  <ul>
+  <li><a href="#what-worked-well-in-this-collaboration" id="toc-what-worked-well-in-this-collaboration">What worked well in this collaboration:</a></li>
+  <li><a href="#limitations-and-cautions" id="toc-limitations-and-cautions">Limitations and cautions:</a></li>
+  <li><a href="#recommended-workflow" id="toc-recommended-workflow">Recommended workflow:</a></li>
+  <li><a href="#the-real-value" id="toc-the-real-value">The real value:</a></li>
   </ul></li>
   </ul>
 </nav>
-    </div>
-<!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">25 Years of the Big Mac Index</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
-  <div class="quarto-categories">
-    <div class="quarto-category">R</div>
-    <div class="quarto-category">tidyverse</div>
-    <div class="quarto-category">economics</div>
-    <div class="quarto-category">ggplot2</div>
-    <div class="quarto-category">data visualization</div>
-  </div>
-  </div>
-
-<div>
-  <div class="description">
-    Visualizing global currency valuation through the lens of a hamburger
-  </div>
-</div>
-
-
-<div class="quarto-title-meta">
-
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">November 18, 2025</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-</header>
-
 <p>Author note: I’m letting ClaudeAI take the wheel here (maybe because Anthropic has partnered with The Economist and this’ll be cute for them).</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-AI Collaboration Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div>
+<blockquote>
+<p><strong>AI Collaboration Note</strong></p>
 <p>This blog post was created through a collaborative process with Claude (Anthropic). Sections explicitly generated by Claude are marked with 🤖. The code comparison section demonstrates different approaches to the same visualization problem—showing how human and AI problem-solving can complement each other.</p>
+</blockquote>
 </div>
-</div>
-<section id="the-big-mac-index-economics-made-delicious" class="level2">
-<h2 class="anchored" data-anchor-id="the-big-mac-index-economics-made-delicious">The Big Mac Index: Economics Made Delicious</h2>
+<h2 id="the-big-mac-index-economics-made-delicious" class="anchored">The Big Mac Index: Economics Made Delicious</h2>
 <p>🤖 <em>Section written by Claude</em></p>
 <p>In September 1986, <em>The Economist</em> journalist Pam Woodall introduced the Big Mac Index as a semi-humorous illustration of Purchasing Power Parity (PPP). The theory behind it—PPP—suggests that exchange rates should adjust so that identical goods cost the same in different countries. Since McDonald’s Big Macs are sold in nearly identical form across 50+ countries, they make for a surprisingly useful economic indicator.</p>
-<section id="why-a-big-mac" class="level3">
-<h3 class="anchored" data-anchor-id="why-a-big-mac">Why a Big Mac?</h3>
+<h3 id="why-a-big-mac" class="anchored">Why a Big Mac?</h3>
 <p>McDonald’s Big Mac was chosen because of the prevalence of the fast food chain worldwide, and because the sandwich remains largely the same across all countries. The Big Mac Index works because:</p>
 <ul>
 <li><strong>Standardization</strong>: The recipe is consistent globally</li>
@@ -240,10 +177,7 @@ AI Collaboration Note
 <li><strong>Simplicity</strong>: Easy to understand and compare—the index gave rise to the term “burgernomics”</li>
 </ul>
 <p>While economists widely cite the Big Mac index as a reasonable real-world measurement of purchasing power parity, it was not intended to be a legitimate tool for exchange rate evaluation, though it is now globally recognized and featured in many academic textbooks and reports. <em>The Economist</em> has published this index regularly since 1986, creating a rich dataset for analysis.</p>
-</section>
-</section>
-<section id="data-source" class="level2">
-<h2 class="anchored" data-anchor-id="data-source">Data Source</h2>
+<h2 id="data-source" class="anchored">Data Source</h2>
 <p>🤖 <em>Section written by Claude</em></p>
 <p>The data comes from <a href="https://github.com/TheEconomist/big-mac-data">The Economist’s GitHub repository</a>, where they maintain historical Big Mac prices and calculated currency valuations. The dataset includes:</p>
 <ul>
@@ -251,9 +185,7 @@ AI Collaboration Note
 <li><strong>Full index</strong>: Includes over/under-valuation calculations against the US dollar</li>
 <li><strong>Time span</strong>: From April 2000 to January 2025 in this analysis</li>
 </ul>
-</section>
-<section id="original-approach-unedited-code-with-commentary" class="level2">
-<h2 class="anchored" data-anchor-id="original-approach-unedited-code-with-commentary">Original Approach: Unedited Code with Commentary</h2>
+<h2 id="original-approach-unedited-code-with-commentary" class="anchored">Original Approach: Unedited Code with Commentary</h2>
 <p>Below is the original code exactly as written, with my commentary on the thought process and decisions.</p>
 <div class="cell">
 <details>
@@ -382,9 +314,7 @@ AI Collaboration Note
 <li><strong>No legend</strong>: While <code>show.legend = FALSE</code> cleans up the plot, there’s no legend explaining what the colored lines mean (though it’s somewhat obvious from context)</li>
 </ol>
 <p><strong>Overall assessment</strong>: This is a strong visualization with intentional design choices. The manual positioning shows attention to detail, and the McDonald’s color scheme is a sophisticated branding choice. The code is readable and the pipeline logic is clear. The brittleness around hardcoded positions is the main weakness—but sometimes that’s necessary for publication-quality plots.</p>
-</section>
-<section id="alternative-approach-claudes-take" class="level2">
-<h2 class="anchored" data-anchor-id="alternative-approach-claudes-take">Alternative Approach: Claude’s Take</h2>
+<h2 id="alternative-approach-claudes-take" class="anchored">Alternative Approach: Claude’s Take</h2>
 <p>🤖 <em>This entire section written and coded by Claude</em></p>
 <p>Here’s how I would approach the same visualization, with a focus on making the code more robust and self-documenting:</p>
 <div class="cell">
@@ -535,16 +465,12 @@ AI Collaboration Note
 <li><strong>My approach</strong>: More automated but might not position labels perfectly without adjustment</li>
 </ul>
 <p>Neither approach is definitively “better”—it depends on whether you value precision (manual positioning) or maintainability (calculated positioning).</p>
-</section>
-<section id="synthesis-different-problem-solving-styles" class="level2">
-<h2 class="anchored" data-anchor-id="synthesis-different-problem-solving-styles">Synthesis: Different Problem-Solving Styles</h2>
+<h2 id="synthesis-different-problem-solving-styles" class="anchored">Synthesis: Different Problem-Solving Styles</h2>
 <p>The comparison above illustrates two valid approaches to data visualization:</p>
 <p><strong>Human approach (original)</strong>: - Iterative and artistic - Manual fine-tuning for pixel-perfect results - Quick, pragmatic solutions (base R subsetting, hardcoded dates) - Relies on visual inspection and adjustment</p>
 <p><strong>LLM approach (Claude’s version)</strong>: - Systematic and programmatic - Aims for robustness and reusability - More verbose but self-documenting - Prioritizes reproducibility</p>
 <p><strong>Best practice</strong>: Combine both approaches! Use automated methods for the initial layout, then add manual tweaks for publication quality. The original code’s hand-tuned label positions are exactly what you’d do after my automated approach got you 90% there.</p>
-</section>
-<section id="design-insights" class="level2">
-<h2 class="anchored" data-anchor-id="design-insights">Design Insights</h2>
+<h2 id="design-insights" class="anchored">Design Insights</h2>
 <p>Both versions share these strong design choices:</p>
 <ol type="1">
 <li><strong>McDonald’s branding</strong>: The red-yellow color scheme immediately connects to the subject matter</li>
@@ -553,9 +479,7 @@ AI Collaboration Note
 <li><strong>Extended canvas</strong>: Creating space for labels outside the data region</li>
 <li><strong>Bold typography</strong>: Ensures readability against the colored background</li>
 </ol>
-</section>
-<section id="saving-the-plot" class="level2">
-<h2 class="anchored" data-anchor-id="saving-the-plot">Saving the Plot</h2>
+<h2 id="saving-the-plot" class="anchored">Saving the Plot</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -567,56 +491,39 @@ AI Collaboration Note
 </details>
 </div>
 <hr>
-</section>
-<section id="sources" class="level2">
-<h2 class="anchored" data-anchor-id="sources">Sources</h2>
+<h2 id="sources" class="anchored">Sources</h2>
 <ul>
 <li>Woodall, P. (1986). “Big Mac Index.” <em>The Economist</em>, September 1986.</li>
 <li><em>The Economist</em>. “The Big Mac Index.” Available at: <a href="https://www.economist.com/big-mac-index" class="uri">https://www.economist.com/big-mac-index</a></li>
 <li><em>The Economist</em>. Big Mac Index GitHub Repository. Available at: <a href="https://github.com/TheEconomist/big-mac-data" class="uri">https://github.com/TheEconomist/big-mac-data</a></li>
 </ul>
 <hr>
-</section>
-<section id="on-using-llms-for-data-analysis-blogging" class="level2">
-<h2 class="anchored" data-anchor-id="on-using-llms-for-data-analysis-blogging">On Using LLMs for Data Analysis Blogging</h2>
+<h2 id="on-using-llms-for-data-analysis-blogging" class="anchored">On Using LLMs for Data Analysis Blogging</h2>
 <p>🤖 <em>Reflective evaluation by Claude</em></p>
-<section id="what-worked-well-in-this-collaboration" class="level3">
-<h3 class="anchored" data-anchor-id="what-worked-well-in-this-collaboration">What worked well in this collaboration:</h3>
+<h3 id="what-worked-well-in-this-collaboration" class="anchored">What worked well in this collaboration:</h3>
 <p><strong>Content generation</strong>: LLMs excel at writing contextual introductions, explaining technical concepts, and providing historical background. The sections on PPP theory and the Big Mac Index’s history add educational value that might be tedious to research and write manually.</p>
 <p><strong>Code commentary</strong>: Having an LLM review and comment on code provides a “pair programming” experience. It can spot potential issues (like hardcoded indices), explain design decisions, and suggest alternatives—all valuable for readers learning data visualization.</p>
 <p><strong>Alternative implementations</strong>: Showing two approaches to the same problem (human intuition vs.&nbsp;algorithmic thinking) creates richer learning material than either approach alone.</p>
-</section>
-<section id="limitations-and-cautions" class="level3">
-<h3 class="anchored" data-anchor-id="limitations-and-cautions">Limitations and cautions:</h3>
+<h3 id="limitations-and-cautions" class="anchored">Limitations and cautions:</h3>
 <p><strong>Accuracy verification needed</strong>: The historical information about the Big Mac Index should be verified against primary sources. LLMs can hallucinate dates, names, or details. <em>(Note: I did search for and cite sources, but independent verification is always good practice.)</em></p>
 <p><strong>Code execution</strong>: I cannot run R code or verify that the plots actually render correctly. The “Claude’s approach” code is untested and might have bugs or produce unexpected results. Always run and verify LLM-generated code.</p>
 <p><strong>Subjective judgments</strong>: My “commentary” on the original code reflects general programming principles, but there’s no objectively “right” way to write this analysis. Your approach may be better for your specific context.</p>
 <p><strong>Loss of authentic voice</strong>: Over-relying on LLM-generated prose can make your blog sound generic. The original code and your design decisions are more valuable than any prose I can generate.</p>
-</section>
-<section id="recommended-workflow" class="level3">
-<h3 class="anchored" data-anchor-id="recommended-workflow">Recommended workflow:</h3>
+<h3 id="recommended-workflow" class="anchored">Recommended workflow:</h3>
 <ol type="1">
 <li><strong>Human leads</strong>: You write the code, make design decisions, and set the creative direction</li>
 <li><strong>LLM assists</strong>: Generate boilerplate explanations, research background information, and provide code review</li>
 <li><strong>Human curates</strong>: Edit LLM output to match your voice, verify all factual claims, and test all code</li>
 <li><strong>Transparency</strong>: Mark LLM contributions (as done here) so readers understand the collaborative process</li>
 </ol>
-</section>
-<section id="the-real-value" class="level3">
-<h3 class="anchored" data-anchor-id="the-real-value">The real value:</h3>
+<h3 id="the-real-value" class="anchored">The real value:</h3>
 <p>This collaboration model works because it combines human creativity and domain expertise with LLM efficiency at research and documentation. You brought the interesting visualization idea and aesthetic sensibility. I helped structure the narrative and provide alternative perspectives. Neither alone would produce this exact result.</p>
 <p>The comparison between two coding approaches is particularly valuable—it gives readers insight into the decision-making process, not just the final solution. This “showing your work” approach is pedagogically stronger than a single “correct” implementation.</p>
 <p><strong>Final recommendation</strong>: Use LLMs as collaborative tools for your blog, not ghostwriters. Your unique perspective and visualization skills are the core value. LLM assistance with context, explanation, and code review enhances that value without replacing it.</p>
 <hr>
-<p><em>Original code and visualization by [Your Name] | AI collaboration with Claude (Anthropic) | Generated 2025-12-18</em></p>
+<p><em>Original code and visualization by [Your Name] | AI collaboration with Claude (Anthropic) | Generated 2025-12-19</em></p>
 
 
-<!-- -->
-
-</section>
-</section>
-
-</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -637,6 +544,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+  tabsets.forEach(function(tabset) {
+    const tabby = new Tabby('#' + tabset.id);
+  });
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -696,57 +607,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
@@ -759,7 +619,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       },
       interactive: true,
       interactiveBorder: 10,
-      theme: 'quarto',
+      theme: 'light-border',
       placement: 'bottom-start'
     };
     window.tippy(el, config); 
@@ -900,440 +760,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "25 Years of the Big Mac Index"</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-11-18"</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Visualizing global currency valuation through the lens of a hamburger"</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [R, tidyverse, economics, ggplot2, data visualization]</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "images/bic_mac_2025.png"</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>Author note: I'm letting ClaudeAI take the wheel here (maybe because Anthropic has partnered with The Economist and this'll be cute for them).</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## AI Collaboration Note</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>This blog post was created through a collaborative process with Claude (Anthropic). Sections explicitly generated by Claude are marked with 🤖. The code comparison section demonstrates different approaches to the same visualization problem---showing how human and AI problem-solving can complement each other.</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Big Mac Index: Economics Made Delicious</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>🤖 *Section written by Claude*</span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>In September 1986, *The Economist* journalist Pam Woodall introduced the Big Mac Index as a semi-humorous illustration of Purchasing Power Parity (PPP). The theory behind it---PPP---suggests that exchange rates should adjust so that identical goods cost the same in different countries. Since McDonald's Big Macs are sold in nearly identical form across 50+ countries, they make for a surprisingly useful economic indicator.</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="fu">### Why a Big Mac?</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>McDonald's Big Mac was chosen because of the prevalence of the fast food chain worldwide, and because the sandwich remains largely the same across all countries. The Big Mac Index works because:</span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Standardization**: The recipe is consistent globally</span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Local Production**: Big Macs contain locally-sourced ingredients and the price reflects many local economic factors, such as ingredient prices, local wages, and advertising costs</span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Ubiquity**: McDonald's operates in most major economies</span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Simplicity**: Easy to understand and compare---the index gave rise to the term "burgernomics"</span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>While economists widely cite the Big Mac index as a reasonable real-world measurement of purchasing power parity, it was not intended to be a legitimate tool for exchange rate evaluation, though it is now globally recognized and featured in many academic textbooks and reports. *The Economist* has published this index regularly since 1986, creating a rich dataset for analysis.</span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Source</span></span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>🤖 *Section written by Claude*</span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>The data comes from <span class="co">[</span><span class="ot">The Economist's GitHub repository</span><span class="co">](https://github.com/TheEconomist/big-mac-data)</span>, where they maintain historical Big Mac prices and calculated currency valuations. The dataset includes:</span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Raw prices**: Local currency and USD-converted prices</span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Full index**: Includes over/under-valuation calculations against the US dollar</span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Time span**: From April 2000 to January 2025 in this analysis</span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## Original Approach: Unedited Code with Commentary</span></span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>Below is the original code exactly as written, with my commentary on the thought process and decisions.</span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: false</span></span>
-<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)</span>
-<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extrafont)</span>
-<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="fu">fonts</span>()</span>
-<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>🤖 **Claude's Commentary**: This setup is clean and minimal. Loading <span class="in">`plotly`</span> suggests the author may have experimented with interactive versions (though it's not used in the final plot). The <span class="in">`fonts()`</span> call displays available fonts---useful during development but could be removed for production.</span>
-<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-data-original</span></span>
-<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a>full <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/big-mac-full-index.csv"</span>)</span>
-<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/big-mac-raw-index.csv"</span>)</span>
-<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a>🤖 **Claude's Commentary**: Both datasets are loaded, though only <span class="in">`full`</span> is used. This is common during exploratory analysis---keeping <span class="in">`raw`</span> available in case you need to cross-reference or pivot approaches.</span>
-<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: calculate-changes-original</span></span>
-<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>delta <span class="ot">&lt;-</span> </span>
-<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a>  full <span class="sc">|&gt;</span> </span>
-<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">%in%</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">'2000-04-01'</span>, <span class="st">'2025-01-01'</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date, name, dollar_price) <span class="sc">|&gt;</span> </span>
-<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> date,</span>
-<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> dollar_price,</span>
-<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_repair =</span> <span class="st">'minimal'</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, <span class="at">before =</span> <span class="st">`</span><span class="at">2000-04-01</span><span class="st">`</span>, <span class="at">after =</span> <span class="st">`</span><span class="at">2025-01-01</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(before), <span class="sc">!</span><span class="fu">is.na</span>(after)) <span class="sc">|&gt;</span> </span>
-<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(name) </span>
-<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a>percent_change <span class="ot">&lt;-</span></span>
-<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>  delta <span class="sc">|&gt;</span> </span>
-<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_change =</span> <span class="fu">round</span>(((after<span class="sc">-</span>before)<span class="sc">/</span>before), <span class="at">digits =</span> <span class="dv">2</span>),</span>
-<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a>         <span class="at">pct_label =</span> scales<span class="sc">::</span><span class="fu">percent</span>(pct_change)) <span class="sc">|&gt;</span> </span>
-<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(pct_change))</span>
-<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a>🤖 **Claude's Commentary**: This is a smart approach to calculating change over time. The use of <span class="in">`pivot_wider()`</span> is particularly elegant---it transforms dates into columns, making it easy to calculate the difference. The <span class="in">`names_repair = 'minimal'`</span> argument is important because date columns would otherwise be automatically "cleaned" into invalid R names. Creating both numeric (<span class="in">`pct_change`</span>) and formatted (<span class="in">`pct_label`</span>) versions shows good data hygiene---you keep the raw numbers for potential calculations while having display-ready labels.</span>
-<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a>**Potential consideration**: This approach filters to countries present in *both* time periods. Countries that started reporting after 2000 or stopped before 2025 are excluded, which is the right call for a "change over 25 years" metric.</span>
-<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: identify-highlights-original</span></span>
-<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a>destaca <span class="ot">&lt;-</span> </span>
-<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a>  full <span class="sc">|&gt;</span> </span>
-<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">%in%</span> <span class="fu">as.Date</span>(<span class="st">'2025-01-01'</span>), <span class="sc">!</span><span class="fu">is.na</span>(dollar_price)) <span class="sc">|&gt;</span> </span>
-<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(date, <span class="fu">desc</span>(dollar_price)) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a>  .[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">50</span><span class="sc">:</span><span class="dv">54</span>), ]</span>
-<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> </span>
-<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a>  destaca <span class="sc">|&gt;</span> </span>
-<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">label =</span> <span class="fu">paste0</span>(name, <span class="st">", $"</span>, <span class="fu">round</span>(dollar_price, <span class="at">digits =</span> <span class="dv">2</span>)))</span>
-<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a>🤖 **Claude's Commentary**: This is where things get interesting. The use of <span class="in">`.[c(1:5, 50:54), ]`</span> is base R subsetting---grabbing rows 1-5 (most expensive) and 50-54 (least expensive). This works but is brittle: if the dataset has fewer than 54 rows, this breaks. Also, the specific row indices assume a certain ordering.</span>
-<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a>**Design insight**: The author is making an aesthetic choice here---exactly 10 countries highlighted, split between extremes. This creates visual balance.</span>
-<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a>The <span class="in">`transmute()`</span> for labels is efficient---it's like <span class="in">`mutate()`</span> but keeps only the new column. The formatted labels are ready-to-use for annotation.</span>
-<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: create-plot-original</span></span>
-<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
-<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 6</span></span>
-<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a>full <span class="sc">|&gt;</span> </span>
-<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">check =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(dollar_price) <span class="sc">&amp;</span> date <span class="sc">==</span> <span class="fu">as.Date</span>(<span class="st">'2025-01-01'</span>), <span class="st">'na'</span>, <span class="st">'good'</span>),</span>
-<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a>         <span class="at">hl =</span> <span class="fu">if_else</span>(name <span class="sc">%in%</span> destaca<span class="sc">$</span>name, <span class="st">"yes"</span>, <span class="st">"no"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(check <span class="sc">==</span> <span class="st">'good'</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date, name, dollar_price, hl) <span class="sc">|&gt;</span> </span>
-<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> dollar_price, <span class="at">group =</span> name)) <span class="sc">+</span></span>
-<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> hl),</span>
-<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a>            <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'25 years of the Big Mac Index from *The Economist*'</span>,</span>
-<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">'Most and Least Expensive Countries to by a Big Mac, USD'</span>)<span class="sc">+</span></span>
-<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">'%Y'</span>,</span>
-<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a>               <span class="at">limits =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">'1999-06-01'</span>, <span class="st">'2034-01-01'</span>)),</span>
-<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a>               <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">8</span>)) <span class="sc">+</span></span>
-<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#FFCC00"</span>, <span class="st">"#05007B"</span>, <span class="st">"black"</span>)) <span class="sc">+</span></span>
-<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">'text'</span>,</span>
-<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">'2033-04-09'</span>),</span>
-<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fl">0.3</span><span class="sc">:</span><span class="fl">8.3</span>, </span>
-<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"#FFCC00"</span>,</span>
-<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"$"</span>, <span class="dv">0</span><span class="sc">:</span><span class="dv">8</span>),</span>
-<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">6</span>,</span>
-<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> <span class="st">'Cambria'</span>) <span class="sc">+</span></span>
-<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,</span>
-<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2025-02-28"</span>),</span>
-<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="fl">7.35</span>, <span class="dv">7</span>, <span class="fl">6.6</span>, <span class="fl">5.95</span>, <span class="fl">3.4</span>, <span class="fl">3.05</span>, <span class="fl">2.7</span>, <span class="fl">2.35</span>, <span class="dv">2</span>),</span>
-<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> labels<span class="sc">$</span>label,</span>
-<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> <span class="st">'Cambria'</span>,</span>
-<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="fl">4.5</span>,</span>
-<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"#05007B"</span>,</span>
-<span id="cb10-169"><a href="#cb10-169" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"#FFCC00"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"Cambria"</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"#FFCC00"</span>),</span>
-<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#DA291C"</span>, <span class="at">color =</span> <span class="st">"#DA291C"</span>),</span>
-<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#DA291C"</span>, <span class="at">color =</span> <span class="st">"#DA291C"</span>),</span>
-<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(),</span>
-<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a>  ) </span>
-<span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a>🤖 **Claude's Commentary on this approach**:</span>
-<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-186"><a href="#cb10-186" aria-hidden="true" tabindex="-1"></a>**What works really well:**</span>
-<span id="cb10-187"><a href="#cb10-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**The filtering logic**: The <span class="in">`check`</span> variable elegantly filters out countries with no 2025 data, ensuring we only plot complete series</span>
-<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**Color hierarchy**: Three colors (yellow highlight, dark blue for labels, black for background lines) creates clear visual hierarchy</span>
-<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Manual annotation positioning**: Those y-coordinates (<span class="in">`c(8, 7.35, 7, 6.6, 5.95...)`</span>) were clearly hand-tuned to avoid overlaps---this is often the only way to get perfect label placement</span>
-<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>**Extended x-axis**: The <span class="in">`limits = as.Date(c('1999-06-01', '2034-01-01'))`</span> is clever---it extends well into the future to create space for labels on the right</span>
-<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>**McDonald's branding**: The color scheme (#DA291C red, #FFCC00 yellow, #05007B dark blue) immediately evokes the brand</span>
-<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a>**Potential improvements:**</span>
-<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-196"><a href="#cb10-196" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**The y-coordinates for labels are hardcoded**: If the data changes or different countries are highlighted, these positions would need manual adjustment</span>
-<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**Typo in subtitle**: "by a Big Mac" should be "buy a Big Mac"</span>
-<span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**The x-position for y-axis labels** (<span class="in">`'2033-04-09'`</span>) seems arbitrary---unclear why this specific date</span>
-<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>**No legend**: While <span class="in">`show.legend = FALSE`</span> cleans up the plot, there's no legend explaining what the colored lines mean (though it's somewhat obvious from context)</span>
-<span id="cb10-200"><a href="#cb10-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a>**Overall assessment**: This is a strong visualization with intentional design choices. The manual positioning shows attention to detail, and the McDonald's color scheme is a sophisticated branding choice. The code is readable and the pipeline logic is clear. The brittleness around hardcoded positions is the main weakness---but sometimes that's necessary for publication-quality plots.</span>
-<span id="cb10-202"><a href="#cb10-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-203"><a href="#cb10-203" aria-hidden="true" tabindex="-1"></a><span class="fu">## Alternative Approach: Claude's Take</span></span>
-<span id="cb10-204"><a href="#cb10-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-205"><a href="#cb10-205" aria-hidden="true" tabindex="-1"></a>🤖 *This entire section written and coded by Claude*</span>
-<span id="cb10-206"><a href="#cb10-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-207"><a href="#cb10-207" aria-hidden="true" tabindex="-1"></a>Here's how I would approach the same visualization, with a focus on making the code more robust and self-documenting:</span>
-<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-211"><a href="#cb10-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-212"><a href="#cb10-212" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: claude-setup</span></span>
-<span id="cb10-213"><a href="#cb10-213" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb10-214"><a href="#cb10-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)</span>
-<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a><span class="co"># Read data</span></span>
-<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a>full <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/big-mac-full-index.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: claude-data-prep</span></span>
-<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter to complete time series (countries with 2025 data)</span></span>
-<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a>countries_with_2025 <span class="ot">&lt;-</span> full <span class="sc">|&gt;</span> </span>
-<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">==</span> <span class="fu">as.Date</span>(<span class="st">'2025-01-01'</span>), <span class="sc">!</span><span class="fu">is.na</span>(dollar_price)) <span class="sc">|&gt;</span> </span>
-<span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(name)</span>
-<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> full <span class="sc">|&gt;</span> </span>
-<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(name <span class="sc">%in%</span> countries_with_2025,</span>
-<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a>         date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">'2000-01-01'</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date, name, dollar_price)</span>
-<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify extreme countries more robustly</span></span>
-<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a>extremes_2025 <span class="ot">&lt;-</span> plot_data <span class="sc">|&gt;</span> </span>
-<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">==</span> <span class="fu">max</span>(date)) <span class="sc">|&gt;</span> </span>
-<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(dollar_price)) <span class="sc">|&gt;</span> </span>
-<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, (<span class="fu">n</span>()<span class="sc">-</span><span class="dv">4</span>)<span class="sc">:</span><span class="fu">n</span>())) <span class="sc">|&gt;</span>  <span class="co"># Top 5 and bottom 5</span></span>
-<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">paste0</span>(name, <span class="st">", "</span>, <span class="fu">dollar</span>(dollar_price, <span class="at">accuracy =</span> <span class="fl">0.01</span>)),</span>
-<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate label positions with spacing</span></span>
-<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_pos =</span> dollar_price,</span>
-<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_pos =</span> <span class="fu">max</span>(plot_data<span class="sc">$</span>date) <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">60</span>)</span>
-<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a><span class="co"># Add highlight flag to plot data</span></span>
-<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> plot_data <span class="sc">|&gt;</span> </span>
-<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a>    <span class="at">highlight =</span> <span class="fu">case_when</span>(</span>
-<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a>      name <span class="sc">%in%</span> extremes_2025<span class="sc">$</span>name <span class="sc">~</span> <span class="st">"labeled"</span>,</span>
-<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"background"</span></span>
-<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a>🤖 **My reasoning**:</span>
-<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Rather than hardcoding row indices, I use <span class="in">`slice(c(1:5, (n()-4):n()))`</span> which adapts to any dataset size</span>
-<span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I calculate label positions relative to the data (<span class="in">`max(date) + days(60)`</span>) rather than hardcoding dates</span>
-<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I use <span class="in">`dollar()`</span> from scales for consistent currency formatting</span>
-<span id="cb10-265"><a href="#cb10-265" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I create the highlight flag more explicitly with <span class="in">`case_when()`</span></span>
-<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: claude-plot</span></span>
-<span id="cb10-271"><a href="#cb10-271" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
-<span id="cb10-272"><a href="#cb10-272" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 6</span></span>
-<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-274"><a href="#cb10-274" aria-hidden="true" tabindex="-1"></a><span class="co"># Define McDonald's colors</span></span>
-<span id="cb10-275"><a href="#cb10-275" aria-hidden="true" tabindex="-1"></a>mc_red <span class="ot">&lt;-</span> <span class="st">"#DA291C"</span></span>
-<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a>mc_yellow <span class="ot">&lt;-</span> <span class="st">"#FFCC00"</span></span>
-<span id="cb10-277"><a href="#cb10-277" aria-hidden="true" tabindex="-1"></a>mc_blue <span class="ot">&lt;-</span> <span class="st">"#27251F"</span>  <span class="co"># Using a dark neutral instead of dark blue</span></span>
-<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> dollar_price, <span class="at">group =</span> name)) <span class="sc">+</span></span>
-<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Background lines for all countries</span></span>
-<span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
-<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">filter</span>(plot_data, highlight <span class="sc">==</span> <span class="st">"background"</span>),</span>
-<span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">alpha</span>(<span class="st">"black"</span>, <span class="fl">0.3</span>),</span>
-<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.3</span></span>
-<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Highlighted lines for labeled countries</span></span>
-<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
-<span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">filter</span>(plot_data, highlight <span class="sc">==</span> <span class="st">"labeled"</span>),</span>
-<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> mc_yellow,</span>
-<span id="cb10-290"><a href="#cb10-290" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.8</span></span>
-<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-292"><a href="#cb10-292" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Country labels</span></span>
-<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb10-294"><a href="#cb10-294" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> extremes_2025,</span>
-<span id="cb10-295"><a href="#cb10-295" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> x_pos, <span class="at">y =</span> y_pos, <span class="at">label =</span> label),</span>
-<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">0</span>,</span>
-<span id="cb10-297"><a href="#cb10-297" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">4</span>,</span>
-<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> mc_yellow,</span>
-<span id="cb10-299"><a href="#cb10-299" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
-<span id="cb10-300"><a href="#cb10-300" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span></span>
-<span id="cb10-301"><a href="#cb10-301" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-302"><a href="#cb10-302" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Y-axis price labels on the right</span></span>
-<span id="cb10-303"><a href="#cb10-303" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb10-304"><a href="#cb10-304" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">8</span>,</span>
-<span id="cb10-305"><a href="#cb10-305" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">8.5</span>),</span>
-<span id="cb10-306"><a href="#cb10-306" aria-hidden="true" tabindex="-1"></a>    <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(</span>
-<span id="cb10-307"><a href="#cb10-307" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> .,</span>
-<span id="cb10-308"><a href="#cb10-308" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">8</span>,</span>
-<span id="cb10-309"><a href="#cb10-309" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">dollar_format</span>()(<span class="dv">0</span><span class="sc">:</span><span class="dv">8</span>)</span>
-<span id="cb10-310"><a href="#cb10-310" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb10-311"><a href="#cb10-311" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-312"><a href="#cb10-312" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(</span>
-<span id="cb10-313"><a href="#cb10-313" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_labels =</span> <span class="st">"%Y"</span>,</span>
-<span id="cb10-314"><a href="#cb10-314" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.02</span>, <span class="fl">0.25</span>))  <span class="co"># More room on right for labels</span></span>
-<span id="cb10-315"><a href="#cb10-315" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-316"><a href="#cb10-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-317"><a href="#cb10-317" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"25 years of the Big Mac Index from *The Economist*"</span>,</span>
-<span id="cb10-318"><a href="#cb10-318" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Most and least expensive countries to **buy** a Big Mac, USD"</span>,</span>
-<span id="cb10-319"><a href="#cb10-319" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Data: The Economist Big Mac Index | Visualization: Claude"</span></span>
-<span id="cb10-320"><a href="#cb10-320" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-321"><a href="#cb10-321" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb10-322"><a href="#cb10-322" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb10-323"><a href="#cb10-323" aria-hidden="true" tabindex="-1"></a>    <span class="co"># McDonald's brand colors</span></span>
-<span id="cb10-324"><a href="#cb10-324" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> mc_red, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb10-325"><a href="#cb10-325" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> mc_red, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb10-326"><a href="#cb10-326" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-327"><a href="#cb10-327" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Text styling</span></span>
-<span id="cb10-328"><a href="#cb10-328" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> mc_yellow, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb10-329"><a href="#cb10-329" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">5</span>)),</span>
-<span id="cb10-330"><a href="#cb10-330" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">11</span>, <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">15</span>)),</span>
-<span id="cb10-331"><a href="#cb10-331" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">hjust =</span> <span class="dv">0</span>),</span>
-<span id="cb10-332"><a href="#cb10-332" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-333"><a href="#cb10-333" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Axes</span></span>
-<span id="cb10-334"><a href="#cb10-334" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> mc_yellow),</span>
-<span id="cb10-335"><a href="#cb10-335" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y.right =</span> <span class="fu">element_text</span>(<span class="at">color =</span> mc_yellow, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb10-336"><a href="#cb10-336" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb10-337"><a href="#cb10-337" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb10-338"><a href="#cb10-338" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-339"><a href="#cb10-339" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove gridlines</span></span>
-<span id="cb10-340"><a href="#cb10-340" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb10-341"><a href="#cb10-341" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-342"><a href="#cb10-342" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Margins</span></span>
-<span id="cb10-343"><a href="#cb10-343" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>)</span>
-<span id="cb10-344"><a href="#cb10-344" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-345"><a href="#cb10-345" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-346"><a href="#cb10-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-347"><a href="#cb10-347" aria-hidden="true" tabindex="-1"></a>🤖 **Key differences in my approach**:</span>
-<span id="cb10-348"><a href="#cb10-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-349"><a href="#cb10-349" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**Separate geoms for background vs. highlighted lines**: This gives me more control over their appearance (alpha, linewidth)</span>
-<span id="cb10-350"><a href="#cb10-350" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**Used `sec.axis()`**: Creates a secondary axis for y-axis labels instead of manual annotation---this automatically positions them</span>
-<span id="cb10-351"><a href="#cb10-351" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Dynamic positioning**: All positions are calculated from the data, not hardcoded</span>
-<span id="cb10-352"><a href="#cb10-352" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>**Used `expansion()`**: Modern ggplot2 way to control axis padding</span>
-<span id="cb10-353"><a href="#cb10-353" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>**Added caption**: Credits the data source and visualization creator</span>
-<span id="cb10-354"><a href="#cb10-354" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>**Fixed typo**: "buy" instead of "by"</span>
-<span id="cb10-355"><a href="#cb10-355" aria-hidden="true" tabindex="-1"></a><span class="ss">7.  </span>**Used `alpha()`**: For transparency on background lines</span>
-<span id="cb10-356"><a href="#cb10-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-357"><a href="#cb10-357" aria-hidden="true" tabindex="-1"></a>**Tradeoffs**:</span>
-<span id="cb10-358"><a href="#cb10-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-359"><a href="#cb10-359" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Original approach**: More control over exact positions but requires manual tweaking</span>
-<span id="cb10-360"><a href="#cb10-360" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**My approach**: More automated but might not position labels perfectly without adjustment</span>
-<span id="cb10-361"><a href="#cb10-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-362"><a href="#cb10-362" aria-hidden="true" tabindex="-1"></a>Neither approach is definitively "better"---it depends on whether you value precision (manual positioning) or maintainability (calculated positioning).</span>
-<span id="cb10-363"><a href="#cb10-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-364"><a href="#cb10-364" aria-hidden="true" tabindex="-1"></a><span class="fu">## Synthesis: Different Problem-Solving Styles</span></span>
-<span id="cb10-365"><a href="#cb10-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-366"><a href="#cb10-366" aria-hidden="true" tabindex="-1"></a>The comparison above illustrates two valid approaches to data visualization:</span>
-<span id="cb10-367"><a href="#cb10-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-368"><a href="#cb10-368" aria-hidden="true" tabindex="-1"></a>**Human approach (original)**: - Iterative and artistic - Manual fine-tuning for pixel-perfect results - Quick, pragmatic solutions (base R subsetting, hardcoded dates) - Relies on visual inspection and adjustment</span>
-<span id="cb10-369"><a href="#cb10-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-370"><a href="#cb10-370" aria-hidden="true" tabindex="-1"></a>**LLM approach (Claude's version)**: - Systematic and programmatic - Aims for robustness and reusability - More verbose but self-documenting - Prioritizes reproducibility</span>
-<span id="cb10-371"><a href="#cb10-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-372"><a href="#cb10-372" aria-hidden="true" tabindex="-1"></a>**Best practice**: Combine both approaches! Use automated methods for the initial layout, then add manual tweaks for publication quality. The original code's hand-tuned label positions are exactly what you'd do after my automated approach got you 90% there.</span>
-<span id="cb10-373"><a href="#cb10-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-374"><a href="#cb10-374" aria-hidden="true" tabindex="-1"></a><span class="fu">## Design Insights</span></span>
-<span id="cb10-375"><a href="#cb10-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-376"><a href="#cb10-376" aria-hidden="true" tabindex="-1"></a>Both versions share these strong design choices:</span>
-<span id="cb10-377"><a href="#cb10-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-378"><a href="#cb10-378" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**McDonald's branding**: The red-yellow color scheme immediately connects to the subject matter</span>
-<span id="cb10-379"><a href="#cb10-379" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**Minimalist axes**: Removing gridlines lets the data shine</span>
-<span id="cb10-380"><a href="#cb10-380" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Strategic highlighting**: Only labeling extremes prevents visual clutter</span>
-<span id="cb10-381"><a href="#cb10-381" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>**Extended canvas**: Creating space for labels outside the data region</span>
-<span id="cb10-382"><a href="#cb10-382" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>**Bold typography**: Ensures readability against the colored background</span>
-<span id="cb10-383"><a href="#cb10-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-384"><a href="#cb10-384" aria-hidden="true" tabindex="-1"></a><span class="fu">## Saving the Plot</span></span>
-<span id="cb10-385"><a href="#cb10-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-388"><a href="#cb10-388" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-389"><a href="#cb10-389" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: save-plot</span></span>
-<span id="cb10-390"><a href="#cb10-390" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb10-391"><a href="#cb10-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-392"><a href="#cb10-392" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"bic_mac_2025.png"</span>,</span>
-<span id="cb10-393"><a href="#cb10-393" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">7</span>,</span>
-<span id="cb10-394"><a href="#cb10-394" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">6</span>,</span>
-<span id="cb10-395"><a href="#cb10-395" aria-hidden="true" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">"in"</span>,</span>
-<span id="cb10-396"><a href="#cb10-396" aria-hidden="true" tabindex="-1"></a>       <span class="at">dpi =</span> <span class="dv">300</span>)</span>
-<span id="cb10-397"><a href="#cb10-397" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-398"><a href="#cb10-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-399"><a href="#cb10-399" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb10-400"><a href="#cb10-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-401"><a href="#cb10-401" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sources</span></span>
-<span id="cb10-402"><a href="#cb10-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-403"><a href="#cb10-403" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Woodall, P. (1986). "Big Mac Index." *The Economist*, September 1986.</span>
-<span id="cb10-404"><a href="#cb10-404" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>*The Economist*. "The Big Mac Index." Available at: <span class="ot">&lt;https://www.economist.com/big-mac-index&gt;</span></span>
-<span id="cb10-405"><a href="#cb10-405" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>*The Economist*. Big Mac Index GitHub Repository. Available at: <span class="ot">&lt;https://github.com/TheEconomist/big-mac-data&gt;</span></span>
-<span id="cb10-406"><a href="#cb10-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-407"><a href="#cb10-407" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb10-408"><a href="#cb10-408" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-409"><a href="#cb10-409" aria-hidden="true" tabindex="-1"></a><span class="fu">## On Using LLMs for Data Analysis Blogging</span></span>
-<span id="cb10-410"><a href="#cb10-410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-411"><a href="#cb10-411" aria-hidden="true" tabindex="-1"></a>🤖 *Reflective evaluation by Claude*</span>
-<span id="cb10-412"><a href="#cb10-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-413"><a href="#cb10-413" aria-hidden="true" tabindex="-1"></a><span class="fu">### What worked well in this collaboration:</span></span>
-<span id="cb10-414"><a href="#cb10-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-415"><a href="#cb10-415" aria-hidden="true" tabindex="-1"></a>**Content generation**: LLMs excel at writing contextual introductions, explaining technical concepts, and providing historical background. The sections on PPP theory and the Big Mac Index's history add educational value that might be tedious to research and write manually.</span>
-<span id="cb10-416"><a href="#cb10-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-417"><a href="#cb10-417" aria-hidden="true" tabindex="-1"></a>**Code commentary**: Having an LLM review and comment on code provides a "pair programming" experience. It can spot potential issues (like hardcoded indices), explain design decisions, and suggest alternatives---all valuable for readers learning data visualization.</span>
-<span id="cb10-418"><a href="#cb10-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-419"><a href="#cb10-419" aria-hidden="true" tabindex="-1"></a>**Alternative implementations**: Showing two approaches to the same problem (human intuition vs. algorithmic thinking) creates richer learning material than either approach alone.</span>
-<span id="cb10-420"><a href="#cb10-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-421"><a href="#cb10-421" aria-hidden="true" tabindex="-1"></a><span class="fu">### Limitations and cautions:</span></span>
-<span id="cb10-422"><a href="#cb10-422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-423"><a href="#cb10-423" aria-hidden="true" tabindex="-1"></a>**Accuracy verification needed**: The historical information about the Big Mac Index should be verified against primary sources. LLMs can hallucinate dates, names, or details. *(Note: I did search for and cite sources, but independent verification is always good practice.)*</span>
-<span id="cb10-424"><a href="#cb10-424" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-425"><a href="#cb10-425" aria-hidden="true" tabindex="-1"></a>**Code execution**: I cannot run R code or verify that the plots actually render correctly. The "Claude's approach" code is untested and might have bugs or produce unexpected results. Always run and verify LLM-generated code.</span>
-<span id="cb10-426"><a href="#cb10-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-427"><a href="#cb10-427" aria-hidden="true" tabindex="-1"></a>**Subjective judgments**: My "commentary" on the original code reflects general programming principles, but there's no objectively "right" way to write this analysis. Your approach may be better for your specific context.</span>
-<span id="cb10-428"><a href="#cb10-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-429"><a href="#cb10-429" aria-hidden="true" tabindex="-1"></a>**Loss of authentic voice**: Over-relying on LLM-generated prose can make your blog sound generic. The original code and your design decisions are more valuable than any prose I can generate.</span>
-<span id="cb10-430"><a href="#cb10-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-431"><a href="#cb10-431" aria-hidden="true" tabindex="-1"></a><span class="fu">### Recommended workflow:</span></span>
-<span id="cb10-432"><a href="#cb10-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-433"><a href="#cb10-433" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>**Human leads**: You write the code, make design decisions, and set the creative direction</span>
-<span id="cb10-434"><a href="#cb10-434" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>**LLM assists**: Generate boilerplate explanations, research background information, and provide code review</span>
-<span id="cb10-435"><a href="#cb10-435" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Human curates**: Edit LLM output to match your voice, verify all factual claims, and test all code</span>
-<span id="cb10-436"><a href="#cb10-436" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>**Transparency**: Mark LLM contributions (as done here) so readers understand the collaborative process</span>
-<span id="cb10-437"><a href="#cb10-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-438"><a href="#cb10-438" aria-hidden="true" tabindex="-1"></a><span class="fu">### The real value:</span></span>
-<span id="cb10-439"><a href="#cb10-439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-440"><a href="#cb10-440" aria-hidden="true" tabindex="-1"></a>This collaboration model works because it combines human creativity and domain expertise with LLM efficiency at research and documentation. You brought the interesting visualization idea and aesthetic sensibility. I helped structure the narrative and provide alternative perspectives. Neither alone would produce this exact result.</span>
-<span id="cb10-441"><a href="#cb10-441" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-442"><a href="#cb10-442" aria-hidden="true" tabindex="-1"></a>The comparison between two coding approaches is particularly valuable---it gives readers insight into the decision-making process, not just the final solution. This "showing your work" approach is pedagogically stronger than a single "correct" implementation.</span>
-<span id="cb10-443"><a href="#cb10-443" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-444"><a href="#cb10-444" aria-hidden="true" tabindex="-1"></a>**Final recommendation**: Use LLMs as collaborative tools for your blog, not ghostwriters. Your unique perspective and visualization skills are the core value. LLM assistance with context, explanation, and code review enhances that value without replacing it.</span>
-<span id="cb10-445"><a href="#cb10-445" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-446"><a href="#cb10-446" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb10-447"><a href="#cb10-447" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-448"><a href="#cb10-448" aria-hidden="true" tabindex="-1"></a>*Original code and visualization by \[Your Name\] \| AI collaboration with Claude (Anthropic) \| Generated `r Sys.Date()`*</span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
-</div> <!-- /content -->
+</script>
 
 
 

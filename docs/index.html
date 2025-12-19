@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Solplots</title>
+<title></title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,124 +20,234 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <link href="./favicon.ico" rel="icon">
 <script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
-  }
-}</script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Create navbar HTML
+  const navbarHTML = `
+    <nav id="sticky-navbar" class="navbar-hidden">
+      <div class="navbar-container">
+        <a href="index.html" class="navbar-logo">
+          <img src="images/logo.png" alt="Solplots Logo">
+        </a>
+        <ul class="navbar-menu">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="demos.html">Demos</a></li>
+          <li><a href="apps.html">Apps</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="resume.html">Resume</a></li>
+        </ul>
+      </div>
+    </nav>
+  `;
+  
+  // Insert navbar at the top of body
+  document.body.insertAdjacentHTML('afterbegin', navbarHTML);
+  
+  // Show/hide navbar on scroll
+  let lastScroll = 0;
+  const navbar = document.getElementById('sticky-navbar');
+  
+  window.addEventListener('scroll', function() {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 100) {
+      // At top of page - hide navbar
+      navbar.classList.add('navbar-hidden');
+    } else if (currentScroll > lastScroll && currentScroll > 100) {
+      // Scrolling down - hide navbar
+      navbar.classList.add('navbar-hidden');
+    } else {
+      // Scrolling up - show navbar
+      navbar.classList.remove('navbar-hidden');
+    }
+    
+    lastScroll = currentScroll;
+  });
+});
+</script>
 
 
+<link rel="stylesheet" href="styles.scss">
+<link rel="stylesheet" href="custom-landing.css">
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body>
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Solplots</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-    </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Solplots</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./demos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Thoughts on Plots</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./apps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Plot with Me</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Resources</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./resume.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Resume</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
-<!-- margin-sidebar -->
-    
-<!-- main -->
-<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Solplots</h1>
+
+
+<div class="hero-section">
+<p><img src="images/home_image.png" class="hero-logo img-fluid"></p>
+<div class="hero-quote">
+<p>Ad astra per tabula</p>
 </div>
+</div>
+<div id="services" class="services-section">
+<section id="services" class="services-header">
+<h2 class="anchored">Services</h2>
+<p>My name is Peter, and plots are the currency connecting data with information and compelling narratives. My approach emphasizes repeatable, process-driven methods to compose creative communication to help organizations and individuals alike to feel fully equipped in making informed decisions.</p>
+</section>
+<div class="services-grid">
+<div class="service-card">
+<p><span class="service-icon">📊</span></p>
+<h3 id="statistical-consultation" class="anchored">Statistical Consultation</h3>
+<p>Deep dive into your data challenges with rigorous statistical methods. From experimental design to hypothesis testing, I help you extract meaningful insights and make data-driven decisions with confidence.</p>
+<div class="service-tools">
+<p><strong>Tools:</strong> R, Python, Bayesian methods, causal inference</p>
+</div>
+</div>
+<div class="service-card">
+<p><span class="service-icon">📖</span></p>
+<h3 id="analytical-storytelling" class="anchored">Analytical Storytelling</h3>
+<p>Transform your findings into narratives that resonate. I craft compelling data stories that bridge the gap between technical analysis and human understanding, making complex insights accessible to any audience.</p>
+<div class="service-tools">
+<p><strong>Tools:</strong> R Markdown, Quarto, D3.js, interactive visualizations</p>
+</div>
+</div>
+<div class="service-card">
+<p><span class="service-icon">🎨</span></p>
+<h3 id="data-visualization-design" class="anchored">Data Visualization &amp; Design</h3>
+<p>Create beautiful, functional visualizations that reveal patterns and drive understanding. From exploratory analysis to publication-ready graphics, every visualization tells a story.</p>
+<div class="service-tools">
+<p><strong>Tools:</strong> ggplot2, Plotly, Observable, Tableau</p>
+</div>
+</div>
+<div class="service-card">
+<p><span class="service-icon">🎓</span></p>
+<h3 id="educational-services" class="anchored">Educational Services</h3>
+<p>Workshops, tutorials, and one-on-one mentoring in statistics, R programming, and data analysis. I make complex topics approachable through hands-on learning and real-world applications.</p>
+<div class="service-tools">
+<p><strong>Topics:</strong> R programming, statistical thinking, reproducible research</p>
+</div>
+</div>
+<div class="service-card">
+<p><span class="service-icon">💻</span></p>
+<h3 id="custom-analytics-solutions" class="anchored">Custom Analytics Solutions</h3>
+<p>Build tailored analytical tools and dashboards for your specific needs. From Shiny apps to automated reporting pipelines, I create solutions that scale with your organization.</p>
+<div class="service-tools">
+<p><strong>Technologies:</strong> Shiny, Quarto, APIs, cloud deployment</p>
+</div>
+</div>
+<div class="service-card">
+<p><span class="service-icon">🌐</span></p>
+<h3 id="remote-collaboration" class="anchored">Remote Collaboration</h3>
+<p>Working as a digital nomad, I bring flexibility and global perspective to every project. Comfortable with async communication and distributed teams across time zones.</p>
+<div class="service-tools">
+<p><strong>Approach:</strong> Agile workflows, clear documentation, transparent communication</p>
+</div>
+</div>
+</div>
+</div>
+<div id="about" class="about-section">
+<div>
+<p><img src="images/bio_photo.jpg" class="about-image img-fluid"></p>
+</div>
+<section id="about-me" class="about-content">
+<h2 class="anchored">About Me</h2>
+<p>My name is Peter Maximilian Fortunato.</p>
+<p>I am from Kansas, the Sunflower State, whose motto is “Ad astra per aspera” or, “To the stars through difficulty”. It doesn’t have to be difficult, but rather tidy and organized, and the stars will align (more or less).</p>
+<p>Here at Solplots, I am committed to enabling everyone to see data and stories for themselves, to reproduce and share insights that are not just actionable but also grounded in clarity and mutual respect.</p>
+</section>
+</div>
+<div id="blog" class="blog-preview-section">
+<section id="recent-work" class="blog-preview-header">
+<h2 class="anchored">Recent Work</h2>
+<p>Explore some recent analyses, visualizations, and stories from the blog</p>
+</section>
+<div class="blog-ribbon">
+<div class="blog-tile">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://solplots.com/demos/BigMacIndex.html"><img src="demos/images/bic_mac_2025.png" class="img-fluid"></a></p>
+</figure>
+</div>
+<div class="blog-tile-overlay">
+<h3 class="blog-tile-title anchored">
+25 Years of the Big Mac Index
+</h3>
+<p class="blog-tile-description">
+Visualizing global currency valuation through the lens of a hamburger
+</p>
+</div>
+</div>
+<div class="blog-tile">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://solplots.com/demos/PewMediaStudy.html"><img src="demos/images/pew_original.png" class="img-fluid"></a></p>
+</figure>
+</div>
+<div class="blog-tile-overlay">
+<h3 class="blog-tile-title anchored">
+Reproducing Pew Research’s ‘How the audiences of 30 major news sources differ in their levels of education’
+</h3>
+<p class="blog-tile-description">
+Let’s ask ClaudeAI to help us with identifying data stored in a string
+</p>
+</div>
+</div>
+<div class="blog-tile">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://solplots.com/demos/ombReceipts.html"><img src="demos/images/2fpix3lvs1ld1-01.png" class="img-fluid"></a></p>
+</figure>
+</div>
+<div class="blog-tile-overlay">
+<h3 class="blog-tile-title anchored">
+Sources of U.S. Federal Revenue Over The Years Part 1
+</h3>
+<p class="blog-tile-description">
+Figuring out how to reproduce a plot found out in the wild
+</p>
+</div>
+</div>
+<div class="blog-tile">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://solplots.com/demos/CalFires.html"><img src="demos/images/fighting_acres_2025.png" class="img-fluid"></a></p>
+</figure>
+</div>
+<div class="blog-tile-overlay">
+<h3 class="blog-tile-title anchored">
+California forest fires acres battled by agency
+</h3>
+<p class="blog-tile-description">
+An exercise in effective use of color and axis labels
+</p>
+</div>
+</div>
+</div>
+</div>
+<section id="ready-to-transform-your-data-into-insights" class="cta-section">
+<h2 class="anchored">Ready to transform your data into insights?</h2>
+<p>Let’s discuss how we can work together to solve your analytical challenges.</p>
+<p><a href="mailto:peter@solplots.com" class="cta-button">Get in Touch</a></p>
+</section>
+<!-- 
+INSTRUCTIONS FOR EMAIL:
+Replace "your.email@example.com" in the [Get in Touch] link above with your actual email address.
+For example: [Get in Touch](mailto:solplots@example.com){.cta-button}
+-->
 
 
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<p><img src="images/home_image.png" class="img-fluid"></p>
-
-
-
-</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -158,6 +268,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+  tabsets.forEach(function(tabset) {
+    const tabby = new Tabby('#' + tabset.id);
+  });
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -229,7 +343,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       },
       interactive: true,
       interactiveBorder: 10,
-      theme: 'quarto',
+      theme: 'light-border',
       placement: 'bottom-start'
     };
     window.tippy(el, config); 
@@ -371,7 +485,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-</div> <!-- /content -->
 
 
 

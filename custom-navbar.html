@@ -1,0 +1,47 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Create navbar HTML
+  const navbarHTML = `
+    <nav id="sticky-navbar" class="navbar-hidden">
+      <div class="navbar-container">
+        <a href="index.html" class="navbar-logo">
+          <img src="images/logo.png" alt="Solplots Logo">
+        </a>
+        <ul class="navbar-menu">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="demos.html">Demos</a></li>
+          <li><a href="apps.html">Apps</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="resume.html">Resume</a></li>
+        </ul>
+      </div>
+    </nav>
+  `;
+  
+  // Insert navbar at the top of body
+  document.body.insertAdjacentHTML('afterbegin', navbarHTML);
+  
+  // Show/hide navbar on scroll
+  let lastScroll = 0;
+  const navbar = document.getElementById('sticky-navbar');
+  
+  window.addEventListener('scroll', function() {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 100) {
+      // At top of page - hide navbar
+      navbar.classList.add('navbar-hidden');
+    } else if (currentScroll > lastScroll && currentScroll > 100) {
+      // Scrolling down - hide navbar
+      navbar.classList.add('navbar-hidden');
+    } else {
+      // Scrolling up - show navbar
+      navbar.classList.remove('navbar-hidden');
+    }
+    
+    lastScroll = currentScroll;
+  });
+});
+</script>

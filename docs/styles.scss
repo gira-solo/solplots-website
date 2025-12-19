@@ -1,0 +1,16 @@
+/* Sidebar background */
+.sidebar {
+  background-color: #002569;
+}
+
+/* Sidebar text */
+.sidebar a,
+.sidebar .nav-link,
+.sidebar .nav-item {
+  color: #f1ad02;
+}
+
+/* Optional: hover effect */
+.sidebar a:hover {
+  color: #f1ad02; /* lighter gold */
+}

@@ -10,30 +10,21 @@ project:
     - apple-touch-icon.png
     - favicon.html
     
-    
 website:
   favicon: favicon.ico
-  navbar: false        # ❌ Removes the top navigation bar
+  navbar: false
   search: false
-  sidebar:
-    style: "floating"  # ✅ Makes the sidebar removable/toggleable
-    collapse-level: 1
-    contents:
-      - text: "Solplots"
-        href: index.qmd
-      - demos.qmd
-      - apps.qmd
-      - resources.qmd
-      - resume.qmd
-
-
+  sidebar: false  # Disable sidebar for clean landing page
+  
 format:
   html:
-    light:
-      css: styles.scss
+    theme: none  # We'll use custom CSS only
+    css: 
+      - styles.scss
+      - custom-landing.css
     toc: false
-    include-in-header: favicon.html
+    include-in-header: 
+      - favicon.html
+      - custom-navbar.html
      
-
 editor: visual
-

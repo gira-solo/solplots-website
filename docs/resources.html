@@ -20,131 +20,93 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <link href="./favicon.ico" rel="icon">
 <script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
-  }
-}</script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Create navbar HTML
+  const navbarHTML = `
+    <nav id="sticky-navbar" class="navbar-hidden">
+      <div class="navbar-container">
+        <a href="index.html" class="navbar-logo">
+          <img src="images/logo.png" alt="Solplots Logo">
+        </a>
+        <ul class="navbar-menu">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="demos.html">Demos</a></li>
+          <li><a href="apps.html">Apps</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="resume.html">Resume</a></li>
+        </ul>
+      </div>
+    </nav>
+  `;
+  
+  // Insert navbar at the top of body
+  document.body.insertAdjacentHTML('afterbegin', navbarHTML);
+  
+  // Show/hide navbar on scroll
+  let lastScroll = 0;
+  const navbar = document.getElementById('sticky-navbar');
+  
+  window.addEventListener('scroll', function() {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 100) {
+      // At top of page - hide navbar
+      navbar.classList.add('navbar-hidden');
+    } else if (currentScroll > lastScroll && currentScroll > 100) {
+      // Scrolling down - hide navbar
+      navbar.classList.add('navbar-hidden');
+    } else {
+      // Scrolling up - show navbar
+      navbar.classList.remove('navbar-hidden');
+    }
+    
+    lastScroll = currentScroll;
+  });
+});
+</script>
 
 
+<link rel="stylesheet" href="styles.scss">
+<link rel="stylesheet" href="custom-landing.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body>
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./resources.html">Resources</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-    </div>
-  </nav>
+
+<header id="title-block-header">
+<h1 class="title">Resources</h1>
+
 </header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Solplots</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./demos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Thoughts on Plots</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./apps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Plot with Me</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Resources</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./resume.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Resume</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+<nav id="TOC" role="doc-toc">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#books" id="toc-books" class="nav-link active" data-scroll-target="#books">Books</a></li>
-  <li><a href="#blogs-and-projects" id="toc-blogs-and-projects" class="nav-link" data-scroll-target="#blogs-and-projects">Blogs and Projects</a></li>
+  <li><a href="#books" id="toc-books">Books</a></li>
+  <li><a href="#blogs-and-projects" id="toc-blogs-and-projects">Blogs and Projects</a></li>
   </ul>
 </nav>
-    </div>
-<!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Resources</h1>
-</div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
-
 <p>These are resources I think are useful.</p>
-<section id="books" class="level2">
-<h2 class="anchored" data-anchor-id="books">Books</h2>
+<h2 id="books" class="anchored">Books</h2>
 <p><a href="https://r4ds.hadley.nz/"><strong>R for Data Science (2e)</strong></a><br>
 <em>Hadley Wickham, Mine Cetinkaya-Rundel &amp; Garrett Grolemund</em><br>
 Whenever someone asks me how to get started with learning R programming, I always point them here.</p>
@@ -159,9 +121,7 @@ This is the comprehensive resource for ggplot2, explained in through detail by H
 <p><a href="https://r.geocompx.org/"><strong>Geocomputation with R</strong></a><br>
 <em>Robin Lovelace, Jakub Nowosad and Jannes Muenchow</em><br>
 Learn how to turn R into a GIS by using the <a href="https://r-spatial.github.io/sf/">simple features (sf)</a> package.</p>
-</section>
-<section id="blogs-and-projects" class="level2">
-<h2 class="anchored" data-anchor-id="blogs-and-projects">Blogs and Projects</h2>
+<h2 id="blogs-and-projects" class="anchored">Blogs and Projects</h2>
 <p><a href="https://flowingdata.com/"><strong>FlowingData</strong></a><br>
 <em>Nathan Yau, Ph.D</em><br>
 Well-renown statistician and data visualization artist shares his work (also offers membership that includes tutorials and other learning materials).</p>
@@ -178,9 +138,6 @@ The “most extensive compilation of R-generated graphs” found on the internet
 A former Wall Street CEO shares his data stories with R. Lot’s of different analyses all with reproducible code.</p>
 
 
-</section>
-
-</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -201,6 +158,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+  tabsets.forEach(function(tabset) {
+    const tabby = new Tabby('#' + tabset.id);
+  });
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -272,7 +233,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       },
       interactive: true,
       interactiveBorder: 10,
-      theme: 'quarto',
+      theme: 'light-border',
       placement: 'bottom-start'
     };
     window.tippy(el, config); 
@@ -414,7 +375,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-</div> <!-- /content -->
 
 
 
