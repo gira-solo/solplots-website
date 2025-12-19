@@ -3,92 +3,95 @@ title: ""
 format: 
   html:
     page-layout: full
+    css: custom-landing.css
+    include-in-header: custom-navbar.html
+    toc: false
 ---
 
-::: {.hero-section}
+::: hero-section
 ![](images/home_image.png){.hero-logo}
 
-<div class="hero-quote">
+::: hero-quote
 Ad astra per tabula
-</div>
+:::
 :::
 
 ::: {#services .services-section}
-::: {.services-header}
+::: services-header
 ## Services
 
 My name is Peter, and plots are the currency connecting data with information and compelling narratives. My approach emphasizes repeatable, process-driven methods to compose creative communication to help organizations and individuals alike to feel fully equipped in making informed decisions.
 :::
 
-::: {.services-grid}
-::: {.service-card}
-<span class="service-icon">📊</span>
+::: services-grid
+::: service-card
+[📊]{.service-icon}
 
 ### Statistical Consultation
 
 Deep dive into your data challenges with rigorous statistical methods. From experimental design to hypothesis testing, I help you extract meaningful insights and make data-driven decisions with confidence.
 
-::: {.service-tools}
+::: service-tools
 **Tools:** R, Python, Bayesian methods, causal inference
 :::
 :::
 
-::: {.service-card}
-<span class="service-icon">📖</span>
+::: service-card
+[📖]{.service-icon}
 
 ### Analytical Storytelling
 
 Transform your findings into narratives that resonate. I craft compelling data stories that bridge the gap between technical analysis and human understanding, making complex insights accessible to any audience.
 
-::: {.service-tools}
+::: service-tools
 **Tools:** R Markdown, Quarto, D3.js, interactive visualizations
 :::
 :::
 
-::: {.service-card}
-<span class="service-icon">🎨</span>
+::: service-card
+[🎨]{.service-icon}
 
 ### Data Visualization & Design
 
 Create beautiful, functional visualizations that reveal patterns and drive understanding. From exploratory analysis to publication-ready graphics, every visualization tells a story.
 
-::: {.service-tools}
+::: service-tools
 **Tools:** ggplot2, Plotly, Observable, Tableau
 :::
 :::
 
-::: {.service-card}
-<span class="service-icon">🎓</span>
+::: service-card
+[🎓]{.service-icon}
 
 ### Educational Services
 
 Workshops, tutorials, and one-on-one mentoring in statistics, R programming, and data analysis. I make complex topics approachable through hands-on learning and real-world applications.
 
-::: {.service-tools}
+::: service-tools
 **Topics:** R programming, statistical thinking, reproducible research
 :::
 :::
 
-::: {.service-card}
-<span class="service-icon">💻</span>
+::: service-card
+[💻]{.service-icon}
 
 ### Custom Analytics Solutions
 
 Build tailored analytical tools and dashboards for your specific needs. From Shiny apps to automated reporting pipelines, I create solutions that scale with your organization.
 
-::: {.service-tools}
+::: service-tools
 **Technologies:** Shiny, Quarto, APIs, cloud deployment
 :::
 :::
 
-::: {.service-card}
-<span class="service-icon">🌐</span>
+::: service-card
+[🌐]{.service-icon}
 
 ### Remote Collaboration
 
 Working as a digital nomad, I bring flexibility and global perspective to every project. Comfortable with async communication and distributed teams across time zones.
 
-::: {.service-tools}
+::: service-tools
 **Approach:** Agile workflows, clear documentation, transparent communication
 :::
 :::
@@ -97,70 +100,105 @@ Working as a digital nomad, I bring flexibility and global perspective to every 
 
 ::: {#about .about-section}
 <div>
+
 ![](images/bio_photo.jpg){.about-image}
+
 </div>
 
-::: {.about-content}
+::: about-content
 ## About Me
 
-My name is Peter Maximilian Fortunato. 
+My name is Peter Maximilian Fortunato.
 
 I am from Kansas, the Sunflower State, whose motto is "Ad astra per aspera" or, "To the stars through difficulty". It doesn't have to be difficult, but rather tidy and organized, and the stars will align (more or less).
 
 Here at Solplots, I am committed to enabling everyone to see data and stories for themselves, to reproduce and share insights that are not just actionable but also grounded in clarity and mutual respect.
-
-
-
 :::
 :::
 
 ::: {#blog .blog-preview-section}
-::: {.blog-preview-header}
+::: blog-preview-header
 ## Recent Work
 
 Explore some recent analyses, visualizations, and stories from the blog
 :::
 
-::: {.blog-ribbon}
-::: {.blog-tile}
+::: blog-ribbon
+::: blog-tile
 [![](demos/images/bic_mac_2025.png)](https://solplots.com/demos/BigMacIndex.html)
 
-::: {.blog-tile-overlay}
-<h3 class="blog-tile-title">25 Years of the Big Mac Index</h3>
-<p class="blog-tile-description">Visualizing global currency valuation through the lens of a hamburger</p>
+::: blog-tile-overlay
+<h3 class="blog-tile-title">
+
+25 Years of the Big Mac Index
+
+</h3>
+
+<p class="blog-tile-description">
+
+Visualizing global currency valuation through the lens of a hamburger
+
+</p>
 :::
 :::
 
-::: {.blog-tile}
+::: blog-tile
 [![](demos/images/pew_original.png)](https://solplots.com/demos/PewMediaStudy.html)
 
-::: {.blog-tile-overlay}
-<h3 class="blog-tile-title">Reproducing Pew Research’s ‘How the audiences of 30 major news sources differ in their levels of education’</h3>
-<p class="blog-tile-description">Let’s ask ClaudeAI to help us with identifying data stored in a string</p>
+::: blog-tile-overlay
+<h3 class="blog-tile-title">
+
+Reproducing Pew Research's 'How the audiences of 30 major news sources differ in their levels of education'
+
+</h3>
+
+<p class="blog-tile-description">
+
+Let's ask ClaudeAI to help us with identifying data stored in a string
+
+</p>
 :::
 :::
 
-::: {.blog-tile}
+::: blog-tile
 [![](demos/images/2fpix3lvs1ld1-01.png)](https://solplots.com/demos/ombReceipts.html)
 
-::: {.blog-tile-overlay}
-<h3 class="blog-tile-title">Sources of U.S. Federal Revenue Over The Years Part 1</h3>
-<p class="blog-tile-description">Figuring out how to reproduce a plot found out in the wild</p>
+::: blog-tile-overlay
+<h3 class="blog-tile-title">
+
+Sources of U.S. Federal Revenue Over The Years Part 1
+
+</h3>
+
+<p class="blog-tile-description">
+
+Figuring out how to reproduce a plot found out in the wild
+
+</p>
 :::
 :::
 
-::: {.blog-tile}
+::: blog-tile
 [![](demos/images/fighting_acres_2025.png)](https://solplots.com/demos/CalFires.html)
 
-::: {.blog-tile-overlay}
-<h3 class="blog-tile-title">California forest fires acres battled by agency</h3>
-<p class="blog-tile-description">An exercise in effective use of color and axis labels</p>
+::: blog-tile-overlay
+<h3 class="blog-tile-title">
+
+California forest fires acres battled by agency
+
+</h3>
+
+<p class="blog-tile-description">
+
+An exercise in effective use of color and axis labels
+
+</p>
 :::
 :::
 :::
 :::
 
-::: {.cta-section}
+::: cta-section
 ## Ready to transform your data into insights?
 
 Let's discuss how we can work together to solve your analytical challenges.
@@ -168,8 +206,10 @@ Let's discuss how we can work together to solve your analytical challenges.
 [Get in Touch](mailto:peter@solplots.com){.cta-button}
 :::
 
+```{=html}
 <!-- 
 INSTRUCTIONS FOR EMAIL:
 Replace "your.email@example.com" in the [Get in Touch] link above with your actual email address.
 For example: [Get in Touch](mailto:solplots@example.com){.cta-button}
 -->
+```

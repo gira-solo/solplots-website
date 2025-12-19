@@ -20,20 +20,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 </style>
 
 
-<link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -44,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <nav id="sticky-navbar" class="navbar-hidden">
       <div class="navbar-container">
         <a href="index.html" class="navbar-logo">
-          <img src="images/logo.png" alt="Solplots Logo">
+          <img src="images/home_image.png" alt="Solplots Logo">
         </a>
         <ul class="navbar-menu">
           <li><a href="#services">Services</a></li>
@@ -90,8 +115,52 @@ document.addEventListener('DOMContentLoaded', function() {
 <link rel="stylesheet" href="custom-landing.css">
 </head>
 
-<body>
+<body class="nav-fixed">
 
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./demos.html" rel="" target="">
+ <span class="menu-text">Demos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./apps.html" rel="" target="">
+ <span class="menu-text">Apps</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./resources.html" rel="" target="">
+ <span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./resume.html" rel="" target="">
+ <span class="menu-text">Resume</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content column-page" id="quarto-document-content">
 
 
 
@@ -102,58 +171,70 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 <div id="services" class="services-section">
-<section id="services" class="services-header">
-<h2 class="anchored">Services</h2>
+<section id="services" class="level2 services-header">
+<h2 class="anchored" data-anchor-id="services">Services</h2>
 <p>My name is Peter, and plots are the currency connecting data with information and compelling narratives. My approach emphasizes repeatable, process-driven methods to compose creative communication to help organizations and individuals alike to feel fully equipped in making informed decisions.</p>
 </section>
 <div class="services-grid">
 <div class="service-card">
 <p><span class="service-icon">📊</span></p>
-<h3 id="statistical-consultation" class="anchored">Statistical Consultation</h3>
+<section id="statistical-consultation" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-consultation">Statistical Consultation</h3>
 <p>Deep dive into your data challenges with rigorous statistical methods. From experimental design to hypothesis testing, I help you extract meaningful insights and make data-driven decisions with confidence.</p>
 <div class="service-tools">
 <p><strong>Tools:</strong> R, Python, Bayesian methods, causal inference</p>
 </div>
+</section>
 </div>
 <div class="service-card">
 <p><span class="service-icon">📖</span></p>
-<h3 id="analytical-storytelling" class="anchored">Analytical Storytelling</h3>
+<section id="analytical-storytelling" class="level3">
+<h3 class="anchored" data-anchor-id="analytical-storytelling">Analytical Storytelling</h3>
 <p>Transform your findings into narratives that resonate. I craft compelling data stories that bridge the gap between technical analysis and human understanding, making complex insights accessible to any audience.</p>
 <div class="service-tools">
 <p><strong>Tools:</strong> R Markdown, Quarto, D3.js, interactive visualizations</p>
 </div>
+</section>
 </div>
 <div class="service-card">
 <p><span class="service-icon">🎨</span></p>
-<h3 id="data-visualization-design" class="anchored">Data Visualization &amp; Design</h3>
+<section id="data-visualization-design" class="level3">
+<h3 class="anchored" data-anchor-id="data-visualization-design">Data Visualization &amp; Design</h3>
 <p>Create beautiful, functional visualizations that reveal patterns and drive understanding. From exploratory analysis to publication-ready graphics, every visualization tells a story.</p>
 <div class="service-tools">
 <p><strong>Tools:</strong> ggplot2, Plotly, Observable, Tableau</p>
 </div>
+</section>
 </div>
 <div class="service-card">
 <p><span class="service-icon">🎓</span></p>
-<h3 id="educational-services" class="anchored">Educational Services</h3>
+<section id="educational-services" class="level3">
+<h3 class="anchored" data-anchor-id="educational-services">Educational Services</h3>
 <p>Workshops, tutorials, and one-on-one mentoring in statistics, R programming, and data analysis. I make complex topics approachable through hands-on learning and real-world applications.</p>
 <div class="service-tools">
 <p><strong>Topics:</strong> R programming, statistical thinking, reproducible research</p>
 </div>
+</section>
 </div>
 <div class="service-card">
 <p><span class="service-icon">💻</span></p>
-<h3 id="custom-analytics-solutions" class="anchored">Custom Analytics Solutions</h3>
+<section id="custom-analytics-solutions" class="level3">
+<h3 class="anchored" data-anchor-id="custom-analytics-solutions">Custom Analytics Solutions</h3>
 <p>Build tailored analytical tools and dashboards for your specific needs. From Shiny apps to automated reporting pipelines, I create solutions that scale with your organization.</p>
 <div class="service-tools">
 <p><strong>Technologies:</strong> Shiny, Quarto, APIs, cloud deployment</p>
 </div>
+</section>
 </div>
 <div class="service-card">
 <p><span class="service-icon">🌐</span></p>
-<h3 id="remote-collaboration" class="anchored">Remote Collaboration</h3>
+<section id="remote-collaboration" class="level3">
+<h3 class="anchored" data-anchor-id="remote-collaboration">Remote Collaboration</h3>
 <p>Working as a digital nomad, I bring flexibility and global perspective to every project. Comfortable with async communication and distributed teams across time zones.</p>
 <div class="service-tools">
 <p><strong>Approach:</strong> Agile workflows, clear documentation, transparent communication</p>
 </div>
+</section>
 </div>
 </div>
 </div>
@@ -161,83 +242,83 @@ document.addEventListener('DOMContentLoaded', function() {
 <div>
 <p><img src="images/bio_photo.jpg" class="about-image img-fluid"></p>
 </div>
-<section id="about-me" class="about-content">
-<h2 class="anchored">About Me</h2>
+<section id="about-me" class="level2 about-content">
+<h2 class="anchored" data-anchor-id="about-me">About Me</h2>
 <p>My name is Peter Maximilian Fortunato.</p>
 <p>I am from Kansas, the Sunflower State, whose motto is “Ad astra per aspera” or, “To the stars through difficulty”. It doesn’t have to be difficult, but rather tidy and organized, and the stars will align (more or less).</p>
 <p>Here at Solplots, I am committed to enabling everyone to see data and stories for themselves, to reproduce and share insights that are not just actionable but also grounded in clarity and mutual respect.</p>
 </section>
 </div>
 <div id="blog" class="blog-preview-section">
-<section id="recent-work" class="blog-preview-header">
-<h2 class="anchored">Recent Work</h2>
+<section id="recent-work" class="level2 blog-preview-header">
+<h2 class="anchored" data-anchor-id="recent-work">Recent Work</h2>
 <p>Explore some recent analyses, visualizations, and stories from the blog</p>
 </section>
 <div class="blog-ribbon">
 <div class="blog-tile">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="https://solplots.com/demos/BigMacIndex.html"><img src="demos/images/bic_mac_2025.png" class="img-fluid"></a></p>
+<figure class="figure">
+<p><a href="https://solplots.com/demos/BigMacIndex.html"><img src="demos/images/bic_mac_2025.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 <div class="blog-tile-overlay">
 <h3 class="blog-tile-title anchored">
-25 Years of the Big Mac Index
+<p>25 Years of the Big Mac Index</p>
 </h3>
 <p class="blog-tile-description">
-Visualizing global currency valuation through the lens of a hamburger
-</p>
+</p><p>Visualizing global currency valuation through the lens of a hamburger</p>
+<p></p>
 </div>
 </div>
 <div class="blog-tile">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="https://solplots.com/demos/PewMediaStudy.html"><img src="demos/images/pew_original.png" class="img-fluid"></a></p>
+<figure class="figure">
+<p><a href="https://solplots.com/demos/PewMediaStudy.html"><img src="demos/images/pew_original.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 <div class="blog-tile-overlay">
 <h3 class="blog-tile-title anchored">
-Reproducing Pew Research’s ‘How the audiences of 30 major news sources differ in their levels of education’
+<p>Reproducing Pew Research’s ‘How the audiences of 30 major news sources differ in their levels of education’</p>
 </h3>
 <p class="blog-tile-description">
-Let’s ask ClaudeAI to help us with identifying data stored in a string
-</p>
+</p><p>Let’s ask ClaudeAI to help us with identifying data stored in a string</p>
+<p></p>
 </div>
 </div>
 <div class="blog-tile">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="https://solplots.com/demos/ombReceipts.html"><img src="demos/images/2fpix3lvs1ld1-01.png" class="img-fluid"></a></p>
+<figure class="figure">
+<p><a href="https://solplots.com/demos/ombReceipts.html"><img src="demos/images/2fpix3lvs1ld1-01.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 <div class="blog-tile-overlay">
 <h3 class="blog-tile-title anchored">
-Sources of U.S. Federal Revenue Over The Years Part 1
+<p>Sources of U.S. Federal Revenue Over The Years Part 1</p>
 </h3>
 <p class="blog-tile-description">
-Figuring out how to reproduce a plot found out in the wild
-</p>
+</p><p>Figuring out how to reproduce a plot found out in the wild</p>
+<p></p>
 </div>
 </div>
 <div class="blog-tile">
 <div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="https://solplots.com/demos/CalFires.html"><img src="demos/images/fighting_acres_2025.png" class="img-fluid"></a></p>
+<figure class="figure">
+<p><a href="https://solplots.com/demos/CalFires.html"><img src="demos/images/fighting_acres_2025.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 <div class="blog-tile-overlay">
 <h3 class="blog-tile-title anchored">
-California forest fires acres battled by agency
+<p>California forest fires acres battled by agency</p>
 </h3>
 <p class="blog-tile-description">
-An exercise in effective use of color and axis labels
-</p>
+</p><p>An exercise in effective use of color and axis labels</p>
+<p></p>
 </div>
 </div>
 </div>
 </div>
-<section id="ready-to-transform-your-data-into-insights" class="cta-section">
-<h2 class="anchored">Ready to transform your data into insights?</h2>
+<section id="ready-to-transform-your-data-into-insights" class="level2 cta-section">
+<h2 class="anchored" data-anchor-id="ready-to-transform-your-data-into-insights">Ready to transform your data into insights?</h2>
 <p>Let’s discuss how we can work together to solve your analytical challenges.</p>
 <p><a href="mailto:peter@solplots.com" class="cta-button">Get in Touch</a></p>
 </section>
@@ -248,6 +329,8 @@ For example: [Get in Touch](mailto:solplots@example.com){.cta-button}
 -->
 
 
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -268,10 +351,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-  tabsets.forEach(function(tabset) {
-    const tabby = new Tabby('#' + tabset.id);
-  });
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -343,7 +422,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       },
       interactive: true,
       interactiveBorder: 10,
-      theme: 'light-border',
+      theme: 'quarto',
       placement: 'bottom-start'
     };
     window.tippy(el, config); 
@@ -485,6 +564,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+</div> <!-- /content -->
 
 
 

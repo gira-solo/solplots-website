@@ -12,19 +12,27 @@ project:
     
 website:
   favicon: favicon.ico
-  navbar: false
-  search: false
-  sidebar: false  # Disable sidebar for clean landing page
+  navbar:
+    background: white
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Demos"
+        href: demos.qmd
+      - text: "Apps"
+        href: apps.qmd
+      - text: "Resources"
+        href: resources.qmd
+      - text: "Resume"
+        href: resume.qmd
+  search: true
+  sidebar: false
   
 format:
   html:
-    theme: none  # We'll use custom CSS only
-    css: 
-      - styles.scss
-      - custom-landing.css
-    toc: false
-    include-in-header: 
-      - favicon.html
-      - custom-navbar.html
+    theme: cosmo
+    css: styles.scss
+    toc: true
+    include-in-header: favicon.html
      
 editor: visual
