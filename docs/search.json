@@ -249,7 +249,7 @@
     "href": "demos/TravelOnTap.html#the-shiny-app",
     "title": "Travel on Tap: How R Can Help Recommend Us a Beer While On The Road",
     "section": "The Shiny App",
-    "text": "The Shiny App\nAll of this wrangling and the recommender function live in global.R, which Shiny runs once at startup before any user session begins. This is the right pattern for expensive data prep — load once, serve many.\nThe app itself has three panels:\n\nRecommendations — a sortable DT table with all results, including an est badge on beers where IBU was imputed\nFlavour Map — a Plotly scatter of ABV vs IBU, showing the full style-group cloud in grey, your recommendations in copper, and your taste profile as a gold star\nAbout — methodology notes including the IBU imputation story\n\nThe Shiny App is currently on its way to being uploaded…check back for updates."
+    "text": "The Shiny App\nAll of this wrangling and the recommender function live in global.R, which Shiny runs once at startup before any user session begins. This is the right pattern for expensive data prep — load once, serve many.\nThe app itself has three panels:\n\nRecommendations — a sortable DT table with all results, including an est badge on beers where IBU was imputed\nFlavour Map — a Plotly scatter of ABV vs IBU, showing the full style-group cloud in grey, your recommendations in copper, and your taste profile as a gold star\nAbout — methodology notes including the IBU imputation story\n\nPlease find the Shiny App beer recommender here."
   },
   {
     "objectID": "demos/TravelOnTap.html#what-id-do-differently-or-next",

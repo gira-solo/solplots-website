@@ -427,7 +427,7 @@ The app itself has three panels:
 - **Flavour Map** — a Plotly scatter of ABV vs IBU, showing the full style-group cloud in grey, your recommendations in copper, and your taste profile as a gold star
 - **About** — methodology notes including the IBU imputation story
 
-The Shiny App is currently on its way to being uploaded...check back for updates.
+Please find the [Shiny App](https://solplots.shinyapps.io/beer_recommender/) beer recommender here.
 
 ---
 
