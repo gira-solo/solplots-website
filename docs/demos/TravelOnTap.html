@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Peter Fortunato">
+<meta name="dcterms.date" content="2026-03-17">
+
+<title>Travel on Tap: How R Can Help Recommend Us a Beer While On The Road</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.scss">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../demos.html" rel="" target="">
+ <span class="menu-text">Demos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../apps.html" rel="" target="">
+ <span class="menu-text">Apps</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resources.html" rel="" target="">
+ <span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resume.html" rel="" target="">
+ <span class="menu-text">Resume</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-idea" id="toc-the-idea" class="nav-link active" data-scroll-target="#the-idea">The Idea</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The Data</a>
+  <ul class="collapse">
+  <li><a href="#joining-the-tables" id="toc-joining-the-tables" class="nav-link" data-scroll-target="#joining-the-tables">Joining the tables</a></li>
+  </ul></li>
+  <li><a href="#the-missing-data-problem" id="toc-the-missing-data-problem" class="nav-link" data-scroll-target="#the-missing-data-problem">The Missing Data Problem</a>
+  <ul class="collapse">
+  <li><a href="#check-1-is-missingness-associated-with-beer-style" id="toc-check-1-is-missingness-associated-with-beer-style" class="nav-link" data-scroll-target="#check-1-is-missingness-associated-with-beer-style">Check 1: Is missingness associated with beer style?</a></li>
+  <li><a href="#check-2-is-missingness-associated-with-abv" id="toc-check-2-is-missingness-associated-with-abv" class="nav-link" data-scroll-target="#check-2-is-missingness-associated-with-abv">Check 2: Is missingness associated with ABV?</a></li>
+  <li><a href="#check-3-is-missingness-associated-with-geography" id="toc-check-3-is-missingness-associated-with-geography" class="nav-link" data-scroll-target="#check-3-is-missingness-associated-with-geography">Check 3: Is missingness associated with geography?</a></li>
+  <li><a href="#diagnosis-mar-by-style-group" id="toc-diagnosis-mar-by-style-group" class="nav-link" data-scroll-target="#diagnosis-mar-by-style-group">Diagnosis: MAR by style group</a></li>
+  </ul></li>
+  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a>
+  <ul class="collapse">
+  <li><a href="#remove-non-beer-styles" id="toc-remove-non-beer-styles" class="nav-link" data-scroll-target="#remove-non-beer-styles">Remove non-beer styles</a></li>
+  <li><a href="#build-style-groups" id="toc-build-style-groups" class="nav-link" data-scroll-target="#build-style-groups">Build style groups</a></li>
+  <li><a href="#impute-ibu-and-abv" id="toc-impute-ibu-and-abv" class="nav-link" data-scroll-target="#impute-ibu-and-abv">Impute IBU and ABV</a></li>
+  <li><a href="#deduplicate" id="toc-deduplicate" class="nav-link" data-scroll-target="#deduplicate">Deduplicate</a></li>
+  <li><a href="#dataset-summary" id="toc-dataset-summary" class="nav-link" data-scroll-target="#dataset-summary">Dataset summary</a></li>
+  </ul></li>
+  <li><a href="#building-the-recommender" id="toc-building-the-recommender" class="nav-link" data-scroll-target="#building-the-recommender">Building the Recommender</a>
+  <ul class="collapse">
+  <li><a href="#the-intuition-beers-as-vectors" id="toc-the-intuition-beers-as-vectors" class="nav-link" data-scroll-target="#the-intuition-beers-as-vectors">The intuition: beers as vectors</a></li>
+  <li><a href="#cosine-similarity" id="toc-cosine-similarity" class="nav-link" data-scroll-target="#cosine-similarity">Cosine similarity</a></li>
+  <li><a href="#the-recommender-function" id="toc-the-recommender-function" class="nav-link" data-scroll-target="#the-recommender-function">The recommender function</a></li>
+  <li><a href="#test-drive-what-should-i-drink-in-oregon" id="toc-test-drive-what-should-i-drink-in-oregon" class="nav-link" data-scroll-target="#test-drive-what-should-i-drink-in-oregon">Test drive: “What should I drink in Oregon?”</a></li>
+  </ul></li>
+  <li><a href="#the-shiny-app" id="toc-the-shiny-app" class="nav-link" data-scroll-target="#the-shiny-app">The Shiny App</a></li>
+  <li><a href="#what-id-do-differently-or-next" id="toc-what-id-do-differently-or-next" class="nav-link" data-scroll-target="#what-id-do-differently-or-next">What I’d Do Differently (or Next)</a></li>
+  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up">Wrapping Up</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Travel on Tap: How R Can Help Recommend Us a Beer While On The Road</h1>
+<p class="subtitle lead">A data science walkthrough — missing data, cosine similarity, and a Shiny app for travelling beer lovers</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">Shiny</div>
+    <div class="quarto-category">data-science</div>
+    <div class="quarto-category">beer</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Peter Fortunato </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 17, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="the-idea" class="level2">
+<h2 class="anchored" data-anchor-id="the-idea">The Idea</h2>
+<p>I travel a fair amount, and one of my favorite things to do in a new city is walk into a craft brewery and order something local. The problem: I never know what to order. I know I like Boulevard Wheat and Stella Artois — light, low-bitterness, easy-drinking — but I have no idea whether the brewery’s flagship IPA is going to knock me sideways or whether their wheat ale is worth trying.</p>
+<p>So I built <strong>Travel On Tap</strong>: a Shiny app that takes your taste preferences (alcohol level, bitterness, style) and recommends similar craft beers available in whatever U.S. state you’re visiting. This post walks through the data science behind it — including what turned out to be a genuinely interesting missing data problem.</p>
+<hr>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">The Data</h2>
+<p>The backbone of this project is the <a href="https://github.com/nickhould/craft-beers-dataset">craft-beers-dataset</a> by nickhould, scraped from a canned craft beer catalogue circa 2017. It ships as two CSVs that join on <code>brewery_id</code>:</p>
+<ul>
+<li><strong><code>beers.csv</code></strong> — ~2,410 rows: beer name, style, ABV (alcohol by volume), IBU (bitterness), brewery ID</li>
+<li><strong><code>breweries.csv</code></strong> — ~558 rows: brewery name, city, U.S. state</li>
+</ul>
+<p>A few things to know upfront about this dataset’s <strong>sampling frame</strong> — something worth always establishing before you start modelling:</p>
+<ul>
+<li>It’s canned craft beer only. Major commercial brands (Stella Artois, Boulevard Wheat, most imports) are absent.</li>
+<li>It’s a 2017 snapshot. Breweries that opened or closed since then won’t be reflected.</li>
+<li>It skews toward independent U.S. craft breweries, which is exactly what we want for a travel recommendation tool.</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>beers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/nickhould/craft-beers-dataset/master/data/processed/beers.csv"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>breweries <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/nickhould/craft-beers-dataset/master/data/processed/breweries.csv"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="joining-the-tables" class="level3">
+<h3 class="anchored" data-anchor-id="joining-the-tables">Joining the tables</h3>
+<p>The join requires a little care. Both CSVs have columns named <code>name</code> and <code>id</code>, but they mean different things in each table. Rename before joining to avoid silent column collisions:</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> beers <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">beer_name =</span> name, <span class="at">beer_id =</span> id) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    breweries <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">brewery_name =</span> name),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"brewery_id"</span> <span class="ot">=</span> <span class="st">"id"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(<span class="st">"...1.x"</span>, <span class="st">"...1.y"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">state =</span> <span class="fu">str_trim</span>(state),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">str_trim</span>(style)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>A quick missingness check confirms the join worked — <code>city</code> and <code>state</code> are fully populated:</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>DataExplorer<span class="sc">::</span><span class="fu">profile_missing</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   feature      num_missing pct_missing
+   &lt;fct&gt;              &lt;int&gt;       &lt;dbl&gt;
+ 1 abv                   62     0.0257 
+ 2 ibu                 1005     0.417  
+ 3 beer_id                0     0      
+ 4 beer_name              0     0      
+ 5 style                  5     0.00207
+ 6 brewery_id             0     0      
+ 7 ounces                 0     0      
+ 8 brewery_name           0     0      
+ 9 city                   0     0      
+10 state                  0     0      </code></pre>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="the-missing-data-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-missing-data-problem">The Missing Data Problem</h2>
+<p>Right away, one column stands out: <strong>IBU is 41.7% missing</strong>.</p>
+<p>That’s not a rounding error or a data entry oversight — it’s a structural feature of the dataset. Before imputing a single value, the right move is to diagnose <em>why</em> it’s missing. There are three possibilities, and they lead to very different solutions:</p>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mechanism</th>
+<th>What it means</th>
+<th>Implication</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>MCAR</strong> — Missing Completely at Random</td>
+<td>Missingness is unrelated to any variable</td>
+<td>Simple mean/median imputation is unbiased</td>
+</tr>
+<tr class="even">
+<td><strong>MAR</strong> — Missing at Random</td>
+<td>Missingness depends on <em>observed</em> variables</td>
+<td>Impute using the variables it depends on</td>
+</tr>
+<tr class="odd">
+<td><strong>MNAR</strong> — Missing Not at Random</td>
+<td>Missingness depends on the missing value itself</td>
+<td>Needs careful modelling; can’t be fully fixed</td>
+</tr>
+</tbody>
+</table>
+<p>We ran three diagnostic checks.</p>
+<section id="check-1-is-missingness-associated-with-beer-style" class="level3">
+<h3 class="anchored" data-anchor-id="check-1-is-missingness-associated-with-beer-style">Check 1: Is missingness associated with beer style?</h3>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ibu_missing_by_style <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ibu_missing =</span> <span class="fu">is.na</span>(ibu)) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(style) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_beers       =</span> <span class="fu">n</span>(),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_missing_ibu =</span> <span class="fu">sum</span>(ibu_missing),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_missing   =</span> <span class="fu">mean</span>(ibu_missing)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(pct_missing))</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>ibu_missing_by_style <span class="sc">|&gt;</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 100 × 4
+   style                            n_beers n_missing_ibu pct_missing
+   &lt;chr&gt;                              &lt;int&gt;         &lt;int&gt;       &lt;dbl&gt;
+ 1 American Malt Liquor                   1             1       1    
+ 2 Braggot                                1             1       1    
+ 3 Cider                                 37            37       1    
+ 4 Flanders Red Ale                       1             1       1    
+ 5 Kristalweizen                          1             1       1    
+ 6 Low Alcohol Beer                       1             1       1    
+ 7 Mead                                   5             5       1    
+ 8 Rauchbier                              2             2       1    
+ 9 Shandy                                 3             3       1    
+10 Belgian IPA                           18            15       0.833
+11 Belgian Strong Dark Ale                6             5       0.833
+12 Light Lager                           12             9       0.75 
+13 Quadrupel (Quad)                       4             3       0.75 
+14 Belgian Dark Ale                      11             8       0.727
+15 Belgian Strong Pale Ale                7             5       0.714
+16 Bière de Garde                         7             5       0.714
+17 Doppelbock                             7             5       0.714
+18 American Double / Imperial Stout       9             6       0.667
+19 American Wild Ale                      6             4       0.667
+20 Belgian Pale Ale                      24            16       0.667
+# ℹ 80 more rows</code></pre>
+</div>
+</div>
+<p>The pattern is immediate and informative. Cider, Mead, Shandy, and Braggot are 100% missing — but these aren’t really beers in the traditional sense, so IBU is conceptually inapplicable. Beyond those, Belgian styles, light lagers, and specialty styles show 70–83% missingness.</p>
+<p>This is a <strong>MAR signal</strong>: missingness is systematically related to the <code>style</code> variable, which we can observe.</p>
+</section>
+<section id="check-2-is-missingness-associated-with-abv" class="level3">
+<h3 class="anchored" data-anchor-id="check-2-is-missingness-associated-with-abv">Check 2: Is missingness associated with ABV?</h3>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ibu_missing =</span> <span class="fu">is.na</span>(ibu)) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ibu_missing) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n          =</span> <span class="fu">n</span>(),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_abv   =</span> <span class="fu">mean</span>(abv, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_abv =</span> <span class="fu">median</span>(abv, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  ibu_missing     n mean_abv median_abv
+  &lt;lgl&gt;       &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+1 FALSE        1405   0.0599      0.057
+2 TRUE         1005   0.0596      0.056</code></pre>
+</div>
+</div>
+<p>This is almost perfectly flat — the mean ABV difference between missing and non-missing groups is less than 0.0003. ABV does not predict IBU missingness. This rules out a simple <code>IBU ~ ABV</code> regression imputation, since ABV adds essentially no information once style is accounted for.</p>
+</section>
+<section id="check-3-is-missingness-associated-with-geography" class="level3">
+<h3 class="anchored" data-anchor-id="check-3-is-missingness-associated-with-geography">Check 3: Is missingness associated with geography?</h3>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ibu_missing =</span> <span class="fu">is.na</span>(ibu)) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state) <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_beers     =</span> <span class="fu">n</span>(),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_missing =</span> <span class="fu">mean</span>(ibu_missing)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(pct_missing)) <span class="sc">|&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 51 × 3
+   state n_beers pct_missing
+   &lt;chr&gt;   &lt;int&gt;       &lt;dbl&gt;
+ 1 SD          7       1    
+ 2 AR          5       0.8  
+ 3 CT         27       0.778
+ 4 MI        162       0.765
+ 5 NH          8       0.75 
+ 6 ME         27       0.741
+ 7 SC         14       0.643
+ 8 NE         25       0.64 
+ 9 UT         26       0.577
+10 IL         91       0.571
+11 NM         14       0.571
+12 GA         16       0.562
+13 PA        100       0.53 
+14 MD         21       0.524
+15 WI         87       0.517
+# ℹ 36 more rows</code></pre>
+</div>
+</div>
+<p>Some states look alarming — South Dakota is 100% missing, Michigan is 76%. But this is almost certainly <strong>confounding</strong>: states that happen to have more Belgian or specialty-style breweries will look like geography matters when style is actually the driver.</p>
+</section>
+<section id="diagnosis-mar-by-style-group" class="level3">
+<h3 class="anchored" data-anchor-id="diagnosis-mar-by-style-group">Diagnosis: MAR by style group</h3>
+<p>The evidence points clearly to <strong>Missing At Random, primarily by style</strong>. That has a concrete implication: if we impute IBU using style-group medians, we’re using exactly the variable that explains the missingness pattern. This is principled, not just convenient.</p>
+<p>Three approaches we considered:</p>
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Approach</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Global mean/median imputation</td>
+<td>❌ Ignores style — a high-IBU IPA would get the same fill as a low-IBU wheat ale</td>
+</tr>
+<tr class="even">
+<td><code>mice</code> / multiple imputation</td>
+<td>❌ Overkill — ABV has no marginal predictive value, so there’s nothing for a model to learn</td>
+</tr>
+<tr class="odd">
+<td><strong>Style-group median imputation</strong></td>
+<td>✅ Simple, defensible, matches the missingness mechanism</td>
+</tr>
+</tbody>
+</table>
+<p>One honest caveat: median imputation collapses within-group variance — every imputed beer in a style group gets the same IBU value. For a recommender, this is fine. For inference (e.g.&nbsp;a hypothesis test about IBU), it would introduce bias. Know your downstream use case before choosing an imputation strategy.</p>
+<hr>
+</section>
+</section>
+<section id="data-cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
+<section id="remove-non-beer-styles" class="level3">
+<h3 class="anchored" data-anchor-id="remove-non-beer-styles">Remove non-beer styles</h3>
+<p>Cider, Mead, Shandy, Braggot, Low Alcohol Beer, and American Malt Liquor are removed — IBU is not meaningful for these categories, and they’d pollute beer-to-beer similarity calculations.</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>non_beers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Cider"</span>, <span class="st">"Mead"</span>, <span class="st">"Shandy"</span>, <span class="st">"Braggot"</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Low Alcohol Beer"</span>, <span class="st">"American Malt Liquor"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>df_clean <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>style <span class="sc">%in%</span> non_beers, <span class="sc">!</span><span class="fu">is.na</span>(style))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="build-style-groups" class="level3">
+<h3 class="anchored" data-anchor-id="build-style-groups">Build style groups</h3>
+<p>The raw <code>style</code> column has ~100 distinct values. For the recommender, we collapse these into 10 interpretable groups using <code>str_detect()</code> on keywords:</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_clean <span class="ot">&lt;-</span> df_clean <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">style_group =</span> <span class="fu">case_when</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(style, <span class="st">"IPA|India Pale"</span>)                       <span class="sc">~</span> <span class="st">"IPA"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(style, <span class="st">"Stout|Porter"</span>)                         <span class="sc">~</span> <span class="st">"Stout / Porter"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(style, <span class="st">"Wheat|Wit|Hefeweizen|Weizen"</span>)          <span class="sc">~</span> <span class="st">"Wheat / Wit"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(style, <span class="st">"Lager|Pilsner|Pilsener|Kölsch|Kolsch"</span>) <span class="sc">~</span> <span class="st">"Lager / Pilsner"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(style, <span class="st">"Pale Ale|APA"</span>)                         <span class="sc">~</span> <span class="st">"Pale Ale"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(style, <span class="st">"Amber|Red Ale|Red Lager"</span>)              <span class="sc">~</span> <span class="st">"Amber / Red"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(style, <span class="st">"Sour|Lambic|Gose|Berliner"</span>)            <span class="sc">~</span> <span class="st">"Sour / Wild"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(style, <span class="st">"Saison|Farmhouse|Belgian"</span>)             <span class="sc">~</span> <span class="st">"Belgian / Saison"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(style, <span class="st">"Barleywine|Imperial|Strong"</span>)           <span class="sc">~</span> <span class="st">"Strong / Barleywine"</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(style, <span class="st">"Blonde|Golden"</span>)                        <span class="sc">~</span> <span class="st">"Blonde / Golden"</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span>                                                       <span class="sc">~</span> <span class="st">"Other"</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="impute-ibu-and-abv" class="level3">
+<h3 class="anchored" data-anchor-id="impute-ibu-and-abv">Impute IBU and ABV</h3>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># IBU — style-group median</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>style_ibu_medians <span class="ot">&lt;-</span> df_clean <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(style_group) <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">ibu_median =</span> <span class="fu">median</span>(ibu, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>df_imputed <span class="ot">&lt;-</span> df_clean <span class="sc">|&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(style_ibu_medians, <span class="at">by =</span> <span class="st">"style_group"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ibu_imputed =</span> <span class="fu">is.na</span>(ibu),</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">ibu         =</span> <span class="fu">coalesce</span>(ibu, ibu_median)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ibu_median)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ABV — same approach (only 2.6% missing, MCAR, scattered across all style groups)</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>style_abv_medians <span class="ot">&lt;-</span> df_imputed <span class="sc">|&gt;</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(style_group) <span class="sc">|&gt;</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">abv_median =</span> <span class="fu">median</span>(abv, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>df_imputed <span class="ot">&lt;-</span> df_imputed <span class="sc">|&gt;</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(style_abv_medians, <span class="at">by =</span> <span class="st">"style_group"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">abv_imputed =</span> <span class="fu">is.na</span>(abv),</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">abv         =</span> <span class="fu">coalesce</span>(abv, abv_median)</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>abv_median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>A quick sanity check — do the imputed IBU values make domain sense?</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_imputed <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(style_group, ibu_imputed) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n          =</span> <span class="fu">n</span>(),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_ibu   =</span> <span class="fu">round</span>(<span class="fu">mean</span>(ibu), <span class="dv">1</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_ibu =</span> <span class="fu">round</span>(<span class="fu">median</span>(ibu), <span class="dv">1</span>),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups    =</span> <span class="st">"drop"</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(style_group, ibu_imputed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 22 × 5
+   style_group      ibu_imputed     n mean_ibu median_ibu
+   &lt;chr&gt;            &lt;lgl&gt;       &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Amber / Red      FALSE          85     35.5         30
+ 2 Amber / Red      TRUE           61     30           30
+ 3 Belgian / Saison FALSE          27     30.1         30
+ 4 Belgian / Saison TRUE           42     30           30
+ 5 Blonde / Golden  FALSE          61     21           20
+ 6 Blonde / Golden  TRUE           47     20           20
+ 7 IPA              FALSE         395     71.9         70
+ 8 IPA              TRUE          179     70           70
+ 9 Lager / Pilsner  FALSE         160     24.6         22
+10 Lager / Pilsner  TRUE          128     22           22
+# ℹ 12 more rows</code></pre>
+</div>
+</div>
+<p>IPAs at 70 IBU, wheats at 18, sours at 8.5 — anyone who drinks craft beer will nod at these numbers.</p>
+</section>
+<section id="deduplicate" class="level3">
+<h3 class="anchored" data-anchor-id="deduplicate">Deduplicate</h3>
+<p>The same beer sometimes appears in multiple can sizes (12 oz and 16 oz). We keep the first occurrence per <code>beer_name</code> + <code>brewery_id</code>:</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_imputed <span class="ot">&lt;-</span> df_imputed <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(beer_name, brewery_id, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>This brings us to <strong>~2,100 unique beers</strong> across ~550 U.S. breweries in 51 states.</p>
+</section>
+<section id="dataset-summary" class="level3">
+<h3 class="anchored" data-anchor-id="dataset-summary">Dataset summary</h3>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_imputed <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(style_group) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_beers     =</span> <span class="fu">n</span>(),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_breweries =</span> <span class="fu">n_distinct</span>(brewery_id),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_states    =</span> <span class="fu">n_distinct</span>(state),</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_abv    =</span> <span class="fu">round</span>(<span class="fu">mean</span>(abv) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>),</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_ibu    =</span> <span class="fu">round</span>(<span class="fu">mean</span>(ibu), <span class="dv">1</span>),</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_ibu_imp =</span> <span class="fu">round</span>(<span class="fu">mean</span>(ibu_imputed) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n_beers))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 7
+   style_group        n_beers n_breweries n_states mean_abv mean_ibu pct_ibu_imp
+   &lt;chr&gt;                &lt;int&gt;       &lt;int&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+ 1 IPA                    554         338       49      6.9     71.3        31.6
+ 2 Other                  441         238       47      6.1     26.1        44.7
+ 3 Pale Ale               278         207       47      5.6     42.4        42.8
+ 4 Lager / Pilsner        272         190       44      5       23.6        45.2
+ 5 Wheat / Wit            177         140       38      5.1     18.8        42.9
+ 6 Stout / Porter         172         131       43      6.6     37.6        47.1
+ 7 Amber / Red            145         120       37      5.7     33.3        42.1
+ 8 Blonde / Golden        104          88       35      5       20.6        44.2
+ 9 Belgian / Saison        69          47       25      6.5     30.1        60.9
+10 Strong / Barleywi…      42          37       21      7.3     59.4        23.8
+11 Sour / Wild             21          18       14      4.4      8.6        42.9</code></pre>
+</div>
+</div>
+<p>IPA is dominant — 574 beers represented in 49 states, which tells you everything about American craft beer culture in 2017.</p>
+<hr>
+</section>
+</section>
+<section id="building-the-recommender" class="level2">
+<h2 class="anchored" data-anchor-id="building-the-recommender">Building the Recommender</h2>
+<section id="the-intuition-beers-as-vectors" class="level3">
+<h3 class="anchored" data-anchor-id="the-intuition-beers-as-vectors">The intuition: beers as vectors</h3>
+<p>The recommender works by representing each beer as a point in a multi-dimensional “flavour space”. Two beers that are close together in that space are similar; two beers far apart are not.</p>
+<p>Each beer gets three types of features:</p>
+<ol type="1">
+<li><strong>Normalised ABV</strong> — rescaled to [0, 1] so it’s on the same footing as IBU</li>
+<li><strong>Normalised IBU</strong> — same</li>
+<li><strong>Style group dummies</strong> — one-hot encoded, so “IPA” becomes a 1 in the IPA column and 0 everywhere else</li>
+</ol>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_features <span class="ot">&lt;-</span> df_imputed <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">abv_scaled  =</span> <span class="fu">rescale</span>(abv),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ibu_scaled  =</span> <span class="fu">rescale</span>(ibu),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">style_dummy =</span> <span class="dv">1</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from   =</span> style_group,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from  =</span> style_dummy,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_fill  =</span> <span class="dv">0</span>,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">"style_"</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>feature_matrix <span class="ot">&lt;-</span> df_features <span class="sc">|&gt;</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(beer_id, abv_scaled, ibu_scaled, <span class="fu">starts_with</span>(<span class="st">"style_"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">"beer_id"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(feature_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2275   13</code></pre>
+</div>
+</div>
+</section>
+<section id="cosine-similarity" class="level3">
+<h3 class="anchored" data-anchor-id="cosine-similarity">Cosine similarity</h3>
+<p>We measure similarity using <strong>cosine similarity</strong> — the cosine of the angle between two vectors. A score of 1.0 means the beers point in exactly the same direction in flavour space (identical profile). A score of 0 means they’re orthogonal (no similarity).</p>
+<p><span class="math display">\[\text{similarity}(A, B) = \frac{A \cdot B}{\|A\| \cdot \|B\|}\]</span></p>
+<p>Why cosine rather than Euclidean distance? Cosine similarity is scale-invariant — it measures the <em>direction</em> of the flavour profile, not the magnitude. Two beers can have different absolute ABV values but still be “pointing the same direction” if their overall profile (light + crisp + wheat-forward) matches.</p>
+</section>
+<section id="the-recommender-function" class="level3">
+<h3 class="anchored" data-anchor-id="the-recommender-function">The recommender function</h3>
+<p>Rather than searching by beer name (which breaks down quickly once you realise the dataset only covers canned craft beers), we let users describe their own taste profile directly via sliders — ABV, IBU, and preferred style. We synthesise a virtual “target vector” from those inputs and find the nearest neighbours:</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>get_recommendations_by_profile <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    target_abv,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    target_ibu,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    target_style,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">top_n          =</span> <span class="dv">10</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">filter_state   =</span> <span class="cn">NULL</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_similarity =</span> <span class="fl">0.90</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>) {</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Build synthetic feature vector from user inputs</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  target_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">abv_scaled =</span> <span class="fu">rescale</span>(target_abv, <span class="at">from =</span> <span class="fu">range</span>(df_imputed<span class="sc">$</span>abv)),</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ibu_scaled =</span> <span class="fu">rescale</span>(target_ibu, <span class="at">from =</span> <span class="fu">range</span>(df_imputed<span class="sc">$</span>ibu)),</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setNames</span>(</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.integer</span>(</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">paste0</span>(<span class="st">"style_"</span>, <span class="fu">unique</span>(df_imputed<span class="sc">$</span>style_group)) <span class="sc">==</span> <span class="fu">paste0</span>(<span class="st">"style_"</span>, target_style)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste0</span>(<span class="st">"style_"</span>, <span class="fu">unique</span>(df_imputed<span class="sc">$</span>style_group))</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  target_vec <span class="ot">&lt;-</span> target_vec[<span class="fu">colnames</span>(feature_matrix)]</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Cosine similarity: target vs every beer in the dataset</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  sims <span class="ot">&lt;-</span> <span class="fu">apply</span>(feature_matrix, <span class="dv">1</span>, <span class="cf">function</span>(x) {</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(target_vec <span class="sc">*</span> x) <span class="sc">/</span> (<span class="fu">sqrt</span>(<span class="fu">sum</span>(target_vec<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(x<span class="sc">^</span><span class="dv">2</span>)))</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> df_imputed <span class="sc">|&gt;</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">similarity =</span> sims[<span class="fu">as.character</span>(beer_id)]) <span class="sc">|&gt;</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(similarity)) <span class="sc">|&gt;</span></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(similarity <span class="sc">&gt;=</span> min_similarity)</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(filter_state)) {</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>    result <span class="ot">&lt;-</span> result <span class="sc">|&gt;</span> <span class="fu">filter</span>(state <span class="sc">%in%</span> filter_state)</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>  result <span class="sc">|&gt;</span></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(beer_name, brewery_name, city, state,</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>           style, abv, ibu, ibu_imputed, similarity) <span class="sc">|&gt;</span></span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice_head</span>(<span class="at">n =</span> top_n)</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The <code>min_similarity</code> threshold is important — without it, the function will return beers even when the dataset has no good matches for a given state, producing nonsensical recommendations (we saw it return Imperial IPAs for someone who wanted a wheat ale simply because nothing else was left). A threshold of 0.90 keeps the results honest.</p>
+</section>
+<section id="test-drive-what-should-i-drink-in-oregon" class="level3">
+<h3 class="anchored" data-anchor-id="test-drive-what-should-i-drink-in-oregon">Test drive: “What should I drink in Oregon?”</h3>
+<p>I like Boulevard Wheat (~4.4% ABV, ~14 IBU) and Stella Artois (~5.0% ABV, ~24 IBU). Averaging those and picking Wheat / Wit as the style:</p>
+<div class="cell">
+<details>
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_recommendations_by_profile</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">target_abv   =</span> <span class="fl">0.047</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">target_ibu   =</span> <span class="dv">19</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">target_style =</span> <span class="st">"Wheat / Wit"</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">top_n        =</span> <span class="dv">10</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">filter_state =</span> <span class="st">"OR"</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 9
+  beer_name    brewery_name city  state style   abv   ibu ibu_imputed similarity
+  &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;            &lt;dbl&gt;
+1 Occidental … Occidental … Port… OR    Amer… 0.047    18 TRUE             1.000
+2 Lost Meridi… Base Camp B… Port… OR    Witb… 0.05     20 FALSE            1.000
+3 Quick Wit B… Fort George… Asto… OR    Witb… 0.052    18 TRUE             0.999
+4 Wheat the P… Coalition B… Port… OR    Amer… 0.044    13 FALSE            0.999
+5 Nonstop Hef… Hopworks Ur… Port… OR    Amer… 0.039    20 FALSE            0.997
+6 Hefe Black   Widmer Brot… Port… OR    Hefe… 0.049    30 FALSE            0.997
+7 Widmer Brot… Widmer Brot… Port… OR    Hefe… 0.049    30 FALSE            0.997
+8 Sweet As Pa… Good Life B… Bend  OR    Amer… 0.06     18 FALSE            0.993</code></pre>
+</div>
+</div>
+<p>Eight solid results — Hefeweizens and Witbiers from Portland and Bend, all within a tight similarity band. The threshold correctly excluded the Imperial IPAs that appeared before we added it.</p>
+<hr>
+</section>
+</section>
+<section id="the-shiny-app" class="level2">
+<h2 class="anchored" data-anchor-id="the-shiny-app">The Shiny App</h2>
+<p>All of this wrangling and the recommender function live in <code>global.R</code>, which Shiny runs once at startup before any user session begins. This is the right pattern for expensive data prep — load once, serve many.</p>
+<p>The app itself has three panels:</p>
+<ul>
+<li><strong>Recommendations</strong> — a sortable DT table with all results, including an <code>est</code> badge on beers where IBU was imputed</li>
+<li><strong>Flavour Map</strong> — a Plotly scatter of ABV vs IBU, showing the full style-group cloud in grey, your recommendations in copper, and your taste profile as a gold star</li>
+<li><strong>About</strong> — methodology notes including the IBU imputation story</li>
+</ul>
+<p>The Shiny App is currently on its way to being uploaded…check back for updates.</p>
+<hr>
+</section>
+<section id="what-id-do-differently-or-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-id-do-differently-or-next">What I’d Do Differently (or Next)</h2>
+<p>A few honest limitations worth noting, and natural extensions if you want to take this further:</p>
+<p><strong>Data vintage</strong> — The dataset is from 2017. A lot has changed in the craft beer world since then. A live data source (e.g.&nbsp;Untappd API, BreweryDB) would make this genuinely useful rather than a learning exercise.</p>
+<p><strong>Feature weighting</strong> — Right now ABV, IBU, and style group are all weighted equally in the cosine similarity. In practice, style group probably matters more than a 0.5% ABV difference. Adding weights to the feature vector is a one-line change and worth experimenting with.</p>
+<p><strong>Multi-beer input</strong> — Instead of asking users to input a taste profile, let them name multiple beers and average their feature vectors. This was the original idea, but it requires every reference beer to be in the dataset — which ruled out Stella and Boulevard Wheat immediately.</p>
+<p><strong>The coffee version</strong> — The same architecture (feature vectors + cosine similarity) works perfectly for coffee. ABV → caffeine level, IBU → acidity, style → roast profile. That’s the next post.</p>
+<hr>
+</section>
+<section id="wrapping-up" class="level2">
+<h2 class="anchored" data-anchor-id="wrapping-up">Wrapping Up</h2>
+<p>What started as “I want to find good beer when I travel” turned into a surprisingly satisfying data science problem. The missing IBU data alone gave us a clean worked example of MCAR vs MAR diagnosis, the limits of global imputation, and why knowing your missingness mechanism matters before you touch a single <code>coalesce()</code>.</p>
+<p>The full code — <code>global.R</code>, <code>ui.R</code>, <code>server.R</code> — will be available on GitHub coming soon. If you find a great wheat ale in Oregon because of this, let me know.</p>
+<hr>
+<p><em>Dataset: <a href="https://github.com/nickhould/craft-beers-dataset">nickhould/craft-beers-dataset</a> · Built with R, Shiny, Plotly, and a healthy appreciation for low-IBU beers.</em></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,13 @@
+---
+title: "Exploring Median Household Income & Race in Anywhere, USA"
+format: html
+image: "images/mta_app_cover_photo.jpg"
+---
+
+This app is an extension of my [post](https://solplots.com/demos/CensusDc.html) about using data from the U.S. Census to create
+
+<iframe src="https://gira-solo.shinyapps.io/Art_of_the_MTA/" width="100%" height="1000px" frameborder="0">
+
+</iframe>
+
+The data for this app can be found in the MTA's [Open Data Portal](https://data.ny.gov/Transportation/MTA-Permanent-Art-Catalog-Beginning-1980/4y8j-9pkd/about_data).
