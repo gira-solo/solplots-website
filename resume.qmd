@@ -23,16 +23,21 @@ format:
 -   🌐 [solplots.com](https://www.solplots.com)\
 -   💼 [LinkedIn](https://www.linkedin.com/in/peter-m-f/)\
 -   🐙 [GitHub](https://github.com/gira-solo)
-------------------------------------------------------------------------
+
+---
+
 # Summary
 Data Scientist with 4+ years optimizing complex systems through statistical modeling, workflow automation, and scalable data infrastructure. Expertise in operations research, ETL pipeline development, and analytics supporting $200M+ in operational improvements across payments and transportation sectors.
 
-------------------------------------------------------------------------
+---
+
 # Skills
 -   **Languages:** R, SQL, Python
 -   **Tools:** Databricks, RStudio, Quarto, Git, Snowflake, Jupyter, Streetlight, ArcGIS
 -   **Libraries:** tidyverse (ggplot2, dplyr, etc.), Shiny, RMarkdown
-------------------------------------------------------------------------
+
+---
+
 # Experience
 ## Data Scientist I, Strategic Routing --- Worldpay, Inc
 *Remote \| Dec 2023 -- Jan 2026*
@@ -53,7 +58,8 @@ Data Scientist with 4+ years optimizing complex systems through statistical mode
 -   Presented methodology at regional analytics conferences and useR! Conference 2022, receiving recognition for innovative approach to traffic safety analysis
 -   Automated statistical analysis workflows for transportation safety data, enabling reproducible and scalable crash analysis across multiple jurisdictions
 
-------------------------------------------------------------------------
+---
+
 # Education
 **M.S. in Business Analytics**\
 Miami University | Oxford, OH | 2021\
@@ -63,6 +69,7 @@ Miami University | Oxford, OH | 2021\
 Miami University | Oxford, OH | 2020\
 *Minors in Spanish, Statistics and Geography*
 
-------------------------------------------------------------------------
+---
+
 # Presentations
 -   **Safety Performance Evaluation of OKI's Regional Highway Network:** As part of my work in developing a process to evaluate roadway safety while working for OKI, I organized my research into a poster presentation and submitted it to the [useR! 2022 Conference](https://user2022.r-project.org/program/posters/). The poster was recognized as one of five "best of the conference". [View PDF Report](/assets/pdfs/Roadway%20Safety%20Poster%20V2.pdf)
