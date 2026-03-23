@@ -18,65 +18,51 @@ format:
     linkcolor: blue
     urlcolor: blue
 ---
-
 # Peter Maximilian Fortunato
-
 -   📧 peter\@solplots.com\
+-   🌐 [solplots.com](https://www.solplots.com)\
 -   💼 [LinkedIn](https://www.linkedin.com/in/peter-m-f/)\
 -   🐙 [GitHub](https://github.com/gira-solo)
-
 ------------------------------------------------------------------------
-
 # Summary
-
-Peter is a data scientist with over four years of professional experience and is currently a member of the Strategic Routing team at Worldpay (formerly part of FIS). He is an expert in the R and SQL programming languages, and is passionate about data storytelling and visualization.
+Data Scientist with 4+ years optimizing complex systems through statistical modeling, workflow automation, and scalable data infrastructure. Expertise in operations research, ETL pipeline development, and analytics supporting $200M+ in operational improvements across payments and transportation sectors.
 
 ------------------------------------------------------------------------
-
 # Skills
-
 -   **Languages:** R, SQL, Python
 -   **Tools:** Databricks, RStudio, Quarto, Git, Snowflake, Jupyter, Streetlight, ArcGIS
 -   **Libraries:** tidyverse (ggplot2, dplyr, etc.), Shiny, RMarkdown
-
 ------------------------------------------------------------------------
-
 # Experience
-
 ## Data Scientist I, Strategic Routing --- Worldpay, Inc
-
-*Remote \| Dec 2023 -- Present*
-
--   Implements network routing product to maximize merchant cost savings on card processing fees
--   Performs ad-hoc analyses simulating potential merchant savings using a "least cost routing" method
--   Engineers routing table update processes by integrating various documents and requests
--   Monitors product performance to match negotiated transaction volumes from network deals
+*Remote \| Dec 2023 -- Jan 2026*
+-   Developed linear programming optimization models in R to minimize payment processing costs for major US merchants (supermarkets, gas stations, retail chains), contributing to $200M+ in annual merchant savings
+-   Built end-to-end ETL workflows using SQL (CTEs, window functions, complex joins) to process high-volume transaction data across multiple payment types and merchant segments
+-   Implemented network routing product to maximize merchant savings on card processing fees through automated routing table updates integrating multiple data sources and client requests
+-   Performed ad-hoc analyses simulating potential merchant savings scenarios and monitored product performance to ensure alignment with negotiated transaction volumes from network deals
 
 ## Data Scientist, Transit & Rail Planning --- Vanasse Hangen Brustlin, Inc. (VHB)
-
-*Washington, D.C. \| Sept 2022 - Dec 2023*
-
--   Analyzed General Transit Feed Specification (GTFS) data in conjunction with Automated Passenger Count data to program R scripts and output load factor and schedule adherence KPI for transit studies
--   Developed and maintains a suite of transit planning and origin/destination traffic analysis Shiny Apps known as Data Trippers that resulted in assisting clients' decision making processes
+*Washington, D.C. \| Sept 2022 -- Dec 2023*
+-   Analyzed General Transit Feed Specification (GTFS) data with Automated Passenger Count data to develop R scripts outputting load factor and schedule adherence KPIs for transit studies
+-   Developed and maintained Data Trippers, a suite of transit planning and origin/destination traffic analysis Shiny applications that enhanced client decision-making processes
+-   Built geospatial analysis workflows integrating transit network data, ridership patterns, and demographic information to support regional transportation planning initiatives
 
 ## Data Scientist --- Ohio Kentucky Indiana Regional Council of Governments (OKI)
-
-*Cincinnati, Ohio \| May 2021 - Aug 2022*
-
--   Re-purposed open-source R scripts to develop inaugural method evaluating roadway safety performance in the 8-county OKI region which resulted in the Excess Expected Crashes (EEC) KPI
--   Presented methodology at area analytics conferences and the useR! Conference 2022 (recognized)
--   Visualized of existing conditions and commodity flow using Freight Analysis Framework (FAF)
-
-# Education
-
-**M.S. in Business Analytics**\
-Miami University of Ohio, 2021
-
-**B.A. in International Studies**\
-Miami University of Ohio, 2020
+*Cincinnati, Ohio \| May 2021 -- Sept 2022*
+-   Developed inaugural roadway safety performance methodology for 8-county region, creating the Excess Expected Crashes (EEC) KPI by repurposing and adapting open-source R scripts
+-   Presented methodology at regional analytics conferences and useR! Conference 2022, receiving recognition for innovative approach to traffic safety analysis
+-   Automated statistical analysis workflows for transportation safety data, enabling reproducible and scalable crash analysis across multiple jurisdictions
 
 ------------------------------------------------------------------------
+# Education
+**M.S. in Business Analytics**\
+Miami University | Oxford, OH | 2021\
+*Machine Learning, Experimental Design, Causal Inference, Systems Modeling, Optimization*
 
+**B.A. in International Studies**\
+Miami University | Oxford, OH | 2020\
+*Minors in Spanish, Statistics and Geography*
+
+------------------------------------------------------------------------
 # Presentations
-
 -   **Safety Performance Evaluation of OKI's Regional Highway Network:** As part of my work in developing a process to evaluate roadway safety while working for OKI, I organized my research into a poster presentation and submitted it to the [useR! 2022 Conference](https://user2022.r-project.org/program/posters/). The poster was recognized as one of five "best of the conference". [View PDF Report](/assets/pdfs/Roadway%20Safety%20Poster%20V2.pdf)
