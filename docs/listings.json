@@ -26,5 +26,11 @@
     "items": [
       "/events/coin_des_plots.html"
     ]
+  },
+  {
+    "listing": "/monitor.html",
+    "items": [
+      "/monitor/sp-volitility-april-1.html"
+    ]
   }
 ]

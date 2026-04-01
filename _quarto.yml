@@ -19,6 +19,8 @@ website:
         href: index.qmd
       - text: "Demos"
         href: demos.qmd
+      - text: "Kalshi Monitor"
+        href: monitor.qmd
       - text: "Apps"
         href: apps.qmd
       - text: "Resources"
