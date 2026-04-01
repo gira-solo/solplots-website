@@ -249,7 +249,11 @@ get_market_snapshot <- function(series_ticker) {
 Run it in the morning just after the market opens:
  
 ```{r}
-snapshot <- get_market_snapshot("KXINX")
+library(here)
+
+snapshot <- readRDS(here("demos/data/snapshot_apr1.rds"))
+# run only when the market is live
+# snapshot <- get_market_snapshot("KXINX")
 snapshot$markets |> select(market_ticker, title, yes_bid, no_bid, implied_prob)
 ```
  
@@ -262,13 +266,25 @@ The `KXINX` series only has open markets during trading hours. If you run this o
 With `tidyquant` we can pull 90 days of S&P 500 closing prices from Yahoo Finance using the function `tq_get()`. We then compute log daily returns (`mutate(daily_return = log(close / lag(close)))`) which are the standard input for geometric Brownian motion (GBM) models.
  
 ```{r}
-sp500 <- tq_get("^GSPC",
-                 from = Sys.Date() - 90,
-                 to   = Sys.Date()) |>
-  select(date, close) |>
-  arrange(date) |>
-  mutate(daily_return = log(close / lag(close))) |>
-  drop_na()
+# The following code will only run if the market is open; since I'm publishing after market close, I'm reading in the data manually
+
+# Use the following code when the market is open
+# sp500 <- tq_get("^GSPC",
+#                  from = Sys.Date() - 90,
+#                  to   = Sys.Date()) |>
+#   select(date, close) |>
+#   arrange(date) |>
+#   mutate(daily_return = log(close / lag(close))) |>
+#   drop_na()
+
+# reading in April 1 data
+
+sp500    <- readRDS(here("demos/data/sp500_apr1.rds"))
+vix      <- readRDS(here("demos/data/vix_apr1.rds"))
+params   <- readRDS(here("demos/data/params_apr1.rds"))
+mu     <- params$mu
+sigma  <- params$sigma
+S0     <- params$S0
  
 mu    <- mean(sp500$daily_return)
 sigma <- sd(sp500$daily_return)
@@ -384,7 +400,40 @@ compare_probabilities <- function(buckets, sims) {
 }
  
 comparison <- compare_probabilities(buckets, sims)
-comparison |> filter(model_prob > 0.01)
+
+library(gt)
+
+comparison |> 
+  filter(model_prob > 0.01) |> 
+  select(market_ticker, lower, upper, implied_prob, model_prob, edge) |> 
+  gt() |>
+  tab_header(
+    title    = "Model vs Market: Top 10 Edges",
+    subtitle = "S&P 500 closing price buckets — April 1, 2026"
+  ) |>
+  cols_label(
+    market_ticker = "Market",
+    lower         = "Lower",
+    upper         = "Upper",
+    implied_prob  = "Kalshi Prob",
+    model_prob    = "Model Prob",
+    edge          = "Edge"
+  ) |>
+  fmt_number(columns = c(lower, upper), decimals = 0, use_seps = TRUE) |>
+  fmt_percent(columns = c(implied_prob, model_prob, edge), decimals = 1) |>
+  tab_style(
+    style = cell_fill(color = "#fff3cd"),
+    locations = cells_body(rows = edge > 0)
+  ) |>
+  tab_style(
+    style = cell_fill(color = "#f8d7da"),
+    locations = cells_body(rows = edge < 0)
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_footnote("Edge = Model Prob minus Kalshi implied probability. Red = market more bullish than model. Yellow = model more bullish than market.") 
 ```
  
 ---
@@ -396,7 +445,6 @@ Once again, this is an exercise in data science, not securities or prediction ma
 On April 1, 2026, the model and the prediction market tell very different stories. 
 
 Kalshi priced the S&P closing around 6,587-6,637 with 67% combined probability, implying an expected ~1.9% rally from the prior close of 6,528. 
-
 Our GBM model, anchored to recent history and VIX-adjusted volatility, centered the distribution around 6,487-6,537 with 49.7% combined probability, i.e. no strong directional view.
 
 Our greatest edge, i.e. what our model believes to be the most highly mis-priced asset, is ticker `KXINX-26APR01H1600-B6612`. Kalshi believes it has a 40% chance of resolving to YES, whereas our model believes it has a 5.3% chance of resolving to YES. That is nearly a 35% difference!
@@ -439,6 +487,21 @@ I am not delivering trading advice, I am simply providing a resource that can be
 
 If you have any questions, comments or concerns please [email me.](mailto:peter@solplots.com)
 
+## Resolution
+
+On April 1, 2026, the S&P 500 closed at 6,575.32.
+
+Kalshi was most confident in bucket `B6612` (6,612-6,637), which also happens to be the bucket with the greatest divergence from our model (about -35%). Our model was most confident in bucket `B6512` (6,512-6,537), which also happens to be the bucket with greatest **positive** difference with Kalshi (at 12.4%). Both buckets resolved to NO.
+
+What happened was the market ended up in a spot where both sides were the least certain.
+
+That is bucket `B6562` (6,562-6,587), the one bucket where our model and Kalshi agreed the most. Kalshi gave it an 11% chance of happening, and our model said 10.5%, a difference (edge) of just 0.5%.
+
+A day defined by anticipation (a presidential address, an uncertain geopolitical backdrop, and a VIX scalar telling us to widen our uncertainty) resolves in a spot where neither the crowd nor the model had strong conviction. 
+
+The Claude LLM found this to be poetic, a loud disagreement with a quiet answer, and I agree.
+
+I am not sure what prompted me to report on Kalshi and the S&P 500, I just felt like it would be a fun way to learn how to pull data from different sources and synthesize a resolution.
 
 
 
