@@ -492,7 +492,7 @@ Kalshi was most confident in bucket `B6612` (6,612-6,637), which also happens to
 
 What happened was the market ended up in a spot where both sides *converged*.
 
-That is bucket `B6562` (6,562-6,587), the one bucket where our model and Kalshi agreed the most. Kalshi gave it an 11% chance of happening, and our model said 10.5%, a difference (edge) of just 0.5%.
+That is bucket `B6562` (6,562-6,587), the one bucket where our model and Kalshi agreed the most. Kalshi gave it an 11% chance of happening, and our model said 10.6%, a difference (edge) of just -0.4%.
 
 A day defined by anticipation (a presidential address, an uncertain geopolitical backdrop, and a VIX scalar telling us to widen our uncertainty) resolves in a spot where neither the crowd nor the model had strong conviction.
 
