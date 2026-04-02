@@ -3,7 +3,7 @@ project:
   output-dir: docs
   resources:
     - assets/pdfs/*
-    - images/*
+    - images/**
     - favicon.ico
     - favicon16x16.png
     - favicon32x32.png
