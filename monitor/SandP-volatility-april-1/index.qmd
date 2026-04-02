@@ -29,7 +29,7 @@ So together we shall build a complete pipeline in R:
 
 1.  Pull live from Kalshi's public API using the package `httr2` data of the S&P 500
 2.  Download 90 days of historic S&P 500 prices using `tidyquant`
-3.  Run a Monte Carlo simulation to estimate today's closign price distribution
+3.  Run a Monte Carlo simulation to estimate today's closing price distribution
 4.  Adjust with VIX volatility
 5.  Compare our model's probabilities against Kalshi's implied probabilities bucket by bucket.
 
@@ -248,7 +248,7 @@ Run it in the morning just after the market opens:
 ```{r}
 library(here)
 
-snapshot <- readRDS(here("monitor/SandP-volitility-april-1/data/snapshot_apr1.rds"))
+snapshot <- readRDS("data/snapshot_apr1.rds")
 # run only when the market is live
 # snapshot <- get_market_snapshot("KXINX")
 snapshot$markets |> select(market_ticker, title, yes_bid, no_bid, implied_prob)
@@ -406,7 +406,7 @@ comparison |>
   select(market_ticker, lower, upper, implied_prob, model_prob, edge) |> 
   gt() |>
   tab_header(
-    title    = "Model vs Market: Top 10 Edges",
+    title    = "Model vs Market",
     subtitle = "S&P 500 closing price buckets — April 1, 2026"
   ) |>
   cols_label(
@@ -490,7 +490,7 @@ On April 1, 2026, the S&P 500 closed at 6,575.32.
 
 Kalshi was most confident in bucket `B6612` (6,612-6,637), which also happens to be the bucket with the greatest divergence from our model (about -35%). Our model was most confident in bucket `B6512` (6,512-6,537), which also happens to be the bucket with greatest **positive** difference with Kalshi (at 12.4%). Both buckets resolved to NO.
 
-What happened was the market ended up in a spot where both sides were the least certain.
+What happened was the market ended up in a spot where both sides *converged*.
 
 That is bucket `B6562` (6,562-6,587), the one bucket where our model and Kalshi agreed the most. Kalshi gave it an 11% chance of happening, and our model said 10.5%, a difference (edge) of just 0.5%.
 
