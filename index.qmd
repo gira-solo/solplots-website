@@ -101,7 +101,7 @@ Working as a digital nomad, I bring flexibility and global perspective to every 
 ::: {#about .about-section}
 <div>
 
-![](images/bio_photo.jpg){.about-image}
+![](/images/bio_photo.JPG){.about-image}
 
 </div>
 
