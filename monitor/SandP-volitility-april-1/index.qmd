@@ -1,0 +1,501 @@
+---
+title: "Analyzing S&P Volitility With R, Kalshi and tidyquant"
+toc: true
+date: "2026-04-01"
+description: "Walking through prediction markets, Monte Carlo simulations and VIX-adjusted volatility to build a daily market probability model"
+categories: [R, kalshi-monitor, finance, tidyquant]
+format:
+  html:
+    code-fold: true
+    code-tools: true
+execute:
+  warning: false
+  message: false
+---
+
+## Disclaimer
+
+I am not an expert in finance nor trading nor quantitative analysis. I am a data scientist who likes to journal about how to find and analyze data.
+
+My fascinations with finance, prediction markets and journalism has led me to combine them into a blog post explaining how to determine S&P 500 volatility using publicly available data.
+
+Finally, rather than exhaustively research existing literature on this topic, I am using Claude as an LLM assistant to summarize the existing literature for me. Therefore, please view this blog as an exercise on using open-source tools to gather and analyze data, **NOT** as a definitive resource on trading strategies.
+
+## Motivation
+
+Prediction markets can be thought of in two ways: gambling sites and data repositories. Kalshi prices outcomes as probabilities, so a contract trading a \$0.34 implies a 34% chance the event occurs (resolving to "yes"). Therefore, this becomes an interesting source for quantitative analysis: you compare the Kalshi market implied probability distributions against your own model and see where they disagree.
+
+So together we shall build a complete pipeline in R:
+
+1.  Pull live from Kalshi's public API using the package `httr2` data of the S&P 500
+2.  Download 90 days of historic S&P 500 prices using `tidyquant`
+3.  Run a Monte Carlo simulation to estimate today's closign price distribution
+4.  Adjust with VIX volatility
+5.  Compare our model's probabilities against Kalshi's implied probabilities bucket by bucket.
+
+No financial or trading advice can be found in this blog post. I am a data scientist using my data science skills to perform a quantitative modelling exercise.
+
+------------------------------------------------------------------------
+
+## Setup
+
+These are the additional library packages we need to build the pipeline:
+
+```{r}
+library(httr2)
+library(tidyverse)
+library(tidyquant)
+```
+
+------------------------------------------------------------------------
+
+## Part 1: Building a Kalshi API Pipeline
+
+Kalshi makes available their public market data with endpoints that require no authentication, making it an excellent source to easily query prediction market data using `httr2`, as all requests go to the saem base URL.
+
+```{r}
+BASE_URL <- "https://api.elections.kalshi.com/trade-api/v2"
+```
+
+Think of the "elections" subdomain as "choices" rather than a subdomain about political elections; this endpoint covers all Kalshi markets (financials, climate, sports, etc.).
+
+### `get_series()`
+
+Before we can get started with S&P 500 data, we need to build the function `get_series()` to request from the API all top-level groupings for a market topic (so that this function can be used for other markets besides S&P 500, which is `KXINX`).
+
+```{r}
+get_series <- function(series_ticker) {
+  
+  response <- request(BASE_URL) |>
+    req_url_path_append("series", series_ticker) |>
+    req_error(is_error = \(r) FALSE) |>
+    req_perform()
+  
+  if (resp_status(response) != 200) {
+    warning("Could not fetch series: ", series_ticker)
+    return(NULL)
+  }
+  
+  s <- resp_body_json(response)$series
+  
+  tibble(
+    series_ticker = s$ticker,
+    title         = s$title,
+    frequency     = s$frequency,
+    category      = s$category
+  )
+}
+```
+
+`req_error(is_error = \(r) FALSE)` prevents `httr2` from throwing on non-200 responses so we can handle errors gracefully ourselves.
+
+### `get_markets()`
+
+Within each series are individual markets representing specific price ranges. We need a function that returns a tidy tibble with prices, volume, and implied probabilities.
+
+```{r}
+get_markets <- function(series_ticker, status = "open") {
+  
+  response <- request(BASE_URL) |>
+    req_url_path_append("markets") |>
+    req_url_query(series_ticker = series_ticker, status = status) |>
+    req_error(is_error = \(r) FALSE) |>
+    req_perform()
+  
+  if (resp_status(response) != 200) {
+    warning("Could not fetch markets for series: ", series_ticker)
+    return(NULL)
+  }
+  
+  markets <- resp_body_json(response)$markets
+  
+  if (length(markets) == 0) {
+    warning("No markets found for series: ", series_ticker)
+    return(NULL)
+  }
+  
+  markets |>
+    map(\(m) tibble(
+      market_ticker = m$ticker,
+      event_ticker  = m$event_ticker,
+      title         = m$title,
+      yes_bid       = m$yes_bid_dollars    %||% NA_real_,
+      no_bid        = m$no_bid_dollars     %||% NA_real_,
+      yes_ask       = m$yes_ask_dollars    %||% NA_real_,
+      no_ask        = m$no_ask_dollars     %||% NA_real_,
+      volume        = m$volume_fp          %||% NA_real_,
+      last_price    = m$last_price_dollars %||% NA_real_,
+      liquidity     = m$liquidity_dollars  %||% NA_real_,
+      implied_prob  = m$yes_bid_dollars    %||% NA_real_
+    )) |>
+    list_rbind() |>
+    mutate(across(c(yes_bid, no_bid, yes_ask, no_ask,
+                    volume, last_price, liquidity, implied_prob), as.numeric))
+}
+```
+
+A few things worth noting here. The `%||%` operator is the tidyverse null coalescing operator --- it returns the right-hand side when the left is NULL, which handles missing fields gracefully. The Kalshi API returns all price fields as strings despite looking like numbers, so the final `mutate(across(...))` coerces them to doubles.
+
+### `get_event()`
+
+An event sits between a series and its markets and contains metadata like resolution date and title.
+
+```{r}
+get_event <- function(event_ticker) {
+  
+  response <- request(BASE_URL) |>
+    req_url_path_append("events", event_ticker) |>
+    req_error(is_error = \(r) FALSE) |>
+    req_perform()
+  
+  if (resp_status(response) != 200) {
+    warning("Could not fetch event: ", event_ticker)
+    return(NULL)
+  }
+  
+  e <- resp_body_json(response)$event
+  
+  tibble(
+    event_ticker       = e$event_ticker,
+    series_ticker      = e$series_ticker,
+    title              = e$title,
+    sub_title          = e$sub_title,
+    mutually_exclusive = e$mutually_exclusive,
+    strike_date        = as.POSIXct(e$strike_date, 
+                                    format = "%Y-%m-%dT%H:%M:%SZ", 
+                                    tz = "UTC")
+  )
+}
+```
+
+We need a `mutually_exclusive` flag. When it is TRUE, then exactly one market in the event can resolve to Yes. All probabilities in the price range buckets should some to approximately 1, and is therefore a useful sanity check.
+
+### `get_orderbook()`
+
+The orderbook returns the full bid stack for yes and no sides, showing market depth and liquidity.
+
+```{r}
+get_orderbook <- function(market_ticker) {
+  
+  response <- request(BASE_URL) |>
+    req_url_path_append("markets", market_ticker, "orderbook") |>
+    req_error(is_error = \(r) FALSE) |>
+    req_perform()
+  
+  if (resp_status(response) != 200) {
+    warning("Could not fetch orderbook for: ", market_ticker)
+    return(NULL)
+  }
+  
+  ob <- resp_body_json(response)$orderbook_fp
+  
+  parse_side <- function(side_data, side_name) {
+    side_data |>
+      map(\(x) tibble(side = side_name, price = x[[1]], qty = x[[2]])) |>
+      list_rbind()
+  }
+  
+  bind_rows(
+    parse_side(ob$yes_dollars, "yes"),
+    parse_side(ob$no_dollars,  "no")
+  ) |>
+    mutate(across(c(price, qty), as.numeric)) |>
+    arrange(side, desc(price))
+}
+```
+
+Each entry in the orderbook is a `[price, quantity]` pair. The best bid on each side is the first row after sorting descending by price.
+
+### `get_market_snapshot()`
+
+We have all the functions we need to process Kalshi data, we just need to wrap everything together so that when we enter in the series ticker `KXINX`, we are returned a named list with all four data structures.
+
+```{r}
+get_market_snapshot <- function(series_ticker) {
+  
+  cat("Fetching series...\n")
+  series <- get_series(series_ticker)
+  
+  cat("Fetching markets...\n")
+  markets <- get_markets(series_ticker)
+  
+  if (is.null(markets)) return(NULL)
+  
+  cat("Fetching events...\n")
+  events <- markets |>
+    distinct(event_ticker) |>
+    pull(event_ticker) |>
+    map(\(e) get_event(e)) |>
+    list_rbind()
+  
+  cat("Fetching orderbooks...\n")
+  orderbooks <- markets |>
+    pull(market_ticker) |>
+    set_names() |>
+    map(\(t) get_orderbook(t))
+  
+  list(
+    series     = series,
+    events     = events,
+    markets    = markets,
+    orderbooks = orderbooks
+  )
+}
+```
+
+Run it in the morning just after the market opens:
+
+```{r}
+library(here)
+
+snapshot <- readRDS(here("monitor/SandP-volitility-april-1/data/snapshot_apr1.rds"))
+# run only when the market is live
+# snapshot <- get_market_snapshot("KXINX")
+snapshot$markets |> select(market_ticker, title, yes_bid, no_bid, implied_prob)
+```
+
+The `KXINX` series only has open markets during trading hours. If you run this outside market hours it will return NULL --- try `status = "all"` to see recent settled markets instead.
+
+------------------------------------------------------------------------
+
+## Part 2: Retrieving Historic S&P 500 Price Data
+
+With `tidyquant` we can pull 90 days of S&P 500 closing prices from Yahoo Finance using the function `tq_get()`. We then compute log daily returns (`mutate(daily_return = log(close / lag(close)))`) which are the standard input for geometric Brownian motion (GBM) models.
+
+```{r}
+# The following code will only run if the market is open; since I'm publishing after market close, I'm reading in the data manually
+
+# Use the following code when the market is open
+# sp500 <- tq_get("^GSPC",
+#                  from = Sys.Date() - 90,
+#                  to   = Sys.Date()) |>
+#   select(date, close) |>
+#   arrange(date) |>
+#   mutate(daily_return = log(close / lag(close))) |>
+#   drop_na()
+
+# reading in April 1 data
+
+
+sp500    <- readRDS("data/sp500_apr1.rds")
+vix      <- readRDS("data/sp500_apr1.rds")
+params   <- readRDS("data/sp500_apr1.rds")
+mu     <- params$mu
+sigma  <- params$sigma
+S0     <- params$S0
+ 
+mu    <- mean(sp500$daily_return)
+sigma <- sd(sp500$daily_return)
+S0    <- tail(sp500$close, 1)
+ 
+cat("Current S&P:", S0, "\n")
+cat("Daily drift (mu):", round(mu, 5), "\n")
+cat("Daily volatility (sigma):", round(sigma, 5), "\n")
+```
+
+Log returns are used rather than simple returns because they're symmetric, additive across time, and align with the assumptions of the geometric Brownian motion model we'll use in the simulation. `mu` is the average daily drift and `sigma` is the daily standard deviation --- the two parameters that fully describe our price process.
+
+------------------------------------------------------------------------
+
+## Part 3: VIX Volatility Adjustment
+
+Today's true uncertainty is influenced by historic volatility. The VIX (the CBOE Volatility Index) measures the market's expectation of near-term volatility implied by S&P 500 options. We can again use `tq_get()` to return VIX data to adjust our historical sigma up or down based on current market conditions.
+
+```{r}
+vix <- tq_get("^VIX",
+               from = Sys.Date() - 90,
+               to   = Sys.Date()) |>
+  select(date, close) |>
+  arrange(date)
+ 
+vix_current <- tail(vix$close, 1)
+vix_avg     <- mean(vix$close, na.rm = TRUE)
+vol_scalar  <- vix_current / vix_avg
+
+sigma_adjusted <- sigma * vol_scalar
+ 
+cat("Current VIX:", round(vix_current, 2), "\n")
+cat("90-day avg VIX:", round(vix_avg, 2), "\n")
+cat("Vol scalar:", round(vol_scalar, 3), "\n")
+cat("Adjusted sigma:", round(sigma_adjusted, 5), "\n")
+```
+
+A `vol_scalar` value greater than 1 implies that today's uncertainty is higher than history suggests. Therefore, we widen our simulation.
+
+When it's below 1, it's the opposite: conditions are calmer than usual.
+
+On April 1, 2026, with the VIX at 25.25 vs a 90-day average of 20.49, the scalar was 1.23. This reflects genuine macro uncertainty, driven by a major presidential announcement after trading closes.
+
+One important caveat: using `vix_current / vix_avg` as a direct scalar on historical sigma is a practitioner heuristic, not a formally established methodology. It is directionally sound --- the VIX can be incorporated into frameworks to dynamically adjust risk exposure during periods of elevated implied volatility --- but the specific ratio approach is a simplification. More rigorous approaches include GARCH models that formally estimate time-varying volatility, or directly converting the VIX to a daily sigma by dividing by √252 and using that as the simulation input rather than scaling historical sigma.
+
+------------------------------------------------------------------------
+
+## Part 4: Monte Carlo Simulation
+
+We simulate 100,000 possible end-of-day S&P 500 prices using geometric Brownian motion. Each simulated price is drawn from a log-normal distribution parameterized by our adjusted mu and sigma.
+
+```{r}
+run_monte_carlo <- function(S0, mu, sigma, n_sim = 100000) {
+  simulated_returns <- rnorm(n_sim, mean = mu, sd = sigma)
+  simulated_prices  <- S0 * exp(simulated_returns)
+  tibble(sim_price = simulated_prices)
+}
+ 
+sims <- run_monte_carlo(S0, mu, sigma_adjusted)
+summary(sims$sim_price)
+```
+
+The formula `S0 * exp(return)` is the standard geometric Brownian motion one-step update. Using `exp()` ensures simulated prices are always positive and correctly handles the compounding nature of returns. Running 100,000 simulations gives us a stable empirical distribution to compare against Kalshi's market.
+
+------------------------------------------------------------------------
+
+## Part 5: Comparing Model vs Market
+
+The final step is parsing the Kalshi market tickers into price range buckets and computing what fraction of our simulated prices fall in each bucket.
+
+### Parsing bucket boundaries
+
+Kalshi encodes the price range directly in the market ticker. `B6612` means the bucket starting at 6,612, `T6674` means above 6,674, and `T5975` means below 5,975. We extract these with regex:
+
+```{r}
+parse_buckets <- function(markets) {
+  markets |>
+    mutate(
+      lower = case_when(
+        str_detect(market_ticker, "-T6")  ~ as.numeric(str_extract(market_ticker, "(?<=-T)[\\d.]+")),
+        str_detect(market_ticker, "-T59") ~ 0,
+        str_detect(market_ticker, "-B")   ~ as.numeric(str_extract(market_ticker, "(?<=-B)[\\d.]+")),
+        TRUE ~ NA_real_
+      ),
+      upper = case_when(
+        str_detect(market_ticker, "-T6")  ~ Inf,
+        str_detect(market_ticker, "-T59") ~ as.numeric(str_extract(market_ticker, "(?<=-T)[\\d.]+")),
+        str_detect(market_ticker, "-B")   ~ as.numeric(str_extract(market_ticker, "(?<=-B)[\\d.]+")) + 25,
+        TRUE ~ NA_real_
+      )
+    )
+}
+ 
+buckets <- parse_buckets(snapshot$markets)
+```
+
+### Computing edge
+
+The whole point of this exercise, which can also be a framework for markets outside of quant trading, is to determine the difference between our model's probability and Kalshi's implied probability for each bucket. Our "edge" determines which is more likely: a bucket is more likely to resolve YES (positive), or Kalshi is pricing something our model thinks is unlikely, resolving to NO (negative).
+
+```{r}
+compare_probabilities <- function(buckets, sims) {
+  buckets |>
+    mutate(
+      model_prob = map2_dbl(lower, upper, \(lo, hi) {
+        mean(sims$sim_price >= lo & sims$sim_price < hi)
+      }),
+      edge     = model_prob - implied_prob,
+      edge_pct = round(edge * 100, 1)
+    ) |>
+    select(market_ticker, lower, upper, implied_prob, model_prob, edge, edge_pct) |>
+    arrange(desc(abs(edge)))
+}
+ 
+comparison <- compare_probabilities(buckets, sims)
+
+library(gt)
+
+comparison |> 
+  filter(model_prob > 0.01) |> 
+  select(market_ticker, lower, upper, implied_prob, model_prob, edge) |> 
+  gt() |>
+  tab_header(
+    title    = "Model vs Market: Top 10 Edges",
+    subtitle = "S&P 500 closing price buckets — April 1, 2026"
+  ) |>
+  cols_label(
+    market_ticker = "Market",
+    lower         = "Lower",
+    upper         = "Upper",
+    implied_prob  = "Kalshi Prob",
+    model_prob    = "Model Prob",
+    edge          = "Edge"
+  ) |>
+  fmt_number(columns = c(lower, upper), decimals = 0, use_seps = TRUE) |>
+  fmt_percent(columns = c(implied_prob, model_prob, edge), decimals = 1) |>
+  tab_style(
+    style = cell_fill(color = "#fff3cd"),
+    locations = cells_body(rows = edge > 0)
+  ) |>
+  tab_style(
+    style = cell_fill(color = "#f8d7da"),
+    locations = cells_body(rows = edge < 0)
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) |>
+  tab_footnote("Edge = Model Prob minus Kalshi implied probability. Red = market more bullish than model. Yellow = model more bullish than market.") 
+```
+
+------------------------------------------------------------------------
+
+## Interpretation
+
+Once again, this is an exercise in data science, not securities or prediction market trading.
+
+On April 1, 2026, the model and the prediction market tell very different stories.
+
+Kalshi priced the S&P closing around 6,587-6,637 with 67% combined probability, implying an expected \~1.9% rally from the prior close of 6,528. Our GBM model, anchored to recent history and VIX-adjusted volatility, centered the distribution around 6,487-6,537 with 49.7% combined probability, i.e. no strong directional view.
+
+Our greatest edge, i.e. what our model believes to be the most highly mis-priced asset, is ticker `KXINX-26APR01H1600-B6612`. Kalshi believes it has a 40% chance of resolving to YES, whereas our model believes it has a 5.3% chance of resolving to YES. That is nearly a 35% difference!
+
+This divergence is informative, for the market is pricing in information that our backward-looking historical model doesn't see. It is likely due to the fact that President Trump is set to make televised address tonight.
+
+It's worth asking *why*, not just *who is right*.
+
+It's also worth being explicit about a core limitation of GBM: it assumes volatility is constant over time. Volatility changes, and it especially increases when the leader of the United States has signaled to the world he intends to finally address the nation after a month of conflict that he still hasn't declared as a war. Is that going to change after tonight?
+
+Prediction markets give us an alternative insight as they aggregate beliefs of many participants. They too are highly volatile (in reliability rather than price); what would happen if I ran this analysis closer to today's market close? Therefore, the gap between what a model says and what the prediction market says should inspire us to ask more questions, not declare something to be true.
+
+### What does VIX Tell Us?
+
+We know less than usual today.
+
+Our sigma widened from 0.00916 to 0.01129, and that shows that the range of plausible outcomes is broader than what we might expect, and tonight's presidential address isn't helping.
+
+Our model still expects the S&P to close between 6,487-6537, which means our model thinks it will stay flat or it will drop compared to yesterday's close of 6528, whereas Kalshi believes that the most likely close will be between 6600-6637.
+
+VIX is telling us to be less confident, and it didn't tell us to be bullish.
+
+## Conclusion
+
+If you trust the prediction market, the crowd is pricing in something specific.
+
+If you trust the model, the crowd is overreacting.
+
+The VIX scalar cannot resolve the disagreement, but it makes our uncertainty more honest.
+
+------------------------------------------------------------------------
+
+## What's Next
+
+This pipeline is a foundation.
+
+The full pipeline runs end-to-end in under 30 seconds each morning and produces a clean comparison table ready for journaling, visualization, or further modeling.
+
+I am not delivering trading advice, I am simply providing a resource that can be re-purposed. If you are interested in doing this kind of analysis on weather or politics, simply swap out the Kalshi market ticker with the respective market, and swap out `tidyquant` with a package that contains an API for climate or polling data.
+
+If you have any questions, comments or concerns please [email me.](mailto:peter@solplots.com)
+
+## Resolution
+
+On April 1, 2026, the S&P 500 closed at 6,575.32.
+
+Kalshi was most confident in bucket `B6612` (6,612-6,637), which also happens to be the bucket with the greatest divergence from our model (about -35%). Our model was most confident in bucket `B6512` (6,512-6,537), which also happens to be the bucket with greatest **positive** difference with Kalshi (at 12.4%). Both buckets resolved to NO.
+
+What happened was the market ended up in a spot where both sides were the least certain.
+
+That is bucket `B6562` (6,562-6,587), the one bucket where our model and Kalshi agreed the most. Kalshi gave it an 11% chance of happening, and our model said 10.5%, a difference (edge) of just 0.5%.
+
+A day defined by anticipation (a presidential address, an uncertain geopolitical backdrop, and a VIX scalar telling us to widen our uncertainty) resolves in a spot where neither the crowd nor the model had strong conviction.
+
+The Claude LLM found this to be poetic, a loud disagreement with a quiet answer, and I agree.
+
+I am not sure what prompted me to report on Kalshi and the S&P 500, I just felt like it would be a fun way to learn how to pull data from different sources and synthesize a resolution.

@@ -1,0 +1,426 @@
+---
+title: "Travel on Tap: How R Can Help Recommend Us a Beer While On The Road"
+subtitle: "A data science walkthrough — missing data, cosine similarity, and a Shiny app for travelling beer lovers"
+author: "Peter Fortunato"
+date: "2026-03-17"
+categories: [R, Shiny, data-science, beer]
+image: "images/beer_image.jpg"   # add your own preview image
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    code-summary: "Show code"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo    = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+library(tidyverse)
+library(scales)
+library(DataExplorer)
+```
+
+## The Idea
+
+I travel a fair amount, and one of my favorite things to do in a new city is walk into a craft brewery and order something local. The problem: I never know what to order. I know I like Boulevard Wheat and Stella Artois --- light, low-bitterness, easy-drinking --- but I have no idea whether the brewery's flagship IPA is going to knock me sideways or whether their wheat ale is worth trying.
+
+So I built **Travel On Tap**: a Shiny app that takes your taste preferences (alcohol level, bitterness, style) and recommends similar craft beers available in whatever U.S. state you're visiting. This post walks through the data science behind it --- including what turned out to be a genuinely interesting missing data problem.
+
+------------------------------------------------------------------------
+
+## The Data
+
+The backbone of this project is the [craft-beers-dataset](https://github.com/nickhould/craft-beers-dataset) by nickhould, scraped from a canned craft beer catalogue circa 2017. It ships as two CSVs that join on `brewery_id`:
+
+-   **`beers.csv`** --- \~2,410 rows: beer name, style, ABV (alcohol by volume), IBU (bitterness), brewery ID
+-   **`breweries.csv`** --- \~558 rows: brewery name, city, U.S. state
+
+A few things to know upfront about this dataset's **sampling frame** --- something worth always establishing before you start modelling:
+
+-   It's canned craft beer only. Major commercial brands (Stella Artois, Boulevard Wheat, most imports) are absent.
+-   It's a 2017 snapshot. Breweries that opened or closed since then won't be reflected.
+-   It skews toward independent U.S. craft breweries, which is exactly what we want for a travel recommendation tool.
+
+```{r load-data}
+beers <- read_csv(
+  "https://raw.githubusercontent.com/nickhould/craft-beers-dataset/master/data/processed/beers.csv",
+  show_col_types = FALSE
+)
+
+breweries <- read_csv(
+  "https://raw.githubusercontent.com/nickhould/craft-beers-dataset/master/data/processed/breweries.csv",
+  show_col_types = FALSE
+)
+```
+
+### Joining the tables
+
+The join requires a little care. Both CSVs have columns named `name` and `id`, but they mean different things in each table. Rename before joining to avoid silent column collisions:
+
+```{r join}
+df <- beers |>
+  rename(beer_name = name, beer_id = id) |>
+  left_join(
+    breweries |> rename(brewery_name = name),
+    by = c("brewery_id" = "id")
+  ) |>
+  select(!c("...1.x", "...1.y")) |>
+  mutate(
+    state = str_trim(state),
+    style = str_trim(style)
+  )
+```
+
+A quick missingness check confirms the join worked --- `city` and `state` are fully populated:
+
+```{r profile-missing}
+DataExplorer::profile_missing(df)
+```
+
+------------------------------------------------------------------------
+
+## The Missing Data Problem
+
+Right away, one column stands out: **IBU is 41.7% missing**.
+
+That's not a rounding error or a data entry oversight --- it's a structural feature of the dataset. Before imputing a single value, the right move is to diagnose *why* it's missing. There are three possibilities, and they lead to very different solutions:
+
+| Mechanism                                 | What it means                                   | Implication                                   |
+|-------------------------------------------|-------------------------------------------------|-----------------------------------------------|
+| **MCAR** --- Missing Completely at Random | Missingness is unrelated to any variable        | Simple mean/median imputation is unbiased     |
+| **MAR** --- Missing at Random             | Missingness depends on *observed* variables     | Impute using the variables it depends on      |
+| **MNAR** --- Missing Not at Random        | Missingness depends on the missing value itself | Needs careful modelling; can't be fully fixed |
+
+We ran three diagnostic checks.
+
+### Check 1: Is missingness associated with beer style?
+
+```{r ibu-missing-by-style}
+ibu_missing_by_style <- df |>
+  mutate(ibu_missing = is.na(ibu)) |>
+  group_by(style) |>
+  summarise(
+    n_beers       = n(),
+    n_missing_ibu = sum(ibu_missing),
+    pct_missing   = mean(ibu_missing)
+  ) |>
+  arrange(desc(pct_missing))
+
+ibu_missing_by_style |> print(n = 20)
+```
+
+The pattern is immediate and informative. Cider, Mead, Shandy, and Braggot are 100% missing --- but these aren't really beers in the traditional sense, so IBU is conceptually inapplicable. Beyond those, Belgian styles, light lagers, and specialty styles show 70--83% missingness.
+
+This is a **MAR signal**: missingness is systematically related to the `style` variable, which we can observe.
+
+### Check 2: Is missingness associated with ABV?
+
+```{r ibu-missing-by-abv}
+df |>
+  mutate(ibu_missing = is.na(ibu)) |>
+  group_by(ibu_missing) |>
+  summarise(
+    n          = n(),
+    mean_abv   = mean(abv, na.rm = TRUE),
+    median_abv = median(abv, na.rm = TRUE)
+  )
+```
+
+This is almost perfectly flat --- the mean ABV difference between missing and non-missing groups is less than 0.0003. ABV does not predict IBU missingness. This rules out a simple `IBU ~ ABV` regression imputation, since ABV adds essentially no information once style is accounted for.
+
+### Check 3: Is missingness associated with geography?
+
+```{r ibu-missing-by-state}
+df |>
+  mutate(ibu_missing = is.na(ibu)) |>
+  group_by(state) |>
+  summarise(
+    n_beers     = n(),
+    pct_missing = mean(ibu_missing)
+  ) |>
+  arrange(desc(pct_missing)) |>
+  print(n = 15)
+```
+
+Some states look alarming --- South Dakota is 100% missing, Michigan is 76%. But this is almost certainly **confounding**: states that happen to have more Belgian or specialty-style breweries will look like geography matters when style is actually the driver.
+
+### Diagnosis: MAR by style group
+
+The evidence points clearly to **Missing At Random, primarily by style**. That has a concrete implication: if we impute IBU using style-group medians, we're using exactly the variable that explains the missingness pattern. This is principled, not just convenient.
+
+Three approaches we considered:
+
+| Approach                          | Verdict                                                                                       |
+|-----------------------------------|-----------------------------------------------------------------------------------------------|
+| Global mean/median imputation     | ❌ Ignores style --- a high-IBU IPA would get the same fill as a low-IBU wheat ale            |
+| `mice` / multiple imputation      | ❌ Overkill --- ABV has no marginal predictive value, so there's nothing for a model to learn |
+| **Style-group median imputation** | ✅ Simple, defensible, matches the missingness mechanism                                      |
+
+One honest caveat: median imputation collapses within-group variance --- every imputed beer in a style group gets the same IBU value. For a recommender, this is fine. For inference (e.g. a hypothesis test about IBU), it would introduce bias. Know your downstream use case before choosing an imputation strategy.
+
+------------------------------------------------------------------------
+
+## Data Cleaning
+
+### Remove non-beer styles
+
+Cider, Mead, Shandy, Braggot, Low Alcohol Beer, and American Malt Liquor are removed --- IBU is not meaningful for these categories, and they'd pollute beer-to-beer similarity calculations.
+
+```{r remove-non-beers}
+non_beers <- c("Cider", "Mead", "Shandy", "Braggot",
+               "Low Alcohol Beer", "American Malt Liquor")
+
+df_clean <- df |>
+  filter(!style %in% non_beers, !is.na(style))
+```
+
+### Build style groups
+
+The raw `style` column has \~100 distinct values. For the recommender, we collapse these into 10 interpretable groups using `str_detect()` on keywords:
+
+```{r style-groups}
+df_clean <- df_clean |>
+  mutate(style_group = case_when(
+    str_detect(style, "IPA|India Pale")                       ~ "IPA",
+    str_detect(style, "Stout|Porter")                         ~ "Stout / Porter",
+    str_detect(style, "Wheat|Wit|Hefeweizen|Weizen")          ~ "Wheat / Wit",
+    str_detect(style, "Lager|Pilsner|Pilsener|Kölsch|Kolsch") ~ "Lager / Pilsner",
+    str_detect(style, "Pale Ale|APA")                         ~ "Pale Ale",
+    str_detect(style, "Amber|Red Ale|Red Lager")              ~ "Amber / Red",
+    str_detect(style, "Sour|Lambic|Gose|Berliner")            ~ "Sour / Wild",
+    str_detect(style, "Saison|Farmhouse|Belgian")             ~ "Belgian / Saison",
+    str_detect(style, "Barleywine|Imperial|Strong")           ~ "Strong / Barleywine",
+    str_detect(style, "Blonde|Golden")                        ~ "Blonde / Golden",
+    TRUE                                                       ~ "Other"
+  ))
+```
+
+### Impute IBU and ABV
+
+```{r impute}
+# IBU — style-group median
+style_ibu_medians <- df_clean |>
+  group_by(style_group) |>
+  summarise(ibu_median = median(ibu, na.rm = TRUE), .groups = "drop")
+
+df_imputed <- df_clean |>
+  left_join(style_ibu_medians, by = "style_group") |>
+  mutate(
+    ibu_imputed = is.na(ibu),
+    ibu         = coalesce(ibu, ibu_median)
+  ) |>
+  select(-ibu_median)
+
+# ABV — same approach (only 2.6% missing, MCAR, scattered across all style groups)
+style_abv_medians <- df_imputed |>
+  group_by(style_group) |>
+  summarise(abv_median = median(abv, na.rm = TRUE), .groups = "drop")
+
+df_imputed <- df_imputed |>
+  left_join(style_abv_medians, by = "style_group") |>
+  mutate(
+    abv_imputed = is.na(abv),
+    abv         = coalesce(abv, abv_median)
+  ) |>
+  select(-abv_median)
+```
+
+A quick sanity check --- do the imputed IBU values make domain sense?
+
+```{r imputation-check}
+df_imputed |>
+  group_by(style_group, ibu_imputed) |>
+  summarise(
+    n          = n(),
+    mean_ibu   = round(mean(ibu), 1),
+    median_ibu = round(median(ibu), 1),
+    .groups    = "drop"
+  ) |>
+  arrange(style_group, ibu_imputed)
+```
+
+IPAs at 70 IBU, wheats at 18, sours at 8.5 --- anyone who drinks craft beer will nod at these numbers.
+
+### Deduplicate
+
+The same beer sometimes appears in multiple can sizes (12 oz and 16 oz). We keep the first occurrence per `beer_name` + `brewery_id`:
+
+```{r dedup}
+df_imputed <- df_imputed |>
+  distinct(beer_name, brewery_id, .keep_all = TRUE)
+```
+
+This brings us to **\~2,100 unique beers** across \~550 U.S. breweries in 51 states.
+
+### Dataset summary
+
+```{r dataset-summary}
+df_imputed |>
+  group_by(style_group) |>
+  summarise(
+    n_beers     = n(),
+    n_breweries = n_distinct(brewery_id),
+    n_states    = n_distinct(state),
+    mean_abv    = round(mean(abv) * 100, 1),
+    mean_ibu    = round(mean(ibu), 1),
+    pct_ibu_imp = round(mean(ibu_imputed) * 100, 1)
+  ) |>
+  arrange(desc(n_beers))
+```
+
+IPA is dominant --- 574 beers represented in 49 states, which tells you everything about American craft beer culture in 2017.
+
+------------------------------------------------------------------------
+
+## Building the Recommender
+
+### The intuition: beers as vectors
+
+The recommender works by representing each beer as a point in a multi-dimensional "flavour space". Two beers that are close together in that space are similar; two beers far apart are not.
+
+Each beer gets three types of features:
+
+1.  **Normalised ABV** --- rescaled to \[0, 1\] so it's on the same footing as IBU
+2.  **Normalised IBU** --- same
+3.  **Style group dummies** --- one-hot encoded, so "IPA" becomes a 1 in the IPA column and 0 everywhere else
+
+```{r feature-matrix}
+df_features <- df_imputed |>
+  mutate(
+    abv_scaled  = rescale(abv),
+    ibu_scaled  = rescale(ibu),
+    style_dummy = 1
+  ) |>
+  pivot_wider(
+    names_from   = style_group,
+    values_from  = style_dummy,
+    values_fill  = 0,
+    names_prefix = "style_"
+  )
+
+feature_matrix <- df_features |>
+  select(beer_id, abv_scaled, ibu_scaled, starts_with("style_")) |>
+  column_to_rownames("beer_id") |>
+  as.matrix()
+
+dim(feature_matrix)
+```
+
+### Cosine similarity
+
+We measure similarity using **cosine similarity** --- the cosine of the angle between two vectors. A score of 1.0 means the beers point in exactly the same direction in flavour space (identical profile). A score of 0 means they're orthogonal (no similarity).
+
+$$\text{similarity}(A, B) = \frac{A \cdot B}{\|A\| \cdot \|B\|}$$
+
+Why cosine rather than Euclidean distance? Cosine similarity is scale-invariant --- it measures the *direction* of the flavour profile, not the magnitude. Two beers can have different absolute ABV values but still be "pointing the same direction" if their overall profile (light + crisp + wheat-forward) matches.
+
+### The recommender function
+
+Rather than searching by beer name (which breaks down quickly once you realise the dataset only covers canned craft beers), we let users describe their own taste profile directly via sliders --- ABV, IBU, and preferred style. We synthesise a virtual "target vector" from those inputs and find the nearest neighbours:
+
+```{r recommender-function}
+get_recommendations_by_profile <- function(
+    target_abv,
+    target_ibu,
+    target_style,
+    top_n          = 10,
+    filter_state   = NULL,
+    min_similarity = 0.90
+) {
+
+  # Build synthetic feature vector from user inputs
+  target_vec <- c(
+    abv_scaled = rescale(target_abv, from = range(df_imputed$abv)),
+    ibu_scaled = rescale(target_ibu, from = range(df_imputed$ibu)),
+    setNames(
+      as.integer(
+        paste0("style_", unique(df_imputed$style_group)) == paste0("style_", target_style)
+      ),
+      paste0("style_", unique(df_imputed$style_group))
+    )
+  )
+
+  target_vec <- target_vec[colnames(feature_matrix)]
+
+  # Cosine similarity: target vs every beer in the dataset
+  sims <- apply(feature_matrix, 1, function(x) {
+    sum(target_vec * x) / (sqrt(sum(target_vec^2)) * sqrt(sum(x^2)))
+  })
+
+  result <- df_imputed |>
+    mutate(similarity = sims[as.character(beer_id)]) |>
+    arrange(desc(similarity)) |>
+    filter(similarity >= min_similarity)
+
+  if (!is.null(filter_state)) {
+    result <- result |> filter(state %in% filter_state)
+  }
+
+  result |>
+    select(beer_name, brewery_name, city, state,
+           style, abv, ibu, ibu_imputed, similarity) |>
+    slice_head(n = top_n)
+}
+```
+
+The `min_similarity` threshold is important --- without it, the function will return beers even when the dataset has no good matches for a given state, producing nonsensical recommendations (we saw it return Imperial IPAs for someone who wanted a wheat ale simply because nothing else was left). A threshold of 0.90 keeps the results honest.
+
+### Test drive: "What should I drink in Oregon?"
+
+I like Boulevard Wheat (\~4.4% ABV, \~14 IBU) and Stella Artois (\~5.0% ABV, \~24 IBU). Averaging those and picking Wheat / Wit as the style:
+
+```{r test-oregon}
+get_recommendations_by_profile(
+  target_abv   = 0.047,
+  target_ibu   = 19,
+  target_style = "Wheat / Wit",
+  top_n        = 10,
+  filter_state = "OR"
+)
+```
+
+Eight solid results --- Hefeweizens and Witbiers from Portland and Bend, all within a tight similarity band. The threshold correctly excluded the Imperial IPAs that appeared before we added it.
+
+------------------------------------------------------------------------
+
+## The Shiny App
+
+All of this wrangling and the recommender function live in `global.R`, which Shiny runs once at startup before any user session begins. This is the right pattern for expensive data prep --- load once, serve many.
+
+The app itself has three panels:
+
+-   **Recommendations** --- a sortable DT table with all results, including an `est` badge on beers where IBU was imputed
+-   **Flavour Map** --- a Plotly scatter of ABV vs IBU, showing the full style-group cloud in grey, your recommendations in copper, and your taste profile as a gold star
+-   **About** --- methodology notes including the IBU imputation story
+
+Please find the [Shiny App](https://solplots.shinyapps.io/beer_recommender/) beer recommender here.
+
+------------------------------------------------------------------------
+
+## What I'd Do Differently (or Next)
+
+A few honest limitations worth noting, and natural extensions if you want to take this further:
+
+**Data vintage** --- The dataset is from 2017. A lot has changed in the craft beer world since then. A live data source (e.g. Untappd API, BreweryDB) would make this genuinely useful rather than a learning exercise.
+
+**Feature weighting** --- Right now ABV, IBU, and style group are all weighted equally in the cosine similarity. In practice, style group probably matters more than a 0.5% ABV difference. Adding weights to the feature vector is a one-line change and worth experimenting with.
+
+**Multi-beer input** --- Instead of asking users to input a taste profile, let them name multiple beers and average their feature vectors. This was the original idea, but it requires every reference beer to be in the dataset --- which ruled out Stella and Boulevard Wheat immediately.
+
+**The coffee version** --- The same architecture (feature vectors + cosine similarity) works perfectly for coffee. ABV → caffeine level, IBU → acidity, style → roast profile. That's the next post.
+
+------------------------------------------------------------------------
+
+## Wrapping Up
+
+What started as "I want to find good beer when I travel" turned into a surprisingly satisfying data science problem. The missing IBU data alone gave us a clean worked example of MCAR vs MAR diagnosis, the limits of global imputation, and why knowing your missingness mechanism matters before you touch a single `coalesce()`.
+
+The full code --- `global.R`, `ui.R`, `server.R` --- will be available on GitHub coming soon. If you find a great wheat ale in Oregon because of this, let me know.
+
+------------------------------------------------------------------------
+
+*Dataset: [nickhould/craft-beers-dataset](https://github.com/nickhould/craft-beers-dataset) · Built with R, Shiny, Plotly, and a healthy appreciation for low-IBU beers.*

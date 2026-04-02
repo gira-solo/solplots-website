@@ -3,7 +3,7 @@ title: "Kalshi Monitor"
 listing:
   type: default
   sort: "date desc"
-  contents: monitor/*
+  contents: monitor/*/index.qmd
 ---
 
 Prediction markets like Kalshi claim to be the new way of reporting on world events. I'm a bit skeptical, so let's test their claim by putting on a data journalist's hat and pulling data from their public API.

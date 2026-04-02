@@ -1,9 +1,0 @@
----
-title: "Plot with Me"
-listing:
-  type: default
-  sort: "date desc"
-  contents: apps/*
----
-
-Browse through the data sets I've interactively visualized with the help of Shiny.

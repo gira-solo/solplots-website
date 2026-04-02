@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title></title>
+<title>Resources</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,49 +62,9 @@ ul.task-list li input[type="checkbox"] {
 <link rel="icon" type="image/png" sizes="32x32" href="favicon32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const navbarHTML = `
-    <nav id="sticky-navbar" class="navbar-hidden">
-      <div class="navbar-container">
-        <a href="/index.html" class="navbar-logo">
-          <img src="/images/home_image.png" alt="Solplots Logo">
-        </a>
-        <ul class="navbar-menu">
-          <li><a href="#services">Services</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#blog">Blog</a></li>
-          <li><a href="/demos.html">Demos</a></li>
-          <li><a href="/monitor.html">Kalshi Monitor</a></li>
-        </ul>
-      </div>
-    </nav>
-  `;
-
-  document.body.insertAdjacentHTML('afterbegin', navbarHTML);
-
-  let lastScroll = 0;
-  const navbar = document.getElementById('sticky-navbar');
-
-  window.addEventListener('scroll', function() {
-    const currentScroll = window.pageYOffset;
-
-    if (currentScroll <= 100) {
-      navbar.classList.add('navbar-hidden');
-    } else if (currentScroll > lastScroll && currentScroll > 100) {
-      navbar.classList.add('navbar-hidden');
-    } else {
-      navbar.classList.remove('navbar-hidden');
-    }
-
-    lastScroll = currentScroll;
-  });
-});
-</script>
 
 
 <link rel="stylesheet" href="styles.scss">
-<link rel="stylesheet" href="custom-landing.css">
 </head>
 
 <body class="nav-fixed">
@@ -120,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="./index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -132,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
  <span class="menu-text">Kalshi Monitor</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resources.html" rel="" target="">
+    <a class="nav-link active" href="./resources.html" rel="" target="" aria-current="page">
  <span class="menu-text">Resources</span></a>
   </li>  
 </ul>
@@ -143,180 +103,76 @@ document.addEventListener('DOMContentLoaded', function() {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#books" id="toc-books" class="nav-link active" data-scroll-target="#books">Books</a></li>
+  <li><a href="#blogs-and-projects" id="toc-blogs-and-projects" class="nav-link" data-scroll-target="#blogs-and-projects">Blogs and Projects</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Resources</h1>
+</div>
 
 
 
-<div class="hero-section">
-<p><img src="images/home_image.png" class="hero-logo img-fluid"></p>
-<div class="hero-quote">
-<p>Ad astra per tabula</p>
-</div>
-</div>
-<div id="services" class="services-section">
-<section id="services" class="level2 services-header">
-<h2 class="anchored" data-anchor-id="services">Services</h2>
-<p>My name is Peter, and plots are the currency connecting data with information and compelling narratives. My approach emphasizes repeatable, process-driven methods to compose creative communication to help organizations and individuals alike to feel fully equipped in making informed decisions.</p>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>These are resources I think are useful.</p>
+<section id="books" class="level2">
+<h2 class="anchored" data-anchor-id="books">Books</h2>
+<p><a href="https://r4ds.hadley.nz/"><strong>R for Data Science (2e)</strong></a><br>
+<em>Hadley Wickham, Mine Cetinkaya-Rundel &amp; Garrett Grolemund</em><br>
+Whenever someone asks me how to get started with learning R programming, I always point them here.</p>
+<p><a href="https://r-graphics.org/"><strong>R Graphics Cookbook, 2nd edition</strong></a><br>
+<em>Winston Chang</em><br>
+This book focuses on R’s plotting capabilities, primarily through the ggplot2 library. I used this resource when I made the intentional decision to sit down and learn how to code plots in R. It’s a cookbook meant to cover the possible situations you may encounter when plotting data, so it isn’t too comprehensive. I didn’t have really any programming experience before I started reading this book.</p>
+<p><a href="https://dcl-prog.stanford.edu/"><strong>Functional Programming</strong></a><br>
+<em>Sara Altman, Bill Behrman, Hadley Wickham</em> A practical introduction functional programming in the tidyverse.</p>
+<p><a href="https://ggplot2-book.org/"><strong>ggplot2: Elegant Graphics for Data Analysis</strong></a><br>
+<em>Hadley Wickham</em><br>
+This is the comprehensive resource for ggplot2, explained in through detail by Hadley Wickham, the author of several other key R data science package libraries.</p>
+<p><a href="https://r.geocompx.org/"><strong>Geocomputation with R</strong></a><br>
+<em>Robin Lovelace, Jakub Nowosad and Jannes Muenchow</em><br>
+Learn how to turn R into a GIS by using the <a href="https://r-spatial.github.io/sf/">simple features (sf)</a> package.</p>
 </section>
-<div class="services-grid">
-<div class="service-card">
-<p><span class="service-icon">📊</span></p>
-<section id="statistical-consultation" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-consultation">Statistical Consultation</h3>
-<p>Deep dive into your data challenges with rigorous statistical methods. From experimental design to hypothesis testing, I help you extract meaningful insights and make data-driven decisions with confidence.</p>
-<div class="service-tools">
-<p><strong>Tools:</strong> R, Python, Bayesian methods, causal inference</p>
-</div>
-</section>
-</div>
-<div class="service-card">
-<p><span class="service-icon">📖</span></p>
-<section id="analytical-storytelling" class="level3">
-<h3 class="anchored" data-anchor-id="analytical-storytelling">Analytical Storytelling</h3>
-<p>Transform your findings into narratives that resonate. I craft compelling data stories that bridge the gap between technical analysis and human understanding, making complex insights accessible to any audience.</p>
-<div class="service-tools">
-<p><strong>Tools:</strong> R Markdown, Quarto, D3.js, interactive visualizations</p>
-</div>
-</section>
-</div>
-<div class="service-card">
-<p><span class="service-icon">🎨</span></p>
-<section id="data-visualization-design" class="level3">
-<h3 class="anchored" data-anchor-id="data-visualization-design">Data Visualization &amp; Design</h3>
-<p>Create beautiful, functional visualizations that reveal patterns and drive understanding. From exploratory analysis to publication-ready graphics, every visualization tells a story.</p>
-<div class="service-tools">
-<p><strong>Tools:</strong> ggplot2, Plotly, Observable, Tableau</p>
-</div>
-</section>
-</div>
-<div class="service-card">
-<p><span class="service-icon">🎓</span></p>
-<section id="educational-services" class="level3">
-<h3 class="anchored" data-anchor-id="educational-services">Educational Services</h3>
-<p>Workshops, tutorials, and one-on-one mentoring in statistics, R programming, and data analysis. I make complex topics approachable through hands-on learning and real-world applications.</p>
-<div class="service-tools">
-<p><strong>Topics:</strong> R programming, statistical thinking, reproducible research</p>
-</div>
-</section>
-</div>
-<div class="service-card">
-<p><span class="service-icon">💻</span></p>
-<section id="custom-analytics-solutions" class="level3">
-<h3 class="anchored" data-anchor-id="custom-analytics-solutions">Custom Analytics Solutions</h3>
-<p>Build tailored analytical tools and dashboards for your specific needs. From Shiny apps to automated reporting pipelines, I create solutions that scale with your organization.</p>
-<div class="service-tools">
-<p><strong>Technologies:</strong> Shiny, Quarto, APIs, cloud deployment</p>
-</div>
-</section>
-</div>
-<div class="service-card">
-<p><span class="service-icon">🌐</span></p>
-<section id="remote-collaboration" class="level3">
-<h3 class="anchored" data-anchor-id="remote-collaboration">Remote Collaboration</h3>
-<p>Working as a digital nomad, I bring flexibility and global perspective to every project. Comfortable with async communication and distributed teams across time zones.</p>
-<div class="service-tools">
-<p><strong>Approach:</strong> Agile workflows, clear documentation, transparent communication</p>
-</div>
-</section>
-</div>
-</div>
-</div>
-<div id="about" class="about-section">
-<div>
-<p><img src="images/bio_photo.jpg" class="about-image img-fluid"></p>
-</div>
-<section id="about-me" class="level2 about-content">
-<h2 class="anchored" data-anchor-id="about-me">About Me</h2>
-<p>My name is Peter Maximilian Fortunato.</p>
-<p>I am from Kansas, the Sunflower State, whose motto is “Ad astra per aspera” or, “To the stars through difficulty”. It doesn’t have to be difficult, but rather tidy and organized, and the stars will align (more or less).</p>
-<p>Here at Solplots, I am committed to enabling everyone to see data and stories for themselves, to reproduce and share insights that are not just actionable but also grounded in clarity and mutual respect.</p>
-</section>
-</div>
-<div id="blog" class="blog-preview-section">
-<section id="recent-work" class="level2 blog-preview-header">
-<h2 class="anchored" data-anchor-id="recent-work">Recent Work</h2>
-<p>Explore some recent analyses, visualizations, and stories from the blog</p>
-</section>
-<div class="blog-ribbon">
-<div class="blog-tile">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://solplots.com/demos/BigMacIndex.html"><img src="demos/images/bic_mac_2025.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
-<div class="blog-tile-overlay">
-<h3 class="blog-tile-title anchored">
-<p>25 Years of the Big Mac Index</p>
-</h3>
-<p class="blog-tile-description">
-</p><p>Visualizing global currency valuation through the lens of a hamburger</p>
-<p></p>
-</div>
-</div>
-<div class="blog-tile">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://solplots.com/demos/PewMediaStudy.html"><img src="demos/images/pew_original.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
-<div class="blog-tile-overlay">
-<h3 class="blog-tile-title anchored">
-<p>Reproducing Pew Research’s ‘How the audiences of 30 major news sources differ in their levels of education’</p>
-</h3>
-<p class="blog-tile-description">
-</p><p>Let’s ask ClaudeAI to help us with identifying data stored in a string</p>
-<p></p>
-</div>
-</div>
-<div class="blog-tile">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://solplots.com/demos/ombReceipts.html"><img src="demos/images/2fpix3lvs1ld1-01.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
-<div class="blog-tile-overlay">
-<h3 class="blog-tile-title anchored">
-<p>Sources of U.S. Federal Revenue Over The Years Part 1</p>
-</h3>
-<p class="blog-tile-description">
-</p><p>Figuring out how to reproduce a plot found out in the wild</p>
-<p></p>
-</div>
-</div>
-<div class="blog-tile">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://solplots.com/demos/CalFires.html"><img src="demos/images/fighting_acres_2025.png" class="img-fluid figure-img"></a></p>
-</figure>
-</div>
-<div class="blog-tile-overlay">
-<h3 class="blog-tile-title anchored">
-<p>California forest fires acres battled by agency</p>
-</h3>
-<p class="blog-tile-description">
-</p><p>An exercise in effective use of color and axis labels</p>
-<p></p>
-</div>
-</div>
-</div>
-</div>
-<section id="ready-to-transform-your-data-into-insights" class="level2 cta-section">
-<h2 class="anchored" data-anchor-id="ready-to-transform-your-data-into-insights">Ready to transform your data into insights?</h2>
-<p>Let’s discuss how we can work together to solve your analytical challenges.</p>
-<p><a href="mailto:peter@solplots.com" class="cta-button">Get in Touch</a></p>
-</section>
-<!-- 
-INSTRUCTIONS FOR EMAIL:
-Replace "your.email@example.com" in the [Get in Touch] link above with your actual email address.
-For example: [Get in Touch](mailto:solplots@example.com){.cta-button}
--->
+<section id="blogs-and-projects" class="level2">
+<h2 class="anchored" data-anchor-id="blogs-and-projects">Blogs and Projects</h2>
+<p><a href="https://flowingdata.com/"><strong>FlowingData</strong></a><br>
+<em>Nathan Yau, Ph.D</em><br>
+Well-renown statistician and data visualization artist shares his work (also offers membership that includes tutorials and other learning materials).</p>
+<p><a href="https://nrennie.rbind.io/"><strong>Nicola Rennie</strong></a>, a data visualization specialist.</p>
+<p><a href="https://statisticsglobe.com/"><strong>Statistics Globe</strong></a><br>
+<em>Joachim Schork</em><br>
+A comprehensive statistics resource for R and Python.</p>
+<p><a href="https://r-graph-gallery.com/"><strong>R Graph Gallery</strong></a><br>
+<em>Yan Holtz</em><br>
+The “most extensive compilation of R-generated graphs” found on the internet, it contains over 400 examples of over 50 different plot types primarily focusing on R and ggplot2, with some base R plotting as well.</p>
+<p><a href="https://juliasilge.com/blog/"><strong>Julia Silge</strong></a> releases <a href="https://www.youtube.com/channel/UCTTBgWyJl2HrrhQOOc710kA">YouTube</a> videos along with each blog post, which are very straightforward and pragmatic analyses</p>
+<p><a href="https://outsiderdata.blog/"><strong>Outsider Data Science</strong></a><br>
+<em>Art Steinmetz</em><br>
+A former Wall Street CEO shares his data stories with R. Lot’s of different analyses all with reproducible code.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

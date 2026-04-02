@@ -21,12 +21,8 @@ website:
         href: demos.qmd
       - text: "Kalshi Monitor"
         href: monitor.qmd
-      - text: "Apps"
-        href: apps.qmd
       - text: "Resources"
         href: resources.qmd
-      - text: "Resume"
-        href: resume.qmd
   search: true
   sidebar: false
   

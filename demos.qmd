@@ -3,7 +3,7 @@ title: "Thoughts on Plots"
 listing:
   type: default
   sort: "date desc"
-  contents: demos/*.qmd
+  contents: demos/*/index.qmd
 ---
 
 This is a collection of my plots and their reproducible R scripts.

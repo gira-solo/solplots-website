@@ -1,8 +1,23 @@
 [
   {
+    "listing": "/demos.html",
+    "items": [
+      "/demos/TravelOnTap/index.html",
+      "/demos/BigMacIndex/index.html",
+      "/demos/PewMediaStudy/index.html",
+      "/demos/ombReceipts_Animate/index.html",
+      "/demos/ombReceipts/index.html",
+      "/demos/CalFires/index.html",
+      "/demos/CensusDc/index.html",
+      "/demos/bobross/index.html",
+      "/demos/llm_writes_gtfs_explorer/index.html",
+      "/demos/mta_art_explorer/index.html"
+    ]
+  },
+  {
     "listing": "/monitor.html",
     "items": [
-      "/monitor/sp-volitility-april-1.html"
+      "/monitor/SandP-volitility-april-1/index.html"
     ]
   }
 ]
