@@ -29,8 +29,8 @@ So together we shall build a complete pipeline in R:
 
 1.  Pull live from Kalshi's public API using the package `httr2` data of the S&P 500
 2.  Download 90 days of historic S&P 500 prices using `tidyquant`
-3.  Run a Monte Carlo simulation to estimate today's closing price distribution
-4.  Adjust with VIX volatility
+3.  Adjust with VIX volatility
+4.  Run a Monte Carlo simulation to estimate today's closing price distribution
 5.  Compare our model's probabilities against Kalshi's implied probabilities bucket by bucket.
 
 No financial or trading advice can be found in this blog post. I am a data scientist using my data science skills to perform a quantitative modelling exercise.
@@ -340,7 +340,8 @@ run_monte_carlo <- function(S0, mu, sigma, n_sim = 100000) {
   simulated_prices  <- S0 * exp(simulated_returns)
   tibble(sim_price = simulated_prices)
 }
- 
+
+set.seed(1234)
 sims <- run_monte_carlo(S0, mu, sigma_adjusted)
 summary(sims$sim_price)
 ```
@@ -444,7 +445,7 @@ On April 1, 2026, the model and the prediction market tell very different storie
 
 Kalshi priced the S&P closing around 6,587-6,637 with 67% combined probability, implying an expected \~1.9% rally from the prior close of 6,528. Our GBM model, anchored to recent history and VIX-adjusted volatility, centered the distribution around 6,487-6,537 with 49.7% combined probability, i.e. no strong directional view.
 
-Our greatest edge, i.e. what our model believes to be the most highly mis-priced asset, is ticker `KXINX-26APR01H1600-B6612`. Kalshi believes it has a 40% chance of resolving to YES, whereas our model believes it has a 5.3% chance of resolving to YES. That is nearly a 35% difference!
+Our greatest edge, i.e. what our model believes to be the most highly mis-priced asset, is ticker `KXINX-26APR01H1600-B6612`. Kalshi believes it has a 40% chance of resolving to YES, whereas our model believes it has a 5.2% chance of resolving to YES. That is nearly a 35% difference!
 
 This divergence is informative, for the market is pricing in information that our backward-looking historical model doesn't see. It is likely due to the fact that President Trump is set to make televised address tonight.
 
@@ -488,11 +489,11 @@ If you have any questions, comments or concerns please [email me.](mailto:peter@
 
 On April 1, 2026, the S&P 500 closed at 6,575.32.
 
-Kalshi was most confident in bucket `B6612` (6,612-6,637), which also happens to be the bucket with the greatest divergence from our model (about -35%). Our model was most confident in bucket `B6512` (6,512-6,537), which also happens to be the bucket with greatest **positive** difference with Kalshi (at 12.4%). Both buckets resolved to NO.
+Kalshi was most confident in bucket `B6612` (6,612-6,637), which also happens to be the bucket with the greatest divergence from our model (about -35%). Our model was most confident in bucket `B6512` (6,512-6,537), which also happens to be the bucket with greatest **positive** difference with Kalshi (at 12.5%). Both buckets resolved to NO.
 
 What happened was the market ended up in a spot where both sides *converged*.
 
-That is bucket `B6562` (6,562-6,587), the one bucket where our model and Kalshi agreed the most. Kalshi gave it an 11% chance of happening, and our model said 10.6%, a difference (edge) of just -0.4%.
+That is bucket `B6562` (6,562-6,587), the one bucket where our model and Kalshi agreed the most. Kalshi gave it an 11% chance of happening, and our model said between 10 and 11%.
 
 A day defined by anticipation (a presidential address, an uncertain geopolitical backdrop, and a VIX scalar telling us to widen our uncertainty) resolves in a spot where neither the crowd nor the model had strong conviction.
 
