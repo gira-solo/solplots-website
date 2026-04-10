@@ -506,7 +506,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="co"># mu    &lt;- mean(sp500$daily_return)</span></span>
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co"># sigma &lt;- sd(sp500$daily_return)</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>S0    <span class="ot">&lt;-</span> <span class="fu">tail</span>(sp500<span class="sc">$</span>close, <span class="dv">1</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># S0    &lt;- tail(sp500$close, 1)</span></span>
 <span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Current S&amp;P:"</span>, S0, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -537,11 +537,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>vix <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">"^VIX"</span>,</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">from =</span> <span class="fu">Sys.Date</span>() <span class="sc">-</span> <span class="dv">90</span>,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">to   =</span> <span class="fu">Sys.Date</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date, close) <span class="sc">|&gt;</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(date)</span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vix &lt;- tq_get("^VIX",</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                from = Sys.Date() - 90,</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                to   = Sys.Date()) |&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(date, close) |&gt;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   arrange(date)</span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>vix_current <span class="ot">&lt;-</span> <span class="fu">tail</span>(vix<span class="sc">$</span>close, <span class="dv">1</span>)</span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>vix_avg     <span class="ot">&lt;-</span> <span class="fu">mean</span>(vix<span class="sc">$</span>close, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
@@ -552,28 +552,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Current VIX:"</span>, <span class="fu">round</span>(vix_current, <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Current VIX: 19.49 </code></pre>
+<pre><code>Current VIX: 25.25 </code></pre>
 </div>
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"90-day avg VIX:"</span>, <span class="fu">round</span>(vix_avg, <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>90-day avg VIX: 21.3 </code></pre>
+<pre><code>90-day avg VIX: 20.49 </code></pre>
 </div>
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Vol scalar:"</span>, <span class="fu">round</span>(vol_scalar, <span class="dv">3</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Vol scalar: 0.915 </code></pre>
+<pre><code>Vol scalar: 1.233 </code></pre>
 </div>
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Adjusted sigma:"</span>, <span class="fu">round</span>(sigma_adjusted, <span class="dv">5</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Adjusted sigma: 0.00838 </code></pre>
+<pre><code>Adjusted sigma: 0.01129 </code></pre>
 </div>
 </div>
 <p>A <code>vol_scalar</code> value greater than 1 implies that today’s uncertainty is higher than history suggests. Therefore, we widen our simulation.</p>
@@ -600,7 +600,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   6281    6487    6523    6524    6560    6740 </code></pre>
+   6199    6474    6523    6524    6573    6817 </code></pre>
 </div>
 </div>
 <p>The formula <code>S0 * exp(return)</code> is the standard geometric Brownian motion one-step update. Using <code>exp()</code> ensures simulated prices are always positive and correctly handles the compounding nature of returns. Running 100,000 simulations gives us a stable empirical distribution to compare against Kalshi’s market.</p>
@@ -1165,68 +1165,86 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td headers="lower" class="gt_row gt_right" style="background-color: #F8D7DA;">6,612</td>
 <td headers="upper" class="gt_row gt_right" style="background-color: #F8D7DA;">6,637</td>
 <td headers="implied_prob" class="gt_row gt_right" style="background-color: #F8D7DA;">40.0%</td>
-<td headers="model_prob" class="gt_row gt_right" style="background-color: #F8D7DA;">3.3%</td>
-<td headers="edge" class="gt_row gt_right" style="background-color: #F8D7DA;">−36.7%</td></tr>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #F8D7DA;">5.2%</td>
+<td headers="edge" class="gt_row gt_right" style="background-color: #F8D7DA;">−34.8%</td></tr>
     <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #F8D7DA;">KXINX-26APR01H1600-B6587</td>
 <td headers="lower" class="gt_row gt_right" style="background-color: #F8D7DA;">6,587</td>
 <td headers="upper" class="gt_row gt_right" style="background-color: #F8D7DA;">6,612</td>
 <td headers="implied_prob" class="gt_row gt_right" style="background-color: #F8D7DA;">27.0%</td>
-<td headers="model_prob" class="gt_row gt_right" style="background-color: #F8D7DA;">6.9%</td>
-<td headers="edge" class="gt_row gt_right" style="background-color: #F8D7DA;">−20.1%</td></tr>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #F8D7DA;">7.8%</td>
+<td headers="edge" class="gt_row gt_right" style="background-color: #F8D7DA;">−19.2%</td></tr>
     <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #FFF3CD;">KXINX-26APR01H1600-B6512</td>
 <td headers="lower" class="gt_row gt_right" style="background-color: #FFF3CD;">6,512</td>
 <td headers="upper" class="gt_row gt_right" style="background-color: #FFF3CD;">6,537</td>
 <td headers="implied_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">1.0%</td>
-<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">18.0%</td>
-<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">17.0%</td></tr>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">13.4%</td>
+<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">12.4%</td></tr>
     <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #FFF3CD;">KXINX-26APR01H1600-B6487</td>
 <td headers="lower" class="gt_row gt_right" style="background-color: #FFF3CD;">6,487</td>
 <td headers="upper" class="gt_row gt_right" style="background-color: #FFF3CD;">6,512</td>
 <td headers="implied_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">1.0%</td>
-<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">16.5%</td>
-<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">15.5%</td></tr>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">12.9%</td>
+<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">11.9%</td></tr>
     <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #FFF3CD;">KXINX-26APR01H1600-B6537</td>
 <td headers="lower" class="gt_row gt_right" style="background-color: #FFF3CD;">6,537</td>
 <td headers="upper" class="gt_row gt_right" style="background-color: #FFF3CD;">6,562</td>
 <td headers="implied_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">1.0%</td>
-<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">16.3%</td>
-<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">15.3%</td></tr>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">12.7%</td>
+<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">11.7%</td></tr>
     <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #F8D7DA;">KXINX-26APR01H1600-B6637</td>
 <td headers="lower" class="gt_row gt_right" style="background-color: #F8D7DA;">6,637</td>
 <td headers="upper" class="gt_row gt_right" style="background-color: #F8D7DA;">6,662</td>
 <td headers="implied_prob" class="gt_row gt_right" style="background-color: #F8D7DA;">13.0%</td>
-<td headers="model_prob" class="gt_row gt_right" style="background-color: #F8D7DA;">1.4%</td>
-<td headers="edge" class="gt_row gt_right" style="background-color: #F8D7DA;">−11.6%</td></tr>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #F8D7DA;">3.1%</td>
+<td headers="edge" class="gt_row gt_right" style="background-color: #F8D7DA;">−9.9%</td></tr>
     <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #FFF3CD;">KXINX-26APR01H1600-B6462</td>
 <td headers="lower" class="gt_row gt_right" style="background-color: #FFF3CD;">6,462</td>
 <td headers="upper" class="gt_row gt_right" style="background-color: #FFF3CD;">6,487</td>
 <td headers="implied_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">1.0%</td>
-<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">12.2%</td>
-<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">11.2%</td></tr>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">10.7%</td>
+<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">9.7%</td></tr>
     <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #FFF3CD;">KXINX-26APR01H1600-B6437</td>
 <td headers="lower" class="gt_row gt_right" style="background-color: #FFF3CD;">6,437</td>
 <td headers="upper" class="gt_row gt_right" style="background-color: #FFF3CD;">6,462</td>
 <td headers="implied_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">0.0%</td>
-<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">7.4%</td>
-<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">7.4%</td></tr>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">8.3%</td>
+<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">8.3%</td></tr>
     <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #FFF3CD;">KXINX-26APR01H1600-B6412</td>
 <td headers="lower" class="gt_row gt_right" style="background-color: #FFF3CD;">6,412</td>
 <td headers="upper" class="gt_row gt_right" style="background-color: #FFF3CD;">6,437</td>
 <td headers="implied_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">0.0%</td>
-<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">3.7%</td>
-<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">3.7%</td></tr>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">5.6%</td>
+<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">5.6%</td></tr>
     <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #FFF3CD;">KXINX-26APR01H1600-B6387</td>
 <td headers="lower" class="gt_row gt_right" style="background-color: #FFF3CD;">6,387</td>
 <td headers="upper" class="gt_row gt_right" style="background-color: #FFF3CD;">6,412</td>
 <td headers="implied_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">0.0%</td>
-<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">1.4%</td>
-<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">1.4%</td></tr>
-    <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #FFF3CD;">KXINX-26APR01H1600-B6562</td>
-<td headers="lower" class="gt_row gt_right" style="background-color: #FFF3CD;">6,562</td>
-<td headers="upper" class="gt_row gt_right" style="background-color: #FFF3CD;">6,587</td>
-<td headers="implied_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">11.0%</td>
-<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">11.7%</td>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">3.4%</td>
+<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">3.4%</td></tr>
+    <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #FFF3CD;">KXINX-26APR01H1600-T6674.9999</td>
+<td headers="lower" class="gt_row gt_right" style="background-color: #FFF3CD;">6,675</td>
+<td headers="upper" class="gt_row gt_right" style="background-color: #FFF3CD;">Inf</td>
+<td headers="implied_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">0.0%</td>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">2.1%</td>
+<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">2.1%</td></tr>
+    <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #FFF3CD;">KXINX-26APR01H1600-B6362</td>
+<td headers="lower" class="gt_row gt_right" style="background-color: #FFF3CD;">6,362</td>
+<td headers="upper" class="gt_row gt_right" style="background-color: #FFF3CD;">6,387</td>
+<td headers="implied_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">0.0%</td>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">1.7%</td>
+<td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">1.7%</td></tr>
+    <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #FFF3CD;">KXINX-26APR01H1600-B6662</td>
+<td headers="lower" class="gt_row gt_right" style="background-color: #FFF3CD;">6,662</td>
+<td headers="upper" class="gt_row gt_right" style="background-color: #FFF3CD;">6,687</td>
+<td headers="implied_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">1.0%</td>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #FFF3CD;">1.7%</td>
 <td headers="edge" class="gt_row gt_right" style="background-color: #FFF3CD;">0.7%</td></tr>
+    <tr><td headers="market_ticker" class="gt_row gt_left" style="background-color: #F8D7DA;">KXINX-26APR01H1600-B6562</td>
+<td headers="lower" class="gt_row gt_right" style="background-color: #F8D7DA;">6,562</td>
+<td headers="upper" class="gt_row gt_right" style="background-color: #F8D7DA;">6,587</td>
+<td headers="implied_prob" class="gt_row gt_right" style="background-color: #F8D7DA;">11.0%</td>
+<td headers="model_prob" class="gt_row gt_right" style="background-color: #F8D7DA;">10.8%</td>
+<td headers="edge" class="gt_row gt_right" style="background-color: #F8D7DA;">−0.2%</td></tr>
   </tbody>
   <tfoot>
     <tr class="gt_footnotes">
@@ -1860,7 +1878,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb28-304"><a href="#cb28-304" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb28-305"><a href="#cb28-305" aria-hidden="true" tabindex="-1"></a><span class="co"># mu    &lt;- mean(sp500$daily_return)</span></span>
 <span id="cb28-306"><a href="#cb28-306" aria-hidden="true" tabindex="-1"></a><span class="co"># sigma &lt;- sd(sp500$daily_return)</span></span>
-<span id="cb28-307"><a href="#cb28-307" aria-hidden="true" tabindex="-1"></a>S0    <span class="ot">&lt;-</span> <span class="fu">tail</span>(sp500<span class="sc">$</span>close, <span class="dv">1</span>)</span>
+<span id="cb28-307"><a href="#cb28-307" aria-hidden="true" tabindex="-1"></a><span class="co"># S0    &lt;- tail(sp500$close, 1)</span></span>
 <span id="cb28-308"><a href="#cb28-308" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb28-309"><a href="#cb28-309" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Current S&amp;P:"</span>, S0, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
 <span id="cb28-310"><a href="#cb28-310" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Daily drift (mu):"</span>, <span class="fu">round</span>(mu, <span class="dv">5</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -1876,11 +1894,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb28-320"><a href="#cb28-320" aria-hidden="true" tabindex="-1"></a>Today's true uncertainty is influenced by historic volatility. The VIX (the CBOE Volatility Index) measures the market's expectation of near-term volatility implied by S&amp;P 500 options. We can again use <span class="in">`tq_get()`</span> to return VIX data to adjust our historical sigma up or down based on current market conditions.</span>
 <span id="cb28-321"><a href="#cb28-321" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-324"><a href="#cb28-324" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb28-325"><a href="#cb28-325" aria-hidden="true" tabindex="-1"></a>vix <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">"^VIX"</span>,</span>
-<span id="cb28-326"><a href="#cb28-326" aria-hidden="true" tabindex="-1"></a>               <span class="at">from =</span> <span class="fu">Sys.Date</span>() <span class="sc">-</span> <span class="dv">90</span>,</span>
-<span id="cb28-327"><a href="#cb28-327" aria-hidden="true" tabindex="-1"></a>               <span class="at">to   =</span> <span class="fu">Sys.Date</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb28-328"><a href="#cb28-328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date, close) <span class="sc">|&gt;</span></span>
-<span id="cb28-329"><a href="#cb28-329" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(date)</span>
+<span id="cb28-325"><a href="#cb28-325" aria-hidden="true" tabindex="-1"></a><span class="co"># vix &lt;- tq_get("^VIX",</span></span>
+<span id="cb28-326"><a href="#cb28-326" aria-hidden="true" tabindex="-1"></a><span class="co">#                from = Sys.Date() - 90,</span></span>
+<span id="cb28-327"><a href="#cb28-327" aria-hidden="true" tabindex="-1"></a><span class="co">#                to   = Sys.Date()) |&gt;</span></span>
+<span id="cb28-328"><a href="#cb28-328" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(date, close) |&gt;</span></span>
+<span id="cb28-329"><a href="#cb28-329" aria-hidden="true" tabindex="-1"></a><span class="co">#   arrange(date)</span></span>
 <span id="cb28-330"><a href="#cb28-330" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb28-331"><a href="#cb28-331" aria-hidden="true" tabindex="-1"></a>vix_current <span class="ot">&lt;-</span> <span class="fu">tail</span>(vix<span class="sc">$</span>close, <span class="dv">1</span>)</span>
 <span id="cb28-332"><a href="#cb28-332" aria-hidden="true" tabindex="-1"></a>vix_avg     <span class="ot">&lt;-</span> <span class="fu">mean</span>(vix<span class="sc">$</span>close, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>

@@ -284,9 +284,9 @@ mu     <- params$mu
 sigma  <- params$sigma
 S0     <- params$S0
  
-mu    <- mean(sp500$daily_return)
-sigma <- sd(sp500$daily_return)
-S0    <- tail(sp500$close, 1)
+# mu    <- mean(sp500$daily_return)
+# sigma <- sd(sp500$daily_return)
+# S0    <- tail(sp500$close, 1)
  
 cat("Current S&P:", S0, "\n")
 cat("Daily drift (mu):", round(mu, 5), "\n")
@@ -302,11 +302,11 @@ Log returns are used rather than simple returns because they're symmetric, addit
 Today's true uncertainty is influenced by historic volatility. The VIX (the CBOE Volatility Index) measures the market's expectation of near-term volatility implied by S&P 500 options. We can again use `tq_get()` to return VIX data to adjust our historical sigma up or down based on current market conditions.
 
 ```{r}
-vix <- tq_get("^VIX",
-               from = Sys.Date() - 90,
-               to   = Sys.Date()) |>
-  select(date, close) |>
-  arrange(date)
+# vix <- tq_get("^VIX",
+#                from = Sys.Date() - 90,
+#                to   = Sys.Date()) |>
+#   select(date, close) |>
+#   arrange(date)
  
 vix_current <- tail(vix$close, 1)
 vix_avg     <- mean(vix$close, na.rm = TRUE)
