@@ -278,8 +278,8 @@ With `tidyquant` we can pull 90 days of S&P 500 closing prices from Yahoo Financ
 
 
 sp500    <- readRDS("data/sp500_apr1.rds")
-vix      <- readRDS("data/sp500_apr1.rds")
-params   <- readRDS("data/sp500_apr1.rds")
+vix      <- readRDS("data/vix_apr1.rds")
+params   <- readRDS("data/params_apr1.rds")
 mu     <- params$mu
 sigma  <- params$sigma
 S0     <- params$S0
