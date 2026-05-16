@@ -2,6 +2,7 @@
   {
     "listing": "/demos.html",
     "items": [
+      "/demos/A_B_Testing/index.html",
       "/demos/TravelOnTap/index.html",
       "/demos/BigMacIndex/index.html",
       "/demos/PewMediaStudy/index.html",
